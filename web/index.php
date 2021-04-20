@@ -39,6 +39,8 @@ function writeMsg($command = "", $etc = "", $script = "query.fcgi") {
     return $result;
 }
 
+echo writeMsg("query_register_new", "username=bannerlrd&new_password=bannerlrd&new_password2=bannerlrd&email=bnr@mail.com&handle=Bannerlords&manager_region=Eurasia&competition=eko&private=0&publicmail=0&schedule_email=0&subscribe=0&accept_transfers=1");
+
 
 if (isset($_REQUEST["thread_id"]))
     echo str_replace("https://webl.vivi.com/cgi-bin/", "?", writeMsg("", "", "Forum.fpl?operation=thread&topic_id=2&thread_id={$_REQUEST["thread_id"]}&username=bannerlrd&password=bannerlrd"));
