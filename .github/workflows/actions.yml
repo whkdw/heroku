@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
@@ -25,14 +25,13 @@ jobs:
 
       - name: execute py script and capture log
         env:
-          GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
-          GYM_USERNAME: ${{ secrets.GYM_USERNAME }}
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: |
           python main.py > run.log 2>&1
 
       - name: upload log artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   # <-- FIXED
         with:
           name: main-log
           path: run.log
-          retention-days: 30  # optional: keep logs for 30 days
+          retention-days: 30
