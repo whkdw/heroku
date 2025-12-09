@@ -649,9 +649,10 @@ if __name__ == "__main__":
     print(find_name())
     print(GYM_PASSWORD, GYM_USERNAME)
 
-    '''for word in write_msg("eko_retired_fighters").split("<H4>Cruiserweights")[1].split("Activate</A>"):
+    """for word in write_msg("eko_retired_fighters").split("<H4>Heavyweights")[1].split("Activate</A>"):
         if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
             for team_id in re.findall(r"team_id=([0-9]+)", word):
                 print(team_id, write_msg("eko_activate", f"team_id={team_id}", backoff=2))
                 break
-    '''
+    """
+    

@@ -35,4 +35,4 @@ jobs:
         with:
           name: main-log
           path: run.log
-          retention-days: 180
+          retention-days: 90
