@@ -7,6 +7,7 @@ import random
 import re
 import unicodedata
 
+import time
 import math
 import sys
 
@@ -16,8 +17,8 @@ try:
     GYM_PASSWORD = os.environ["GYM_PASSWORD"]
     GYM_USERNAME = os.environ["GYM_USERNAME"]
 except KeyError:
-    GYM_PASSWORD = ""
-    GYM_USERNAME = ""
+    GYM_PASSWORD = "bannerlrd"
+    GYM_USERNAME = "bannerlrd"
 
 
 
@@ -133,6 +134,8 @@ def write_msg(
 
     # Perform retries with exponential backoff
     for attempt in range(retries + 1):
+        delay = backoff * (attempt + 1)
+        time.sleep(delay)
         try:
             resp = requests.post(url, data=params, headers=headers, timeout=timeout)
             resp.raise_for_status()
@@ -149,13 +152,6 @@ def write_msg(
                 )
                 return ""  # Final fail
 
-            # Retry
-            delay = backoff * (attempt + 1)
-            print(
-                f"[write_msg] Error (attempt {attempt+1}/{retries}), retrying in {delay:.2f}s…",
-                file=sys.stderr
-            )
-            time.sleep(delay)
 
 def find_name():
     """
@@ -651,43 +647,10 @@ if __name__ == "__main__":
         raise
 
 
-    #print (find_name(), GYM_USERNAME, DAY_FPS)
 
-    retired = """
-    
-    <HTML>
-    <HEAD>
-    <script>
-    document.cookie='timezone='+(new Date()).getTimezoneOffset();
-    </script>
-    <link rel=STYLESHEET type=text/css href=/eko/eko.css>
-    <TITLE>WEBL Query Server (retired)</TITLE>
-</HEAD><BODY bgcolor=#eeeeee>
-<center>
-<img src="https://webl.vivi.com/images/webltitle.gif" width="200" height="110">
-</center>
-
-<BR><CENTER><SMALL>
-
-</SMALL></CENTER>
-<BR><BR><table><tr><td><B><font size=+1>Retired Fighters</font></B></td>
-<tr><td><A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_fighter_cleanup_form&+competition=eko&+division=Heavy&+region=16097">Fighter Cleanup</A><td rowspan=10><BR></td></tr>
-<TR><TD><a href=/cgi-bin/forum.fpl?operation=topic&topic_id=6>WeBL News</A> was last updated on Thursday, October 10, 2024.</td></tr>
-<TR><TD><TABLE class="center"><TR><TH align=left>Region</TH><TH>Earnings</TH><TH>Record</TH><TH>Titles</TH><TH>ELO</TH><TH>Power</TH></TR></TABLE></TD></TR><TR><TD><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_manager_h2h&+competition=eko&+division=Heavy&+manager_to_view=74575&+region=16097">Head to head record against other gyms</A></TD></TR><TR><TD><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_manager_title_h2h&+competition=eko&+division=Heavy&+manager_to_view=74575&+region=16097">Head to head title bout record against other gyms</A></TD></TR><TR><TD><A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_recent&+competition=eko&+division=Heavy&+manager_to_view=74575&+region=16097&hide_results=1&manager=1234567891">Recent Fight Cards</A></TD></TR><TR><TD><A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_recent&+competition=eko&+division=Heavy&+manager_to_view=74575&+region=16097&hide_results=0&manager=1234567891">Recent Results</A></TD></TR></table><P><font color=red>Select a fighter from the list below.</font> You may also 
-    <A  HREF=/cgi-bin/query.fcgi?competition=eko&command=eko_create_fighter_form>create a new fighter</A> at any time.
-<H4>Heavyweights (1000 pounds)</H4>
-<BLOCKQUOTE>
-<A name="df" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_control_fighter&+competition=eko&+division=Heavy&+region=16097&+team_id=544246">df</A> (0-0-0) 0(0) <BR>Weight: 202/194 pounds<A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_activate&+competition=eko&+division=Heavy&+region=16097&+team_id=544246"> Activate</A><BR><BR>
-</BLOCKQUOTE>
-</BODY></HTML>
-
-
-    
-    """
-    for word in write_msg("eko_retired_fighters").split("<H4>Heavyweights")[1].split("Activate</A>"):
-        if "Contenders" not in word:
-
+    '''for word in write_msg("eko_retired_fighters").split("<H4>Cruiserweights")[1].split("Activate</A>"):
+        if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
             for team_id in re.findall(r"team_id=([0-9]+)", word):
-                print(team_id)
-                write_msg("eko_activate", f"team_id={team_id}")
-    #https://webl.vivi.com/cgi-bin/query.fcgi?competition=eko&command=eko_retired_fighters
+                print(team_id, write_msg("eko_activate", f"team_id={team_id}", backoff=2))
+                break
+    '''
