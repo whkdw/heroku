@@ -25,7 +25,8 @@ jobs:
 
       - name: execute py script and capture log
         env:
-          SOME_SECRET: ${{ secrets.SOME_SECRET }}
+          GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
+          GYM_USERNAME : ${{ secrets.GYM_USERNAME  }}
         run: |
           python main.py > run.log 2>&1
 
