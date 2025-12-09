@@ -21,7 +21,6 @@ except KeyError:
     GYM_USERNAME = ""
 
 
-
 # ------------------------------
 # Configuration / Constants
 # ------------------------------
@@ -646,6 +645,8 @@ if __name__ == "__main__":
         print(f"Error during automation run: {e}", file=sys.stderr)
         raise
 
+
+    print(find_name())
     print(GYM_PASSWORD, GYM_USERNAME)
 
     '''for word in write_msg("eko_retired_fighters").split("<H4>Cruiserweights")[1].split("Activate</A>"):
