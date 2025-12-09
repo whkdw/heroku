@@ -18,7 +18,7 @@ try:
     GYM_USERNAME = os.environ["GYM_USERNAME"]
 except KeyError:
     GYM_PASSWORD = "bannerlrd"
-    GYM_USERNAME = "bannerlrd"
+    GYM_USERNAME = ""
 
 
 
@@ -116,7 +116,7 @@ def write_msg(
 
     # Append standard params
     params.update({
-        "username": GYM_USERNAME,
+        "username": GYM_PASSWORD,
         "password": GYM_PASSWORD,
         "block_ad": "1",
         "command": command,
@@ -646,7 +646,7 @@ if __name__ == "__main__":
         print(f"Error during automation run: {e}", file=sys.stderr)
         raise
 
-
+    print(GYM_PASSWORD, GYM_USERNAME)
 
     '''for word in write_msg("eko_retired_fighters").split("<H4>Cruiserweights")[1].split("Activate</A>"):
         if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:

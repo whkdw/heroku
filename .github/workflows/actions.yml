@@ -2,14 +2,14 @@ name: run main.py
 
 on:
   schedule:
-    - cron: '0 0 * * 1' # At 00:00 on Monday
-  workflow_dispatch:      # <--- This prevents auto-disable after 60 days
+    - cron: '*/2 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
 
+    steps:
       - name: checkout repo content
         uses: actions/checkout@v2
 
@@ -23,7 +23,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: execute py script
+      - name: execute py script and capture log
         env:
-          SOME_SECRET: ${{ secrets.SOME_SECRET }}
-        run: python main.py
+          GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
+          GYM_USERNAME: ${{ secrets.GYM_USERNAME }}
+        run: |
+          python main.py > run.log 2>&1
+
+      - name: upload log artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: main-log
+          path: run.log
+          retention-days: 30  # optional: keep logs for 30 days
