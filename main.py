@@ -31,8 +31,8 @@ divis_str = [ "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam
 style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside", "allout" ]
 cut_str = [ "low", "normal", "high" ]
 
-stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning", "random" ]
-train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)", "free+practice" ]
+stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning" ]
+train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
 
 DIVISIONS = [
     "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam", "Feather", "Super-Feather",
@@ -699,7 +699,7 @@ if __name__ == "__main__":
 <P>df fights in the <A name="Heavyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+division=Heavy&+region=1234567891&team=df">Heavyweight</A> division.  <P>df's next bout is a <B>title fight</B> against the 6 feet 2 inches, 
 <A name="sunny" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_careerbyid&+competition=eko&+division=Heavy&+region=16097&+team_id=1695461&describe=1">Sunny</A>  (0-0-0 0/0)  from the 
 <A HREF="https://webl.vivi.com/cgi-bin/query.fcgi?competition=eko&command=eko_managerbyid&manager_to_view=74575">1234567891</A> gym  for   $0  on <B>Sunday, December 14, 2025.</B>
-<P>df is training <b>random</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=df">train for something else</A>.<P>df is currently using the <b>Rely on Hand Speed</b> fight plan. 
+<P>df is training <b>speed</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=df">train for something else</A>.<P>df is currently using the <b>Rely on Hand Speed</b> fight plan. 
 He may <UL>
 <LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_select_orders&+competition=eko&+division=Heavy&+region=16097&+team=df">choose a different fight plan</A>, 
 <LI><A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=query_echo&+competition=eko&+division=Heavy&+filename=fightplan_beginner.html&+region=16097&team=df">create a new fight plan</A>  
@@ -752,57 +752,24 @@ He may <UL>
     if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
         make_post_request(sess, "https://webl.vivi.com/cgi-bin/query.fcgi", data=dict(parse.parse_qsl("username=%s&password=%s&competition=eko&command=eko_change_division&your_team=%s&+division=%sweight" % (username, password, quote(ftr["NAME"]), ftr["DIVISIONS"][2]))))
 
+    ftr["TRAINING"] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
+
     ftr["GRADE"] = 1.0 / ftr["CUT"] * (42.0 * (1.0 - min(ftr["IPS"] / (ftr["STATUS"] + 1.0) / 38.0, 1.0)) + (10.0 + min(ftr["RECORD"][0] + ftr["RECORD"][1], 10.0)) * ftr["RECORD"][0] / (ftr["RECORD"][0] + ftr["RECORD"][1] + 0.001) +
         13.0 * ftr["RATING"] / 28.0 + 12.0 * min(ftr["RECORD"][0], 20.0) / 20.0 + 3.0 * ftr["STRENGTH"] / (ftr["STRENGTH"] + ftr["SPEED"] + ftr["AGILITY"]) + 2.0 / (ftr["KP"] + 1.0))
 
-    # TRAINING detection pattern used in PHP
-    m = re.search(r" training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)", text)
-    if m:
-        t1 = m.group(1).strip().lower()
-        t2 = m.group(2).strip().lower()
-        try:
-            t1_idx = stats_str.index(t1)
-        except ValueError:
-            t1_idx = None
-        try:
-            t2_idx = stats_str.index(t2)
-        except ValueError:
-            t2_idx = None
-        ftr["TRAINING"] = [t1_idx, t2_idx, " (intensive) <" in text]
-    else:
-        ftr["TRAINING"] = None
+    types = [
+        {"STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3},
+        {"STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1},
+        {"STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2},
+        {"STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0},
+    ]
+    baseaps = ftr["STRENGTH"] + ftr["SPEED"] + ftr["AGILITY"]
+    ftr["TYPE"] = min(range(len(types)), key=lambda i: (abs(baseaps * types[i]["STRENGTH"] - ftr["STRENGTH"]) + abs(baseaps * types[i]["SPEED"]    - ftr["SPEED"]) + abs(baseaps * types[i]["AGILITY"]  - ftr["AGILITY"])))
 
-
-    print([i for i in re.search(r' training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)', text).groups()])
-    #ftr["TRAINING2"] = [stats_str.index(i.lower()) for i in re.search(r' training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)', text).groups()]
-
-	#$data["TRAINING"] = preg_match("/ training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)/", $text, $matches) ? array(array_search(strtolower(trim($matches[1])), $stats_str), array_search(strtolower(trim($matches[2])), $stats_str), strpos($text, " (intensive)")) : null;
-
+    if ftr["STATUS"] > 0 and ftr["IPS"] / (ftr["STATUS"] + 0.01) > 38.0:
+        print(team_id, write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}", backoff=2))
 
     print(ftr)
 
-
-
-    trains = """<P>Sunny is training <b>agility (intensive) </b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
-He may <UL>
-
-<P>Sunny is training <b>agility</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
-He may <UL>
-
-<P>Sunny is training <b>random</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
-He may <UL>
-
-
-<P>master of your domain fights in the <A name="Flyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+describe=1&+division=Fly&+region=North+America&team=masterofyourdomain">Flyweight</A> division.  <P>master of your domain is primarily training <b>agility</b> followed by <b>something unknown</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+describe=1&+division=Heavy&+region=Eurasia&+team=master+of+your+domain">train for something else</A>.<P><font color=red>master of your domain has no fight plan.</font>  
-He may <UL>
-
-
-<P>master of your domain fights in the <A name="Flyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+describe=1&+division=Fly&+region=North+America&team=masterofyourdomain">Flyweight</A> division.  <P>master of your domain is primarily training <b>agility</b> followed by <b>knockout punch</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+describe=1&+division=Heavy&+region=Eurasia&+team=master+of+your+domain">train for something else</A>.<P><font color=red>master of your domain has no fight plan.</font>  
-He may <UL>
-
-
-<P>master of your domain fights in the <A name="Flyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+describe=1&+division=Fly&+region=North+America&team=masterofyourdomain">Flyweight</A> division.  <P>master of your domain is primarily training <b>random (intensive) </b> followed by <b>random</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+describe=1&+division=Heavy&+region=Eurasia&+team=master+of+your+domain">train for something else</A>.<P><font color=red>master of your domain has no fight plan.</font>  
-He may <UL>"""
-    print([i for i in re.search(r' training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)', trains).groups()])
 
     #git add . && git commit -m "update" && git push
