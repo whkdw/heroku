@@ -25,20 +25,15 @@ except KeyError:
 # Configuration / Constants
 # ------------------------------
 
-MAX_WEIGHTS = {
-    -1: 0, 0: 106, 1: 109, 2: 112, 3: 115, 4: 118, 5: 122, 6: 126,
-    7: 130, 8: 135, 9: 141, 10: 147, 11: 153, 12: 160, 13: 167, 14: 175, 15: 200, 16: 1000
-}
-# Note: In original PHP $max_weights was indexed from -1...16 with some weird ordering;
-# we'll use a mapping but iterate by index like PHP where needed.
+max_weights = [ 106, 109, 112, 115, 118, 122, 126, 130, 135, 141, 147, 153, 160, 167, 175, 200, 1000 ]
+build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ]
+divis_str = [ "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam", "Feather", "Super-Feather", "Light", "Super-Light", "Welter", "Super-Welter", "Middle", "Super-Middle", "Light-Heavy", "Cruiser", "Heavy" ]
+style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside", "allout" ]
+cut_str = [ "low", "normal", "high" ]
 
-BUILD_STR = {
-    -3: "very light", -2: "light", -1: "a little light",
-     0: "normal", 1: "a little heavy", 2: "heavy", 3: "very heavy"
-}
-CUTS_STR = [ "low", "normal", "high" ]
-STATS_STR = ["strength", "knockout punch", "speed", "agility", "chin", "conditioning", "random"]
-TRAIN_STR = ["weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)", "free+practice"]
+stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning", "random" ]
+train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)", "free+practice" ]
+
 DIVISIONS = [
     "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam", "Feather", "Super-Feather",
     "Light", "Super-Light", "Welter", "Super-Welter", "Middle", "Super-Middle", "Light-Heavy", "Cruiser", "Heavy"
@@ -696,8 +691,8 @@ if __name__ == "__main__":
 <TR><TD><BR><TD><BR>
 <TD>Total Earnings:<TD align=right>  $0 <TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#injury target=glossary onClick=help()>Injury Points</A><TD align=right>0
 <TD>AP Loss</A><TD align=right>0
-<TR><TD>Height<TD colspan=3>5 feet 10 inches (177 centimeters)
-<TR><TD>Build<TD colspan=3>normal
+<TR><TD>Height<TD colspan=3>6 feet 10 inches (177 centimeters)
+<TR><TD>Build<TD colspan=3>light
 <TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#fweight target=glossary onClick=help()>Weight</A> <TD colspan=3>202 pounds (91 kilograms)
 <TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#minweight target=glossary onClick=help()>Minimum Weight</A> <TD colspan=3>194 pounds (87 kilograms)
 </table>
@@ -725,38 +720,89 @@ He may <UL>
 
 """
 
-    html = fighter
-    data = {}
+    text = fighter
 
-    data["NAME"] = m.group(1).strip() if (m := re.search(r"<P>(.*?) fights in the", html, re.DOTALL | re.IGNORECASE)) else ""
+    ftr = {}
 
-    data["STRENGTH"] = int(m.group(1)) if ((m := re.search(r"[Dd]>[Ss]trength[^0-9]+(\d+)", html)) and m.group(1).isdigit()) else 0
-    data["KP"] = int(m.group(1)) if ((m := re.search(r"[Dd]>[Kk]nockout[^0-9]+(\d+)", html)) and m.group(1).isdigit()) else 0
-    data["SPEED"] = int(m.group(1)) if ((m := re.search(r"[Dd]>[Ss]peed[^0-9]+(\d+)", html)) and m.group(1).isdigit()) else 0
-    data["AGILITY"] = int(m.group(1)) if ((m := re.search(r"[Dd]>[Aa]gility[^0-9]+(\d+)", html)) and m.group(1).isdigit()) else 0
-    data["CHIN"] = int(m.group(1)) if ((m := re.search(r"[Dd]>[Cc]hin[^0-9]+(\d+)", html)) and m.group(1).isdigit()) else 0
-    data["CONDITIONING"] = int(m.group(1)) if ((m := re.search(r"[Dd]>[Cc]onditioning[^0-9]+(\d+)", html)) and m.group(1).isdigit()) else 0
+    ftr["NAME"] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
+    ftr["STRENGTH"] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
+    ftr["KP"] = int(re.search(r'[\w]>[Kk]nockout[^0-9]+(\d+)', text).group(1))
+    ftr["SPEED"] = int(re.search(r'[\w]>[Ss]peed[^0-9]+(\d+)', text).group(1))
+    ftr["AGILITY"] = int(re.search(r'[\w]>[Aa]gility[^0-9]+(\d+)', text).group(1))
+    ftr["CHIN"] = int(re.search(r'[\w]>[Cc]hin[^0-9]+(\d+)', text).group(1))
+    ftr["CONDITIONING"] = int(re.search(r'[\w]>[Cc]onditioning[^0-9]+(\d+)', text).group(1))
+    ftr["CUT"] = cut_str.index(re.search(r'[\w]>[Cc]ut [Rr]esista[^>]+>([HLNaghilmnorw]{1,6})', text).group(1).lower()) + 1
+    ftr["RATING"] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
+    ftr["STATUS"] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
+    ftr["HEIGHT"] = [int("0%s" % i) for i in re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text).groups()]
+    ftr["HEIGHT"] = (ftr["HEIGHT"][0] - 5) * 12 + ftr["HEIGHT"][1]
+    ftr["BUILD"] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
+    ftr["IPS"] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
+    ftr["RECORD"] = [int("0%s" % i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) ([0-9]+)\/([0-9]+)\)', text).groups()]
+    ftr["DIVISIONS"] = [i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups()]
+    ftr["WEIGHT"] = round((ftr["HEIGHT"] + 60.0) ** 3.0 * (0.00001 * ftr["BUILD"] + 0.0005) *
+        (1.0 + (math.sqrt(ftr["STRENGTH"] - 10.0) if (ftr["STRENGTH"] > 10) else -math.sqrt(10.0 - ftr["STRENGTH"])) * 0.05) *
+        (1.0 - (math.sqrt(ftr["AGILITY"] - 10.0) if (ftr["AGILITY"] > 10) else -math.sqrt(10.0 - ftr["AGILITY"])) * 0.05) - 0.49999)
+    ftr["MINIMUMWEIGHT"] = round(ftr["WEIGHT"] * (0.995 - 0.0025 * ftr["CONDITIONING"]))
 
-    data["CUT"] = (CUTS_STR.index(m.group(1).strip().lower()) if ((m := re.search(r"Cut Resistance <[^>]*>([a-zA-Z]+)", html)) and m.group(1)) else 0) + 1
+    ftr["OPPONENT"] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
+    if ftr["OPPONENT"]: ftr["OPPONENT"] = ((int("0%s" % ftr["OPPONENT"].group(1)) - 5) * 12 + int("0%s" % ftr["OPPONENT"].group(2)), int("0%s" % ftr["OPPONENT"].group(3)), ftr["OPPONENT"].group(4))
 
-    data["RATING"] = int(m.group(1)) if ((m := re.search(r"Rating[^0-9]+ight>(\d+)", html)) and m.group(1).isdigit()) else 0
-    data["STATUS"] = int(m.group(1)) if ((m := re.search(r"Status[^0-9]+ight>(\d+)", html)) and m.group(1).isdigit()) else 0
+    ftr["DIVISIONS"].insert(3, divis_str[len([ True for i in max_weights if i < ftr["MINIMUMWEIGHT"]]) ].lower()) # find correct weight div
+    if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
+        make_post_request(sess, "https://webl.vivi.com/cgi-bin/query.fcgi", data=dict(parse.parse_qsl("username=%s&password=%s&competition=eko&command=eko_change_division&your_team=%s&+division=%sweight" % (username, password, quote(ftr["NAME"]), ftr["DIVISIONS"][2]))))
 
+    ftr["GRADE"] = 1.0 / ftr["CUT"] * (42.0 * (1.0 - min(ftr["IPS"] / (ftr["STATUS"] + 1.0) / 38.0, 1.0)) + (10.0 + min(ftr["RECORD"][0] + ftr["RECORD"][1], 10.0)) * ftr["RECORD"][0] / (ftr["RECORD"][0] + ftr["RECORD"][1] + 0.001) +
+        13.0 * ftr["RATING"] / 28.0 + 12.0 * min(ftr["RECORD"][0], 20.0) / 20.0 + 3.0 * ftr["STRENGTH"] / (ftr["STRENGTH"] + ftr["SPEED"] + ftr["AGILITY"]) + 2.0 / (ftr["KP"] + 1.0))
 
-    # Height: "Height<TD colspan=3>(\d+) feet ?([0-9]{0,2})"
-    m = re.search(r"Height<TD colspan=3>(\d+)\s*feet\s*([0-9]{0,2})", html)
+    # TRAINING detection pattern used in PHP
+    m = re.search(r" training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)", text)
     if m:
-        data["HEIGHT"] = convert_height(int(m.group(1)), int(m.group(2) or 0))
+        t1 = m.group(1).strip().lower()
+        t2 = m.group(2).strip().lower()
+        try:
+            t1_idx = stats_str.index(t1)
+        except ValueError:
+            t1_idx = None
+        try:
+            t2_idx = stats_str.index(t2)
+        except ValueError:
+            t2_idx = None
+        ftr["TRAINING"] = [t1_idx, t2_idx, " (intensive) <" in text]
     else:
-        data["HEIGHT"] = 0
+        ftr["TRAINING"] = None
 
-    # Build
-    m = re.search(r"Build<TD colspan=3>([a-zA-Z ]+)", html)
-    if m:
-        build_str = m.group(1).strip().lower()
-        # reverse mapping: find key in BUILD_STR with matching string
-        found = next((k for k, v in BUILD_STR.items() if v.lower() == build_str), 0)
-        data["BUILD"] = found
-    else:
-        data["BUILD"] = 0
-    print(data)
+
+    print([i for i in re.search(r' training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)', text).groups()])
+    #ftr["TRAINING2"] = [stats_str.index(i.lower()) for i in re.search(r' training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)', text).groups()]
+
+	#$data["TRAINING"] = preg_match("/ training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)/", $text, $matches) ? array(array_search(strtolower(trim($matches[1])), $stats_str), array_search(strtolower(trim($matches[2])), $stats_str), strpos($text, " (intensive)")) : null;
+
+
+    print(ftr)
+
+
+
+    trains = """<P>Sunny is training <b>agility (intensive) </b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
+He may <UL>
+
+<P>Sunny is training <b>agility</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
+He may <UL>
+
+<P>Sunny is training <b>random</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
+He may <UL>
+
+
+<P>master of your domain fights in the <A name="Flyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+describe=1&+division=Fly&+region=North+America&team=masterofyourdomain">Flyweight</A> division.  <P>master of your domain is primarily training <b>agility</b> followed by <b>something unknown</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+describe=1&+division=Heavy&+region=Eurasia&+team=master+of+your+domain">train for something else</A>.<P><font color=red>master of your domain has no fight plan.</font>  
+He may <UL>
+
+
+<P>master of your domain fights in the <A name="Flyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+describe=1&+division=Fly&+region=North+America&team=masterofyourdomain">Flyweight</A> division.  <P>master of your domain is primarily training <b>agility</b> followed by <b>knockout punch</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+describe=1&+division=Heavy&+region=Eurasia&+team=master+of+your+domain">train for something else</A>.<P><font color=red>master of your domain has no fight plan.</font>  
+He may <UL>
+
+
+<P>master of your domain fights in the <A name="Flyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+describe=1&+division=Fly&+region=North+America&team=masterofyourdomain">Flyweight</A> division.  <P>master of your domain is primarily training <b>random (intensive) </b> followed by <b>random</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+describe=1&+division=Heavy&+region=Eurasia&+team=master+of+your+domain">train for something else</A>.<P><font color=red>master of your domain has no fight plan.</font>  
+He may <UL>"""
+    print([i for i in re.search(r' training <[Bb]>([\w\s]+)[^<]*<[^<]*[\<Bb\>]*([\w\s]+)', trains).groups()])
+
+    #git add . && git commit -m "update" && git push
