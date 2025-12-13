@@ -734,8 +734,7 @@ He may <UL>
     ftr["CUT"] = cut_str.index(re.search(r'[\w]>[Cc]ut [Rr]esista[^>]+>([HLNaghilmnorw]{1,6})', text).group(1).lower()) + 1
     ftr["RATING"] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
     ftr["STATUS"] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
-    ftr["HEIGHT"] = [int("0%s" % i) for i in re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text).groups()]
-    ftr["HEIGHT"] = (ftr["HEIGHT"][0] - 5) * 12 + ftr["HEIGHT"][1]
+    ftr["HEIGHT"] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
     ftr["BUILD"] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
     ftr["IPS"] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
     ftr["RECORD"] = [int("0%s" % i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) ([0-9]+)\/([0-9]+)\)', text).groups()]
@@ -768,6 +767,9 @@ He may <UL>
 
     if ftr["STATUS"] > 0 and ftr["IPS"] / (ftr["STATUS"] + 0.01) > 38.0:
         print(team_id, write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}", backoff=2))
+
+
+
 
     print(ftr)
 
