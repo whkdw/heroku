@@ -12,6 +12,7 @@ import math
 import sys
 
 from typing import List, Dict, Tuple
+from urllib.parse import quote
 
 try:
     GYM_PASSWORD = os.environ["GYM_PASSWORD"]
@@ -627,7 +628,7 @@ def process_fighters():
 # ------------------------------
 
 if __name__ == "__main__":
-    print(f"Your IP address is unknown in Python (PHP printed REMOTE_ADDR).")
+    print(requests.get("https://ipinfo.io/json", timeout=5).json())
     # set some global seeds if desired (PHP used mt_rand/random_int)
     random.seed()
 
@@ -724,7 +725,7 @@ He may <UL>
 
     ftr = {}
 
-    ftr["NAME"] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
+    ftr["NAME"] = quote(re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1))
     ftr["STRENGTH"] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
     ftr["KP"] = int(re.search(r'[\w]>[Kk]nockout[^0-9]+(\d+)', text).group(1))
     ftr["SPEED"] = int(re.search(r'[\w]>[Ss]peed[^0-9]+(\d+)', text).group(1))
@@ -749,7 +750,7 @@ He may <UL>
 
     ftr["DIVISIONS"].insert(3, divis_str[len([ True for i in max_weights if i < ftr["MINIMUMWEIGHT"]]) ].lower()) # find correct weight div
     if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
-        make_post_request(sess, "https://webl.vivi.com/cgi-bin/query.fcgi", data=dict(parse.parse_qsl("username=%s&password=%s&competition=eko&command=eko_change_division&your_team=%s&+division=%sweight" % (username, password, quote(ftr["NAME"]), ftr["DIVISIONS"][2]))))
+        print(team_id, write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight", backoff=2))
 
     ftr["TRAINING"] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
 
