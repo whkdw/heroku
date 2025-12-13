@@ -773,6 +773,6 @@ He may <UL>
 
 
     print(ftr)
-
+    print(team_id, write_msg("eko_transfer", f"to_manager=233330&your_team=Val`szam", backoff=2))
 
     #git add . && git commit -m "update" && git push
