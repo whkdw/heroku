@@ -750,7 +750,7 @@ He may <UL>
 
     ftr["DIVISIONS"].insert(3, divis_str[len([ True for i in max_weights if i < ftr["MINIMUMWEIGHT"]]) ].lower()) # find correct weight div
     if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
-        print(team_id, write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight", backoff=2))
+        print(write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight", backoff=2))
 
     ftr["TRAINING"] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
 
@@ -767,12 +767,12 @@ He may <UL>
     ftr["TYPE"] = min(range(len(types)), key=lambda i: (abs(baseaps * types[i]["STRENGTH"] - ftr["STRENGTH"]) + abs(baseaps * types[i]["SPEED"]    - ftr["SPEED"]) + abs(baseaps * types[i]["AGILITY"]  - ftr["AGILITY"])))
 
     if ftr["STATUS"] > 0 and ftr["IPS"] / (ftr["STATUS"] + 0.01) > 38.0:
-        print(team_id, write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}", backoff=2))
+        print(write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}", backoff=2))
 
 
 
 
     print(ftr)
-    print(team_id, write_msg("eko_transfer", f"to_manager=233330&your_team=Val`szam", backoff=2))
+    #print(write_msg("eko_transfer", f"to_manager=233330&your_team=Val`szam", backoff=2))
 
     #git add . && git commit -m "update" && git push
