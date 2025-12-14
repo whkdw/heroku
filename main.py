@@ -40,6 +40,13 @@ DIVISIONS = [
     "Light", "Super-Light", "Welter", "Super-Welter", "Middle", "Super-Middle", "Light-Heavy", "Cruiser", "Heavy"
 ]
 
+fighter_builds = [
+    {"STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3},
+    {"STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1},
+    {"STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2},
+    {"STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0},
+]
+
 # day_fps parallels the PHP array (index 0 = Sunday)
 DAY_FPS = [
     [DIVISIONS[3], DIVISIONS[4], DIVISIONS[5], DIVISIONS[6], DIVISIONS[7], DIVISIONS[8]],  # sun
@@ -639,9 +646,6 @@ if __name__ == "__main__":
                 (1.0 - (math.sqrt(ftr["AGILITY"] - 10.0) if (ftr["AGILITY"] > 10) else -math.sqrt(10.0 - ftr["AGILITY"])) * 0.05) - 0.49999)
             ftr["MINIMUMWEIGHT"] = round(ftr["WEIGHT"] * (0.995 - 0.0025 * ftr["CONDITIONING"]))
 
-            ftr["DIVISIONS"].insert(3, divis_str[len([ True for i in max_weights if i < ftr["MINIMUMWEIGHT"]]) ].lower()) # find correct weight div
-            if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
-                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight")
 
             ftr["OPPONENT"] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
             if ftr["OPPONENT"]: ftr["OPPONENT"] = ((int("0%s" % ftr["OPPONENT"].group(1)) - 5) * 12 + int("0%s" % ftr["OPPONENT"].group(2)), int("0%s" % ftr["OPPONENT"].group(3)), ftr["OPPONENT"].group(4))
@@ -652,22 +656,23 @@ if __name__ == "__main__":
             ftr["GRADE"] = 1.0 / ftr["CUT"] * (42.0 * (1.0 - min(ftr["IPS"] / (ftr["STATUS"] + 1.0) / 38.0, 1.0)) + (10.0 + min(ftr["RECORD"][0] + ftr["RECORD"][1], 10.0)) * ftr["RECORD"][0] / (ftr["RECORD"][0] + ftr["RECORD"][1] + 0.001) +
                 13.0 * ftr["RATING"] / 28.0 + 12.0 * min(ftr["RECORD"][0], 20.0) / 20.0 + 3.0 * ftr["STRENGTH"] / (ftr["STRENGTH"] + ftr["SPEED"] + ftr["AGILITY"]) + 2.0 / (ftr["KP"] + 1.0))
 
-            types = [
-                {"STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3},
-                {"STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1},
-                {"STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2},
-                {"STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0},
-            ]
             baseaps = ftr["STRENGTH"] + ftr["SPEED"] + ftr["AGILITY"]
-            ftr["TYPE"] = min(range(len(types)), key=lambda i: (abs(baseaps * types[i]["STRENGTH"] - ftr["STRENGTH"]) + abs(baseaps * types[i]["SPEED"] - ftr["SPEED"]) + abs(baseaps * types[i]["AGILITY"] - ftr["AGILITY"])))
+            ftr["TYPE"] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]["STRENGTH"] - ftr["STRENGTH"]) + abs(baseaps * fighter_builds[i]["SPEED"] - ftr["SPEED"]) + abs(baseaps * fighter_builds[i]["AGILITY"] - ftr["AGILITY"])))
+
+            print(ftr)
 
             if (ftr["STATUS"] > 0 and ftr["IPS"] / (ftr["STATUS"] + 0.01) > 38.0) or (ftr["RECORD"][0] == 0 and ftr["RECORD"][1] > 1):
                 write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}")
 
+            ftr["DIVISIONS"].insert(3, divis_str[len([ True for i in max_weights if i < ftr["MINIMUMWEIGHT"]]) ].lower()) # find correct weight div
+            if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
+                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight")
+
             if ftr["FIGHTPLAN"] is None:
                 write_msg("eko_select_orders", f"your_team={ftr["NAME"]}&+strategy_choice=5H114insideR")
 
-            print(ftr)
+            if ftr["TRAINING"][0] is None:
+                write_msg("eko_training", f"your_team={ftr["NAME"]}&train={train_str[1]}&train2={train_str[1]}")
 
 
 
