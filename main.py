@@ -108,6 +108,7 @@ def write_msg(
     for attempt in range(8):
         time.sleep(2.75 + 15 * attempt)
         try:
+            print(command, etc)
             resp = requests.post(url, data=data, headers=headers, timeout=10)
             resp.raise_for_status()
             return resp.text
@@ -641,7 +642,6 @@ if __name__ == "__main__":
             ftr["DIVISIONS"].insert(3, divis_str[len([ True for i in max_weights if i < ftr["MINIMUMWEIGHT"]]) ].lower()) # find correct weight div
             if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
                 write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight")
-                print("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight")
 
             ftr["OPPONENT"] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
             if ftr["OPPONENT"]: ftr["OPPONENT"] = ((int("0%s" % ftr["OPPONENT"].group(1)) - 5) * 12 + int("0%s" % ftr["OPPONENT"].group(2)), int("0%s" % ftr["OPPONENT"].group(3)), ftr["OPPONENT"].group(4))
@@ -663,11 +663,9 @@ if __name__ == "__main__":
 
             if (ftr["STATUS"] > 0 and ftr["IPS"] / (ftr["STATUS"] + 0.01) > 38.0) or (ftr["RECORD"][0] == 0 and ftr["RECORD"][1] > 1):
                 write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}")
-                print("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}")
 
             if ftr["FIGHTPLAN"] is None:
                 write_msg("eko_select_orders", f"your_team={ftr["NAME"]}&+strategy_choice=5H114insideR")
-                print("eko_select_orders", f"your_team={ftr["NAME"]}&+strategy_choice=5H114insideR")
 
             print(ftr)
 
