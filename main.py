@@ -105,16 +105,16 @@ def write_msg(
         "Content-Type": "application/x-www-form-urlencoded",
     }
 
-    for attempt in range(6):
-        time.sleep(2.5 + 60 * attempt)
+    for attempt in range(8):
+        time.sleep(2.75 + 15 * attempt)
         try:
             resp = requests.post(url, data=data, headers=headers, timeout=10)
             resp.raise_for_status()
             return resp.text
         except requests.RequestException as e:
-            if attempt == 5:
+            if attempt == 7:
                 print(
-                    f"[write_msg] FAILED after 5 attempts — "
+                    f"[write_msg] FAILED after 7 attempts — "
                     f"script={script}, command={command}, etc='{etc}'\n{e}",
                     file=sys.stderr,
                 )
@@ -640,7 +640,8 @@ if __name__ == "__main__":
 
             ftr["DIVISIONS"].insert(3, divis_str[len([ True for i in max_weights if i < ftr["MINIMUMWEIGHT"]]) ].lower()) # find correct weight div
             if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
-                print(write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight"))
+                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight")
+                print("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight")
 
             ftr["OPPONENT"] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
             if ftr["OPPONENT"]: ftr["OPPONENT"] = ((int("0%s" % ftr["OPPONENT"].group(1)) - 5) * 12 + int("0%s" % ftr["OPPONENT"].group(2)), int("0%s" % ftr["OPPONENT"].group(3)), ftr["OPPONENT"].group(4))
@@ -661,10 +662,12 @@ if __name__ == "__main__":
             ftr["TYPE"] = min(range(len(types)), key=lambda i: (abs(baseaps * types[i]["STRENGTH"] - ftr["STRENGTH"]) + abs(baseaps * types[i]["SPEED"] - ftr["SPEED"]) + abs(baseaps * types[i]["AGILITY"] - ftr["AGILITY"])))
 
             if (ftr["STATUS"] > 0 and ftr["IPS"] / (ftr["STATUS"] + 0.01) > 38.0) or (ftr["RECORD"][0] == 0 and ftr["RECORD"][1] > 1):
-                print(write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}"))
+                write_msg("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}")
+                print("eko_transfer", f"to_manager=77894&your_team={ftr["NAME"]}")
 
             if ftr["FIGHTPLAN"] is None:
                 write_msg("eko_select_orders", f"your_team={ftr["NAME"]}&+strategy_choice=5H114insideR")
+                print("eko_select_orders", f"your_team={ftr["NAME"]}&+strategy_choice=5H114insideR")
 
             print(ftr)
 
@@ -691,77 +694,5 @@ if __name__ == "__main__":
                 break
     """
     
-    fighter = """
-
-
-    <HTML>
-    <HEAD>
-    <script>
-    document.cookie='timezone='+(new Date()).getTimezoneOffset();
-    </script>
-    <link rel=STYLESHEET type=text/css href=/eko/eko.css>
-    <TITLE>WEBL Query Server (control)</TITLE>
-</HEAD><BODY bgcolor=#eeeeee>
-<center>
-<img src="https://webl.vivi.com/images/webltitle.gif" width="200" height="110">
-</center>
-
-<BR><CENTER><SMALL>
-
-</SMALL></CENTER>
-<HR><BR><B>
-<A name="sunny" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_career_privatebyid&+competition=eko&+division=Heavy&+region=16097&+team_id=1695461">Sunny</A> </B> (0-0-0 0/0)<BR>
-<table border=1>
-<TR><TD>Strength <TD align=right>15<BR>
-<TD>Knockout Punch <TD  align=right>5<BR>
-<TR><TD>Speed <TD align=right>10<BR>
-<TD>Agility <TD align=right>7<BR>
-<TR><TD>Chin <TD align=right>12<BR>
-<TD>Conditioning <TD align=right>6<BR>
-<TR><TD>Cut Resistance <TD align=right>Low<BR>
-<TD><a target=glossary onClick=help() href=https://cloudfront-webl.vivi.com/eko/glossary.html#streak>Winning Streak</A><TD align=right><TR><TD><script language=javascript>
-    <!--
-    function help() {
-	window.open("", "glossary", "width=550,height=300,resizable=1,scrollbars=1");
-    }
-    //-->
-</script>
-<a href=https://cloudfront-webl.vivi.com/eko/glossary.html#rating target=glossary onClick=help()>Rating</A><TD align=right>0
-<TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#status target=glossary onClick=help()>Status</A><TD align=right>0
-<TR><TD><BR><TD><BR>
-<TD>Total Earnings:<TD align=right>  $0 <TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#injury target=glossary onClick=help()>Injury Points</A><TD align=right>0
-<TD>AP Loss</A><TD align=right>0
-<TR><TD>Height<TD colspan=3>6 feet 2 inches (187 centimeters)
-<TR><TD>Build<TD colspan=3>normal
-<TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#fweight target=glossary onClick=help()>Weight</A> <TD colspan=3>244 pounds (110 kilograms)
-<TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#minweight target=glossary onClick=help()>Minimum Weight</A> <TD colspan=3>239 pounds (108 kilograms)
-</table>
-<P>Sunny fights in the <A name="Heavyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+division=Heavy&+region=1234567891&team=sunny">Heavyweight</A> division.  <P>Sunny's next bout is a <B>title fight</B> against the 5 feet 10 inches, 
-<A name="df" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_careerbyid&+competition=eko&+division=Heavy&+region=16097&+team_id=544246&describe=1">df</A>  (0-0-0 0/0)  from the 
-<A HREF="https://webl.vivi.com/cgi-bin/query.fcgi?competition=eko&command=eko_managerbyid&manager_to_view=74575">1234567891</A> gym  for   $0  on <B>Sunday, December 14, 2025.</B>
-<P>Sunny is training <b>agility</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
-He may <UL>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_select_orders&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">choose a different fight plan</A>, 
-<LI><A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=query_echo&+competition=eko&+division=Heavy&+filename=fightplan_beginner.html&+region=16097&team=sunny">create a new fight plan</A>  
-<LI>or <A  HREF="/cgi-bin/prompt.fcgi?+command=query_edit_orders&+competition=eko&+division=Heavy&+region=16097&+strategy_choice=Go+for+Early+KO&strategy_id=555321">edit</A> your <B>Go for Early KO</B> plan.
-
-<LI>Experts can use the <A  HREF="/cgi-bin/prompt.fcgi?+command=query_orders&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">advanced fight plan form</A>.
-
-<LI>Beginners might want to get into the ring with a  <A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=query_echo&+competition=eko&+division=Heavy&+filename=newbie_form.html&+region=16097&cname=sunny&fighter_name=Sunny&team_id=1695461">sparring partner.</A>
-
-</UL>
-<P>Sunny may also do any of the following:<UL>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=query_press&+competition=eko&+division=Heavy&+region=16097&+team=Sunny&team_id=1695461">issue a press release.</A> 
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_change_division&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">change weight division.</A>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_rename&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">change his description.</A>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_retire_byid&+competition=eko&+division=Heavy&+region=16097&+team_id=1695461">retire.</A></UL>
-
-</BODY></HTML>
-
-
-
-
-
-"""
 
     #git add . && git commit -m "update" && git push
