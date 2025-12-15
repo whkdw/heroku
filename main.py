@@ -646,7 +646,7 @@ if __name__ == "__main__":
             ftr['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
             if ftr['OPPONENT']: ftr['OPPONENT'] = ((int("0%s" % ftr['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr['OPPONENT'].group(2)), int("0%s" % ftr['OPPONENT'].group(3)), ftr['OPPONENT'].group(4))
 
-            ftr['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [' (intensive) <" in text]
+            ftr['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
             ftr['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
             ftr['GRADE'] = 1.0 / ftr['CUT'] * (42.0 * (1.0 - min(ftr['IPS'] / (ftr['STATUS'] + 1.0) / 38.0, 1.0)) + (10.0 + min(ftr['RECORD'][0] + ftr['RECORD'][1], 10.0)) * ftr['RECORD'][0] / (ftr['RECORD'][0] + ftr['RECORD'][1] + 0.001) +
