@@ -615,7 +615,7 @@ if __name__ == "__main__":
     random.seed()
     
     try:
-        team_ids = list(set(map(int, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fightersd_brief", "")))))
+        team_ids = list(set(map(int, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
 
         print(team_ids)
 
