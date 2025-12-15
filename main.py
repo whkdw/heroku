@@ -507,7 +507,7 @@ def process_fighters():
                 if random.randint(0,9) == 0:
                     fp = "6H113alloutR1"
                 if data['CHIN'] > 23:
-                    fp = random.choice(['5H105alloutR", "5H114alloutR", "5H87alloutR", "6H122alloutR" if data['OPPONENT'][0] > data['HEIGHT'] else "5H105alloutR']) + str(random.randint(1,2))
+                    fp = random.choice(["5H105alloutR", "5H114alloutR", "5H87alloutR", "6H122alloutR" if data['OPPONENT'][0] > data['HEIGHT'] else "5H105alloutR"]) + str(random.randint(1,2))
                 # final write to select orders
                 write_msg("eko_select_orders", f"your_team={data['NAME']}&+strategy_choice={fp}")
 
