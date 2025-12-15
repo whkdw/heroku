@@ -22,6 +22,7 @@ except KeyError:
     GYM_USERNAME = ""
 
 
+
 # ------------------------------
 # Configuration / Constants
 # ------------------------------
@@ -41,10 +42,10 @@ DIVISIONS = [
 ]
 
 fighter_builds = [
-    {"STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3},
-    {"STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1},
-    {"STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2},
-    {"STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0},
+    {"STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3}, # albino
+    {"STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1}, # zam
+    {"STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2}, # agl
+    {"STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0}, # bal
 ]
 
 # day_fps parallels the PHP array (index 0 = Sunday)
@@ -612,7 +613,7 @@ if __name__ == "__main__":
     print(requests.get("https://ipinfo.io/json", timeout=5).json())
     # set some global seeds if desired (PHP used mt_rand/random_int)
     random.seed()
-
+    
     try:
 
 
@@ -668,8 +669,8 @@ if __name__ == "__main__":
             if ftr["DIVISIONS"][0] != ftr["DIVISIONS"][2]: # in wrong div, make change
                 write_msg("eko_change_division", f"to_manager=77894&your_team={ftr["NAME"]}&+division={ftr["DIVISIONS"][2]}weight")
 
-            if ftr["FIGHTPLAN"] is None:
-                write_msg("eko_select_orders", f"your_team={ftr["NAME"]}&+strategy_choice=5H114insideR")
+            if ftr["FIGHTPLAN"] is None or ftr["FIGHTPLAN"] == "6H122alloutR2" or ftr["FIGHTPLAN"] == "6H122alloutR1" or ftr["FIGHTPLAN"] == "6H113alloutR1":
+                write_msg("eko_select_orders", f"your_team={ftr["NAME"]}&+strategy_choice=5H114insideR1")
 
             if ftr["TRAINING"][0] is None:
                 write_msg("eko_training", f"your_team={ftr["NAME"]}&train={train_str[1]}&train2={train_str[1]}")

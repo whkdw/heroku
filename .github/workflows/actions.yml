@@ -2,7 +2,7 @@ name: run main.py
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 7 * * *'
   workflow_dispatch:
 
 jobs:
@@ -23,12 +23,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: execute py script and capture log
+      - name: execute py script
         env:
           GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
-          GYM_USERNAME : ${{ secrets.GYM_USERNAME  }}
+          GYM_USERNAME: ${{ secrets.GYM_USERNAME }}
+        run: python -u main.py
+
+      - name: execute py script
+        env:
+          GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
+          GYM_USERNAME: ${{ secrets.GYM_USERNAME }}
         run: |
-          python main.py > run.log 2>&1
+          set -o pipefail
+          python -u main.py 2>&1 | tee run.log
 
       - name: upload log artifact
         uses: actions/upload-artifact@v4
