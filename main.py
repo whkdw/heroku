@@ -11,6 +11,8 @@ import time
 import math
 import sys
 
+import json
+
 from typing import List, Dict, Tuple
 from urllib.parse import quote
 
@@ -613,7 +615,15 @@ if __name__ == "__main__":
     print(requests.get("https://ipinfo.io/json", timeout=5).json())
     # set some global seeds if desired (PHP used mt_rand/random_int)
     random.seed()
-    
+
+
+    try:
+        with open('data.json') as f:
+           json_data = json.load(f)
+    except:
+        json_data = {}
+
+
     try:
         team_ids = list(set(map(int, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
 
@@ -656,6 +666,7 @@ if __name__ == "__main__":
             ftr['TYPE'] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]['STRENGTH'] - ftr['STRENGTH']) + abs(baseaps * fighter_builds[i]['SPEED'] - ftr['SPEED']) + abs(baseaps * fighter_builds[i]['AGILITY'] - ftr['AGILITY'])))
 
             print(ftr)
+            json_data[team_id] = ftr
 
             if (ftr['STATUS'] > 0 and ftr['IPS'] / (ftr['STATUS'] + 0.01) > 38.0) or (ftr['RECORD'][0] == 0 and ftr['RECORD'][1] > 1):
                 write_msg("eko_transfer", f"to_manager=77894&your_team={ftr['NAME']}")
@@ -670,9 +681,10 @@ if __name__ == "__main__":
             if ftr['TRAINING'][0] is None:
                 write_msg("eko_training", f"your_team={ftr['NAME']}&train={train_str[1]}&train2={train_str[1]}")
 
-
-
         
+        with open('data.json', 'w', encoding='utf-8') as f:
+            json.dump(json_data, f, ensure_ascii=False, indent=4)
+
         print("Automation run complete.")
     except KeyboardInterrupt:
         print("Interrupted by user.")

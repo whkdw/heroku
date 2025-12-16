@@ -1,5 +1,8 @@
 name: run main.py
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '0 7 * * *'
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: checkout repo content
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: setup python
         uses: actions/setup-python@v5
@@ -43,3 +48,13 @@ jobs:
           name: main-log
           path: run.log
           retention-days: 90
+
+      - name: commit updated json
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data.json
+          git commit -m "Update data.json" || echo "No changes"
+          git push
