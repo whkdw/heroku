@@ -51,6 +51,6 @@ jobs:
 
           git pull --rebase origin main || git pull origin main
 
-          git add public/data.json
-          git commit -m "Update public data.json" || echo "No changes"
+          git add data.json
+          git commit -m "Update data.json" || echo "No changes"
           git push
