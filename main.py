@@ -12,6 +12,7 @@ import math
 import sys
 
 import json
+import datetime
 
 from typing import List, Dict, Tuple
 from urllib.parse import quote
@@ -44,10 +45,10 @@ DIVISIONS = [
 ]
 
 fighter_builds = [
-    {"STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3}, # albino
-    {"STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1}, # zam
-    {"STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2}, # agl
-    {"STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0}, # bal
+    { "STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3 }, # albino
+    { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1 }, # zam
+    { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2 }, # agl
+    { "STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0 }, # bal
 ]
 
 # day_fps parallels the PHP array (index 0 = Sunday)
@@ -616,74 +617,144 @@ if __name__ == "__main__":
     # set some global seeds if desired (PHP used mt_rand/random_int)
     random.seed()
 
+    fff = """
+    <HTML>
+    <HEAD>
+    <script>
+    document.cookie='timezone='+(new Date()).getTimezoneOffset();
+    </script>
+    <link rel=STYLESHEET type=text/css href=/eko/eko.css>
+    <TITLE>WEBL Query Server (control)</TITLE>
+</HEAD><BODY bgcolor=#eeeeee>
+<center>
+<img src="https://webl.vivi.com/images/webltitle.gif" width="200" height="110">
+</center>
+
+<BR><CENTER><SMALL>
+
+</SMALL></CENTER>
+<HR><BR><B>
+<A name="sunny" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_career_privatebyid&+competition=eko&+division=Heavy&+region=16097&+team_id=1695461">Sunny</A> </B> (0-0-0 0/0)<BR>
+<table border=1>
+<TR><TD>Strength <TD align=right>15<BR>
+<TD>Knockout Punch <TD  align=right>5<BR>
+<TR><TD>Speed <TD align=right>10<BR>
+<TD>Agility <TD align=right>7<BR>
+<TR><TD>Chin <TD align=right>12<BR>
+<TD>Conditioning <TD align=right>6<BR>
+<TR><TD>Cut Resistance <TD align=right>Low<BR>
+<TD><a target=glossary onClick=help() href=https://cloudfront-webl.vivi.com/eko/glossary.html#streak>Winning Streak</A><TD align=right><TR><TD><script language=javascript>
+    <!--
+    function help() {
+	window.open("", "glossary", "width=550,height=300,resizable=1,scrollbars=1");
+    }
+    //-->
+</script>
+<a href=https://cloudfront-webl.vivi.com/eko/glossary.html#rating target=glossary onClick=help()>Rating</A><TD align=right>0
+<TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#status target=glossary onClick=help()>Status</A><TD align=right>0
+<TR><TD><BR><TD><BR>
+<TD>Total Earnings:<TD align=right>  $0 <TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#injury target=glossary onClick=help()>Injury Points</A><TD align=right>0
+<TD>AP Loss</A><TD align=right>0
+<TR><TD>Height<TD colspan=3>6 feet 2 inches (187 centimeters)
+<TR><TD>Build<TD colspan=3>normal
+<TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#fweight target=glossary onClick=help()>Weight</A> <TD colspan=3>244 pounds (110 kilograms)
+<TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#minweight target=glossary onClick=help()>Minimum Weight</A> <TD colspan=3>239 pounds (108 kilograms)
+</table>
+<P>Sunny fights in the <A name="Heavyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+division=Heavy&+region=1234567891&team=sunny">Heavyweight</A> division.  <P>Sunny's next bout is a <B>title fight</B> against the 5 feet 10 inches, 
+<A name="df" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_careerbyid&+competition=eko&+division=Heavy&+region=16097&+team_id=544246&describe=1">df</A>  (0-0-0 0/0)  from the 
+<A HREF="https://webl.vivi.com/cgi-bin/query.fcgi?competition=eko&command=eko_managerbyid&manager_to_view=74575">1234567891</A> gym  for   $0  on <B>Sunday, December 14, 2025.</B>
+<P>Sunny is training <b>agility</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
+He may <UL>
+<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_select_orders&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">choose a different fight plan</A>, 
+<LI><A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=query_echo&+competition=eko&+division=Heavy&+filename=fightplan_beginner.html&+region=16097&team=sunny">create a new fight plan</A>  
+<LI>or <A  HREF="/cgi-bin/prompt.fcgi?+command=query_edit_orders&+competition=eko&+division=Heavy&+region=16097&+strategy_choice=Go+for+Early+KO&strategy_id=555321">edit</A> your <B>Go for Early KO</B> plan.
+
+<LI>Experts can use the <A  HREF="/cgi-bin/prompt.fcgi?+command=query_orders&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">advanced fight plan form</A>.
+
+<LI>Beginners might want to get into the ring with a  <A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=query_echo&+competition=eko&+division=Heavy&+filename=newbie_form.html&+region=16097&cname=sunny&fighter_name=Sunny&team_id=1695461">sparring partner.</A>
+
+</UL>
+<P>Sunny may also do any of the following:<UL>
+<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=query_press&+competition=eko&+division=Heavy&+region=16097&+team=Sunny&team_id=1695461">issue a press release.</A> 
+<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_change_division&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">change weight division.</A>
+<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_rename&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">change his description.</A>
+<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_retire_byid&+competition=eko&+division=Heavy&+region=16097&+team_id=1695461">retire.</A></UL>
+
+</BODY></HTML>
+
+"""
 
     try:
         with open('data.json') as f:
-           json_data = json.load(f)
+           ftr = json.load(f)
     except:
-        json_data = {}
+        ftr = {}
 
 
     try:
         team_ids = list(set(map(int, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
-
+        #team_ids=["1695461"]
         print(team_ids)
 
         for team_id in team_ids:
-            text, ftr = write_msg("eko_control_fighter", f"+team_id={team_id}"), {}
+            text, ftr[team_id] = write_msg("eko_control_fighter", f"+team_id={team_id}"), {}
+            #text, ftr[team_id] = fff, {}
 
-            ftr['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
-            ftr['STRENGTH'] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
-            ftr['KP'] = int(re.search(r'[\w]>[Kk]nockout[^0-9]+(\d+)', text).group(1))
-            ftr['SPEED'] = int(re.search(r'[\w]>[Ss]peed[^0-9]+(\d+)', text).group(1))
-            ftr['AGILITY'] = int(re.search(r'[\w]>[Aa]gility[^0-9]+(\d+)', text).group(1))
-            ftr['CHIN'] = int(re.search(r'[\w]>[Cc]hin[^0-9]+(\d+)', text).group(1))
-            ftr['CONDITIONING'] = int(re.search(r'[\w]>[Cc]onditioning[^0-9]+(\d+)', text).group(1))
-            ftr['CUT'] = cut_str.index(re.search(r'[\w]>[Cc]ut [Rr]esista[^>]+>([HLNaghilmnorw]{1,6})', text).group(1).lower()) + 1
-            ftr['RATING'] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
-            ftr['STATUS'] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
-            ftr['HEIGHT'] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
-            ftr['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
-            ftr['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
-            ftr['RECORD'] = [int("0%s" % i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) ([0-9]+)\/([0-9]+)\)', text).groups()]
-            ftr['DIVISIONS'] = [i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups()]
-            ftr['WEIGHT'] = round((ftr['HEIGHT'] + 60.0) ** 3.0 * (0.00001 * ftr['BUILD'] + 0.0005) *
-                (1.0 + (math.sqrt(ftr['STRENGTH'] - 10.0) if (ftr['STRENGTH'] > 10) else -math.sqrt(10.0 - ftr['STRENGTH'])) * 0.05) *
-                (1.0 - (math.sqrt(ftr['AGILITY'] - 10.0) if (ftr['AGILITY'] > 10) else -math.sqrt(10.0 - ftr['AGILITY'])) * 0.05) - 0.49999)
-            ftr['MINIMUMWEIGHT'] = round(ftr['WEIGHT'] * (0.995 - 0.0025 * ftr['CONDITIONING']))
+            ftr[team_id]['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
+            ftr[team_id]['STRENGTH'] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
+            ftr[team_id]['KP'] = int(re.search(r'[\w]>[Kk]nockout[^0-9]+(\d+)', text).group(1))
+            ftr[team_id]['SPEED'] = int(re.search(r'[\w]>[Ss]peed[^0-9]+(\d+)', text).group(1))
+            ftr[team_id]['AGILITY'] = int(re.search(r'[\w]>[Aa]gility[^0-9]+(\d+)', text).group(1))
+            ftr[team_id]['CHIN'] = int(re.search(r'[\w]>[Cc]hin[^0-9]+(\d+)', text).group(1))
+            ftr[team_id]['CONDITIONING'] = int(re.search(r'[\w]>[Cc]onditioning[^0-9]+(\d+)', text).group(1))
+            ftr[team_id]['CUT'] = cut_str.index(re.search(r'[\w]>[Cc]ut [Rr]esista[^>]+>([HLNaghilmnorw]{1,6})', text).group(1).lower()) + 1
+            ftr[team_id]['RATING'] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
+            ftr[team_id]['STATUS'] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
+            ftr[team_id]['HEIGHT'] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
+            ftr[team_id]['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
+            ftr[team_id]['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
+            ftr[team_id]['RECORD'] = [int("0%s" % i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) ([0-9]+)\/([0-9]+)\)', text).groups()]
+            ftr[team_id]['DIVISIONS'] = [i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups()]
+            ftr[team_id]['WEIGHT'] = round((ftr[team_id]['HEIGHT'] + 60.0) ** 3.0 * (0.00001 * ftr[team_id]['BUILD'] + 0.0005) *
+                (1.0 + (math.sqrt(ftr[team_id]['STRENGTH'] - 10.0) if (ftr[team_id]['STRENGTH'] > 10) else -math.sqrt(10.0 - ftr[team_id]['STRENGTH'])) * 0.05) *
+                (1.0 - (math.sqrt(ftr[team_id]['AGILITY'] - 10.0) if (ftr[team_id]['AGILITY'] > 10) else -math.sqrt(10.0 - ftr[team_id]['AGILITY'])) * 0.05) - 0.49999)
+            ftr[team_id]['MINIMUMWEIGHT'] = round(ftr[team_id]['WEIGHT'] * (0.995 - 0.0025 * ftr[team_id]['CONDITIONING']))
 
 
-            ftr['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
-            if ftr['OPPONENT']: ftr['OPPONENT'] = ((int("0%s" % ftr['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr['OPPONENT'].group(2)), int("0%s" % ftr['OPPONENT'].group(3)), ftr['OPPONENT'].group(4))
+            ftr[team_id]['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
+            if ftr[team_id]['OPPONENT']:
+                ftr[team_id]['OPPONENT'] = ((int("0%s" % ftr[team_id]['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr[team_id]['OPPONENT'].group(2)), int("0%s" % ftr[team_id]['OPPONENT'].group(3)), ftr[team_id]['OPPONENT'].group(4), 
+                    time.strptime("{} {} {}".format(*re.search(r' on <[Bb]>[A-Z][a-z]+day,\s+([A-Z][a-z]+)\s+(\d{1,2}),\s+(\d{4})\.<\/[Bb]>', text).groups()), "%B %d %Y")
+                )
 
-            ftr['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
-            ftr['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
+            ftr[team_id]['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
+            ftr[team_id]['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
-            ftr['GRADE'] = 1.0 / ftr['CUT'] * (42.0 * (1.0 - min(ftr['IPS'] / (ftr['STATUS'] + 1.0) / 38.0, 1.0)) + (10.0 + min(ftr['RECORD'][0] + ftr['RECORD'][1], 10.0)) * ftr['RECORD'][0] / (ftr['RECORD'][0] + ftr['RECORD'][1] + 0.001) +
-                13.0 * ftr['RATING'] / 28.0 + 12.0 * min(ftr['RECORD'][0], 20.0) / 20.0 + 3.0 * ftr['STRENGTH'] / (ftr['STRENGTH'] + ftr['SPEED'] + ftr['AGILITY']) + 2.0 / (ftr['KP'] + 1.0))
+            ftr[team_id]['GRADE'] = 1.0 / ftr[team_id]['CUT'] * (42.0 * (1.0 - min(ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 1.0) / 38.0, 1.0)) + (10.0 + min(ftr[team_id]['RECORD'][0] + ftr[team_id]['RECORD'][1], 10.0)) * ftr[team_id]['RECORD'][0] / (ftr[team_id]['RECORD'][0] + ftr[team_id]['RECORD'][1] + 0.001) +
+                13.0 * ftr[team_id]['RATING'] / 28.0 + 12.0 * min(ftr[team_id]['RECORD'][0], 20.0) / 20.0 + 3.0 * ftr[team_id]['STRENGTH'] / (ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']) + 2.0 / (ftr[team_id]['KP'] + 1.0))
 
-            baseaps = ftr['STRENGTH'] + ftr['SPEED'] + ftr['AGILITY']
-            ftr['TYPE'] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]['STRENGTH'] - ftr['STRENGTH']) + abs(baseaps * fighter_builds[i]['SPEED'] - ftr['SPEED']) + abs(baseaps * fighter_builds[i]['AGILITY'] - ftr['AGILITY'])))
+            baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']
+            ftr[team_id]['TYPE'] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]['STRENGTH'] - ftr[team_id]['STRENGTH']) + abs(baseaps * fighter_builds[i]['SPEED'] - ftr[team_id]['SPEED']) + abs(baseaps * fighter_builds[i]['AGILITY'] - ftr[team_id]['AGILITY'])))
 
-            print(ftr)
-            json_data[team_id] = ftr
+            print(ftr[team_id])
 
-            if (ftr['STATUS'] > 0 and ftr['IPS'] / (ftr['STATUS'] + 0.01) > 38.0) or (ftr['RECORD'][0] == 0 and ftr['RECORD'][1] > 1):
-                write_msg("eko_transfer", f"to_manager=77894&your_team={ftr['NAME']}")
+            if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
+                write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
 
-            ftr['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr['MINIMUMWEIGHT']]) ].lower()) # find correct weight div
-            if ftr['DIVISIONS'][0] != ftr['DIVISIONS'][2]: # in wrong div, make change
-                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr['NAME']}&+division={ftr['DIVISIONS'][2]}weight")
+            ftr[team_id]['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr[team_id]['MINIMUMWEIGHT']]) ].lower()) # find correct weight div
+            if ftr[team_id]['DIVISIONS'][0] != ftr[team_id]['DIVISIONS'][2]: # in wrong div, make change
+                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
-            if ftr['FIGHTPLAN'] is None or ftr['FIGHTPLAN'] == "6H122alloutR2" or ftr['FIGHTPLAN'] == "6H122alloutR1" or ftr['FIGHTPLAN'] == "6H113alloutR1":
-                write_msg("eko_select_orders", f"your_team={ftr['NAME']}&+strategy_choice=5H114insideR1")
+            if ftr[team_id]['FIGHTPLAN'] is None:
+                write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
 
-            if ftr['TRAINING'][0] is None:
-                write_msg("eko_training", f"your_team={ftr['NAME']}&train={train_str[1]}&train2={train_str[1]}")
+            if ftr[team_id]['TRAINING'][0] is None:
+                write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[1]}&train2={train_str[1]}")
 
-        
+
+
         with open('data.json', 'w', encoding='utf-8') as f:
-            json.dump(json_data, f, ensure_ascii=False, indent=4)
+            json.dump(ftr, f, ensure_ascii=False, indent=4)
 
         print("Automation run complete.")
     except KeyboardInterrupt:
@@ -704,6 +775,7 @@ if __name__ == "__main__":
                 print(team_id, write_msg("eko_activate", f"team_id={team_id}"))
                 break
     """
-    
 
-    #git add . && git commit -m "update" && git push
+
+
+    # git add . && git commit -m "update" && git push

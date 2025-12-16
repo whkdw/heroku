@@ -1,1 +1,55 @@
-{}
+{
+    "1695461": {
+        "NAME": "Sunny",
+        "STRENGTH": 15,
+        "KP": 5,
+        "SPEED": 10,
+        "AGILITY": 7,
+        "CHIN": 12,
+        "CONDITIONING": 6,
+        "CUT": 1,
+        "RATING": 0,
+        "STATUS": 0,
+        "HEIGHT": 14,
+        "BUILD": 0,
+        "IPS": 0,
+        "RECORD": [
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "DIVISIONS": [
+            "heavy",
+            "1234567891",
+            "heavy"
+        ],
+        "WEIGHT": 244,
+        "MINIMUMWEIGHT": 239,
+        "OPPONENT": [
+            10,
+            544246,
+            "df",
+            [
+                2025,
+                12,
+                14,
+                0,
+                0,
+                0,
+                6,
+                348,
+                -1
+            ]
+        ],
+        "TRAINING": [
+            3,
+            null,
+            false
+        ],
+        "FIGHTPLAN": "Go for Early KO",
+        "GRADE": 43.739583333333336,
+        "TYPE": 0
+    }
+}
