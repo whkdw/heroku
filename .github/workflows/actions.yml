@@ -32,12 +32,6 @@ jobs:
         env:
           GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
           GYM_USERNAME: ${{ secrets.GYM_USERNAME }}
-        run: python -u main.py
-
-      - name: execute py script
-        env:
-          GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
-          GYM_USERNAME: ${{ secrets.GYM_USERNAME }}
         run: |
           set -o pipefail
           python -u main.py 2>&1 | tee run.log

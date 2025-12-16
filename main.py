@@ -697,7 +697,7 @@ He may <UL>
         print(team_ids)
 
         for team_id in team_ids:
-            text, ftr[team_id] = write_msg("eko_control_fighter", f"+team_id={team_id}"), {}
+            text, ftr[team_id] = write_msg("eko_control_fighter", f"team_id={team_id}"), {}
             #text, ftr[team_id] = fff, {}
 
             ftr[team_id]['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
