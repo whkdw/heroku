@@ -748,8 +748,28 @@ He may <UL>
             if ftr[team_id]['FIGHTPLAN'] is None:
                 write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
 
-            if ftr[team_id]['TRAINING'][0] is None:
-                write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[1]}&train2={train_str[1]}")
+            tr = [None, None, (ftr[team_id]['CHIN'] + ftr[team_id]['STATUS'] // 10 < 10 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2)]
+            for i in range(2):
+                baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']
+                if ftr[team_id]['CONDITIONING'] < 6:
+                    tr[i] = 5
+                    ftr[team_id]['CONDITIONING'] += 1
+                elif ftr[team_id]['CHIN'] + ftr[team_id]['STATUS'] // 10 < 10 or ftr[team_id]['CHIN'] - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0) * ftr[team_id]['STATUS'] / 28.0:
+                    tr[i] = 4
+                    ftr[team_id]['CHIN'] += 1
+                elif ftr[team_id]['SPEED'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']:
+                    tr[i] = 2
+                    ftr[team_id]['SPEED'] += 1
+                elif ftr[team_id]['AGILITY'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY']:
+                    tr[i] = 3
+                    ftr[team_id]['AGILITY'] += 1
+                else:
+                    tr[i] = 1 # KP insead of str
+                    ftr[team_id]['STRENGTH'] += 1
+
+            if tr[0] != ftr[team_id]['TRAINING'][0] or tr[2] != ftr[team_id]['TRAINING'][2]:
+                write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
+
 
 
 
