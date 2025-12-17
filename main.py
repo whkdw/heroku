@@ -738,16 +738,6 @@ He may <UL>
 
             print(ftr[team_id])
 
-            if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
-                write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
-
-            ftr[team_id]['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr[team_id]['MINIMUMWEIGHT']]) ].lower()) # find correct weight div
-            if ftr[team_id]['DIVISIONS'][0] != ftr[team_id]['DIVISIONS'][2]: # in wrong div, make change
-                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
-
-            if ftr[team_id]['FIGHTPLAN'] is None:
-                write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
-
             tr = [None, None, (ftr[team_id]['CHIN'] + ftr[team_id]['STATUS'] // 10 < 10 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2)]
             for i in range(2):
                 baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']
@@ -770,7 +760,15 @@ He may <UL>
             if tr[0] != ftr[team_id]['TRAINING'][0] or tr[2] != ftr[team_id]['TRAINING'][2]:
                 write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
+            ftr[team_id]['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr[team_id]['MINIMUMWEIGHT']]) ].lower()) # find correct weight div
+            if ftr[team_id]['DIVISIONS'][0] != ftr[team_id]['DIVISIONS'][2]: # in wrong div, make change
+                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
+            if ftr[team_id]['FIGHTPLAN'] is None:
+                write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
+
+            if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
+                write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
 
 
         with open('data.json', 'w', encoding='utf-8') as f:
