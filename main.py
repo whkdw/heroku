@@ -122,15 +122,14 @@ def write_msg(
             print(command, etc)
             resp = requests.post(url, data=data, headers=headers, timeout=10)
             resp.raise_for_status()
+            if "eeeeee" not in resp.text:
+                raise requests.RequestException("Invalid WeBL response content")
             return resp.text
         except requests.RequestException as e:
             if attempt == 6:
-                print(
-                    f"[write_msg] FAILED after 7 attempts — "
-                    f"script={script}, command={command}, etc='{etc}'\n{e}",
-                    file=sys.stderr,
-                )
-                return ""
+                print(f"[write_msg] FAILED after 7 attempts:  script={script}, command={command}, etc='{etc}'\n{e}", file=sys.stderr)
+    
+    return ""
 
 
 def find_name():
@@ -738,13 +737,13 @@ He may <UL>
 
             print(ftr[team_id])
 
-            tr = [None, None, (ftr[team_id]['CHIN'] + ftr[team_id]['STATUS'] // 10 < 10 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2)]
+            tr = [None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2)]
             for i in range(2):
                 baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']
                 if ftr[team_id]['CONDITIONING'] < 6:
                     tr[i] = 5
                     ftr[team_id]['CONDITIONING'] += 1
-                elif ftr[team_id]['CHIN'] + ftr[team_id]['STATUS'] // 10 < 10 or ftr[team_id]['CHIN'] - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0:
+                elif ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0:
                     tr[i] = 4
                     ftr[team_id]['CHIN'] += 1
                 elif ftr[team_id]['SPEED'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']:
@@ -768,13 +767,15 @@ He may <UL>
                 write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
 
             if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
-                write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
+                if ftr[team_id]['DIVISIONS'][1] == "contenders":
+                    write_msg("eko_retire_byid", f"verify_retire=1&+team_id={team_id}")
+                else:
+                    write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
 
 
         with open('data.json', 'w', encoding='utf-8') as f:
             json.dump(ftr, f, ensure_ascii=False, indent=4)
 
-        print("Automation run complete.")
     except KeyboardInterrupt:
         print("Interrupted by user.")
     except Exception as e:
@@ -783,17 +784,12 @@ He may <UL>
 
 
     #print(find_name())
-    print(GYM_PASSWORD, GYM_USERNAME)
 
-    #https://webl.vivi.com/cgi-bin/query.fcgi?competition=eko&command=eko_managerbyid&manager_to_view=77894
-    #to_manager=&77894   your_team=Sunny&    command=eko_transfer
     """for word in write_msg("eko_retired_fighters").split("<H4>Heavyweights")[1].split("Activate</A>"):
         if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
             for team_id in re.findall(r"team_id=([0-9]+)", word):
                 print(team_id, write_msg("eko_activate", f"team_id={team_id}"))
                 break
     """
-
-
 
     # git add . && git commit -m "update" && git push
