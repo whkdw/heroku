@@ -757,7 +757,7 @@ He may <UL>
                     tr[i] = 1 # KP insead of str
                     ftr[team_id]['STRENGTH'] += 1
 
-            if tr[0] != ftr[team_id]['TRAINING'][0] or tr[2] != ftr[team_id]['TRAINING'][2]:
+            if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
                 write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
             ftr[team_id]['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr[team_id]['MINIMUMWEIGHT']]) ].lower()) # find correct weight div
