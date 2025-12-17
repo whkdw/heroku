@@ -613,8 +613,6 @@ def process_fighters():
 
 if __name__ == "__main__":
     print(requests.get("https://ipinfo.io/json", timeout=5).json())
-    # set some global seeds if desired (PHP used mt_rand/random_int)
-    random.seed()
 
     fff = """
     <HTML>
@@ -689,6 +687,7 @@ He may <UL>
     except:
         ftr = {}
 
+    week = int(time.strftime("%W")) * 10000
 
     try:
         team_ids = list(set(map(int, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
@@ -696,8 +695,9 @@ He may <UL>
         print(team_ids)
 
         for team_id in team_ids:
-            text, ftr[team_id] = write_msg("eko_control_fighter", f"team_id={team_id}"), {}
+            text, ftr[team_id], rng = write_msg("eko_control_fighter", f"team_id={team_id}"), {}, random.Random(week + int(team_id))
             #text, ftr[team_id] = fff, {}
+
 
             ftr[team_id]['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
             ftr[team_id]['STRENGTH'] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
@@ -763,8 +763,11 @@ He may <UL>
             if ftr[team_id]['DIVISIONS'][0] != ftr[team_id]['DIVISIONS'][2]: # in wrong div, make change
                 write_msg("eko_change_division", f"to_manager=77894&your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
-            if ftr[team_id]['FIGHTPLAN'] is None:
-                write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
+            if ftr[team_id]['OPPONENT']:
+                if ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= 0:
+                    write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice={rng.choice(['5H87clinchR1', '5H105ringR1', '5H87ringR1'])}")
+                if ftr[team_id]['FIGHTPLAN'] is None:
+                    write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
 
             if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
                 if ftr[team_id]['DIVISIONS'][1] == "contenders":
