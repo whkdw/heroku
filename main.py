@@ -764,10 +764,13 @@ He may <UL>
                 write_msg("eko_change_division", f"to_manager=77894&your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
             if ftr[team_id]['OPPONENT']:
+                fp = ""
                 if ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= 0:
-                    write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice={rng.choice(['5H87clinchR1', '5H105ringR1', '5H87ringR1'])}")
+                    fp = rng.choice(['5H87clinchR1', '5H105ringR1', '5H87ringR1'])
                 if ftr[team_id]['FIGHTPLAN'] is None:
-                    write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&+strategy_choice=5H114insideR1")
+                    fp = "5H114insideR1"
+                if ftr[team_id]['FIGHTPLAN'] != fp:
+                    write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
 
             if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
                 if ftr[team_id]['DIVISIONS'][1] == "contenders":
