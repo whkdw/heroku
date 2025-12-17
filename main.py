@@ -47,8 +47,8 @@ DIVISIONS = [
 fighter_builds = [
     { "STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "COUNT": 3 }, # albino
     { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "COUNT": 1 }, # zam
-    { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 20, "COUNT": 2 }, # agl
-    { "STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 19, "COUNT": 0 }, # bal
+    { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "COUNT": 2 }, # agl
+    { "STRENGTH": 0.40, "SPEED": 0.29, "AGILITY": 0.31, "CHIN": 17, "COUNT": 0 }, # bal
 ]
 
 # day_fps parallels the PHP array (index 0 = Sunday)
