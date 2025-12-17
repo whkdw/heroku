@@ -754,7 +754,7 @@ He may <UL>
                 if ftr[team_id]['CONDITIONING'] < 6:
                     tr[i] = 5
                     ftr[team_id]['CONDITIONING'] += 1
-                elif ftr[team_id]['CHIN'] + ftr[team_id]['STATUS'] // 10 < 10 or ftr[team_id]['CHIN'] - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0) * ftr[team_id]['STATUS'] / 28.0:
+                elif ftr[team_id]['CHIN'] + ftr[team_id]['STATUS'] // 10 < 10 or ftr[team_id]['CHIN'] - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0:
                     tr[i] = 4
                     ftr[team_id]['CHIN'] += 1
                 elif ftr[team_id]['SPEED'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']:
