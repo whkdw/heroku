@@ -769,7 +769,7 @@ He may <UL>
                     fp = rng.choice(['5H87clinchR1', '5H105ringR1', '5H87ringR1'])
                 if ftr[team_id]['FIGHTPLAN'] is None:
                     fp = "5H114insideR1"
-                if ftr[team_id]['FIGHTPLAN'] != fp:
+                if fp and ftr[team_id]['FIGHTPLAN'] != fp:
                     write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
 
             if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
