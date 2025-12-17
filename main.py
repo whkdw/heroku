@@ -773,7 +773,7 @@ He may <UL>
                     write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
 
             if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
-                if ftr[team_id]['DIVISIONS'][1] == "contenders":
+                if ftr[team_id]['DIVISIONS'][1] == "contenders" or ftr[team_id]['STATUS'] > 18:
                     write_msg("eko_retire_byid", f"verify_retire=1&+team_id={team_id}")
                 else:
                     write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
