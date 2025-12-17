@@ -116,7 +116,7 @@ def write_msg(
         "Content-Type": "application/x-www-form-urlencoded",
     }
 
-    for attempt in range(8):
+    for attempt in range(7):
         time.sleep(2.75 + 15 * attempt)
         try:
             print(command, etc)
@@ -124,7 +124,7 @@ def write_msg(
             resp.raise_for_status()
             return resp.text
         except requests.RequestException as e:
-            if attempt == 7:
+            if attempt == 6:
                 print(
                     f"[write_msg] FAILED after 7 attempts — "
                     f"script={script}, command={command}, etc='{etc}'\n{e}",
