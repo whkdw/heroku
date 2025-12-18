@@ -690,7 +690,13 @@ He may <UL>
     week = int(time.strftime("%W")) * 10000
 
     try:
-        team_ids = list(set(map(int, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
+        for word in write_msg("eko_retired_fighters").split("Activate</A>"):
+                if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
+                    for team_id in re.findall(r"team_id=([0-9]+)", word):
+                        print(team_id, write_msg("eko_activate", f"team_id={team_id}"))
+                        break
+
+        team_ids = list(set(map(str, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
         #team_ids=["1695461"]
         print(team_ids)
 
@@ -779,8 +785,13 @@ He may <UL>
                     write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
 
 
-        with open('data.json', 'w', encoding='utf-8') as f:
-            json.dump(ftr, f, ensure_ascii=False, indent=4)
+        ftr_tmp, tmp = {}, 'data.json.tmp'
+        for team_id in team_ids:
+            ftr_tmp[team_id] = ftr[team_id]
+        with open(tmp, 'w', encoding='utf-8') as f:
+            json.dump(ftr_tmp, f, ensure_ascii=False, indent=4)
+        os.replace(tmp, 'data.json')
+
 
     except KeyboardInterrupt:
         print("Interrupted by user.")
