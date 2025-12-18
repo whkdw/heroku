@@ -614,6 +614,22 @@ def process_fighters():
 if __name__ == "__main__":
     print(requests.get("https://ipinfo.io/json", timeout=5).json())
 
+
+    try:
+        with open('data.json') as f:
+           ftr = json.load(f)
+    except:
+        ftr = {}
+
+    ftr_by_height = [ { h: 0 for h in range(-2, 21) } for _ in range(len(fighter_builds)) ]
+
+    for f in ftr:
+        ftr_by_height[ftr[f]['TYPE']][ftr[f]['HEIGHT']] += 1
+
+    for f in ftr_by_height:
+        print(f)
+
+
     fff = """
     <HTML>
     <HEAD>
