@@ -574,17 +574,6 @@ if __name__ == "__main__":
     now_ts, week = time.time(), int(time.strftime("%W")) * 10000
 
 
-
-    ftr_by_height = [ { h: 0 for h in range(-2, 21) } for _ in range(len(fighter_builds)) ]
-
-    for f in ftr:
-        ftr_by_height[ftr[f]['TYPE']][ftr[f]['HEIGHT']] += 1
-
-
-
-
-    ffff
-
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
