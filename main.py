@@ -160,7 +160,7 @@ def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: i
     wgtval = round((hgtval + 60.0) ** 3.0 * (0.0005 + bldval * 0.00001) *
         (1.0 + (math.sqrt(strval - 10.0) if (strval > 10) else -math.sqrt(10.0 - strval)) * 0.05) *
         (1.0 - (math.sqrt(aglval - 10.0) if (aglval > 10) else -math.sqrt(10.0 - aglval)) * 0.05) - 0.49999)
-    return wgtval, round(wgtval * (0.995 - cndval * 0.025))
+    return wgtval, round(wgtval * (0.995 - cndval * 0.0025))
 
 def fighter_types() -> List[Dict]:
     """
@@ -645,7 +645,7 @@ if __name__ == "__main__":
             if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
                 write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
-            ftr[team_id]['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr[team_id]['MINIMUMWEIGHT']]) ].lower()) # find correct weight div
+            ftr[team_id]['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower()) # find correct weight div
             if ftr[team_id]['DIVISIONS'][0] != ftr[team_id]['DIVISIONS'][2]: # in wrong div, make change
                 write_msg("eko_change_division", f"to_manager=77894&your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
