@@ -133,7 +133,6 @@ def write_msg(
 
 
 def find_name():
-    return "Ell'kamogelo"
     try:
         response = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people", headers={"User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"}, timeout=10)
         response.raise_for_status()
