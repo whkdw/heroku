@@ -692,7 +692,6 @@ if __name__ == "__main__":
                 while compute_weight(height, strength, agility, condition, build)[0] < max_weights[0]: build += 1
                 write_msg("eko_create_fighter", f"competition=eko&region=0&team={find_name()}&height={height}&strength={strength}&ko_punch={ko_punch}&speed={speed}&agility={agility}&chin={chin}&condition={condition}&cut=1&build={build}")
                 ftr_by_height[type_new][height] += 1
-                
 
 
         with open('data.json.tmp', 'w', encoding='utf-8') as f:
