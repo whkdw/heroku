@@ -662,7 +662,7 @@ if __name__ == "__main__":
             ftr[team_id]['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
             if ftr[team_id]['OPPONENT']:
                 ftr[team_id]['OPPONENT'] = ((int("0%s" % ftr[team_id]['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr[team_id]['OPPONENT'].group(2)), int("0%s" % ftr[team_id]['OPPONENT'].group(3)), ftr[team_id]['OPPONENT'].group(4),
-                time.mktime(time.strptime("{} {} {}".format(*re.search(r' on <[Bb]>[A-Z][a-z]+day,\s+([A-Z][a-z]+)\s+(\d{1,2}),\s+(\d{4})\.<\/[Bb]>', fff).groups()), "%B %d %Y")) )
+                time.mktime(time.strptime("{} {} {}".format(*re.search(r' on <[Bb]>[A-Z][a-z]+day,\s+([A-Z][a-z]+)\s+(\d{1,2}),\s+(\d{4})\.<\/[Bb]>', text).groups()), "%B %d %Y")) )
 
 
             ftr[team_id]['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
