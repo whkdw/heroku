@@ -621,89 +621,8 @@ if __name__ == "__main__":
     except:
         ftr = {}
 
-    ftr_by_height = [ { h: 0 for h in range(-2, 21) } for _ in range(len(fighter_builds)) ]
+    now_ts, week = time.time(), int(time.strftime("%W")) * 10000
 
-    for f in ftr:
-        ftr_by_height[ftr[f]['TYPE']][ftr[f]['HEIGHT']] += 1
-
-    for f in ftr_by_height:
-        print(f)
-
-
-    fff = """
-    <HTML>
-    <HEAD>
-    <script>
-    document.cookie='timezone='+(new Date()).getTimezoneOffset();
-    </script>
-    <link rel=STYLESHEET type=text/css href=/eko/eko.css>
-    <TITLE>WEBL Query Server (control)</TITLE>
-</HEAD><BODY bgcolor=#eeeeee>
-<center>
-<img src="https://webl.vivi.com/images/webltitle.gif" width="200" height="110">
-</center>
-
-<BR><CENTER><SMALL>
-
-</SMALL></CENTER>
-<HR><BR><B>
-<A name="sunny" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_career_privatebyid&+competition=eko&+division=Heavy&+region=16097&+team_id=1695461">Sunny</A> </B> (0-0-0 0/0)<BR>
-<table border=1>
-<TR><TD>Strength <TD align=right>15<BR>
-<TD>Knockout Punch <TD  align=right>5<BR>
-<TR><TD>Speed <TD align=right>10<BR>
-<TD>Agility <TD align=right>7<BR>
-<TR><TD>Chin <TD align=right>12<BR>
-<TD>Conditioning <TD align=right>6<BR>
-<TR><TD>Cut Resistance <TD align=right>Low<BR>
-<TD><a target=glossary onClick=help() href=https://cloudfront-webl.vivi.com/eko/glossary.html#streak>Winning Streak</A><TD align=right><TR><TD><script language=javascript>
-    <!--
-    function help() {
-	window.open("", "glossary", "width=550,height=300,resizable=1,scrollbars=1");
-    }
-    //-->
-</script>
-<a href=https://cloudfront-webl.vivi.com/eko/glossary.html#rating target=glossary onClick=help()>Rating</A><TD align=right>0
-<TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#status target=glossary onClick=help()>Status</A><TD align=right>0
-<TR><TD><BR><TD><BR>
-<TD>Total Earnings:<TD align=right>  $0 <TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#injury target=glossary onClick=help()>Injury Points</A><TD align=right>0
-<TD>AP Loss</A><TD align=right>0
-<TR><TD>Height<TD colspan=3>6 feet 2 inches (187 centimeters)
-<TR><TD>Build<TD colspan=3>normal
-<TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#fweight target=glossary onClick=help()>Weight</A> <TD colspan=3>244 pounds (110 kilograms)
-<TR><TD><a href=https://cloudfront-webl.vivi.com/eko/glossary.html#minweight target=glossary onClick=help()>Minimum Weight</A> <TD colspan=3>239 pounds (108 kilograms)
-</table>
-<P>Sunny fights in the <A name="Heavyweight" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_standings&+competition=eko&+division=Heavy&+region=1234567891&team=sunny">Heavyweight</A> division.  <P>Sunny's next bout is a <B>title fight</B> against the 5 feet 10 inches, 
-<A name="df" HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=eko_careerbyid&+competition=eko&+division=Heavy&+region=16097&+team_id=544246&describe=1">df</A>  (0-0-0 0/0)  from the 
-<A HREF="https://webl.vivi.com/cgi-bin/query.fcgi?competition=eko&command=eko_managerbyid&manager_to_view=74575">1234567891</A> gym  for   $0  on <B>Sunday, December 14, 2025.</B>
-<P>Sunny is training <b>agility</b>, but you can instruct him to <A  HREF="/cgi-bin/prompt.fcgi?+command=eko_training&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">train for something else</A>.<P>Sunny is currently using the <b>Go for Early KO</b> fight plan. 
-He may <UL>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_select_orders&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">choose a different fight plan</A>, 
-<LI><A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=query_echo&+competition=eko&+division=Heavy&+filename=fightplan_beginner.html&+region=16097&team=sunny">create a new fight plan</A>  
-<LI>or <A  HREF="/cgi-bin/prompt.fcgi?+command=query_edit_orders&+competition=eko&+division=Heavy&+region=16097&+strategy_choice=Go+for+Early+KO&strategy_id=555321">edit</A> your <B>Go for Early KO</B> plan.
-
-<LI>Experts can use the <A  HREF="/cgi-bin/prompt.fcgi?+command=query_orders&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">advanced fight plan form</A>.
-
-<LI>Beginners might want to get into the ring with a  <A  HREF="https://webl.vivi.com/cgi-bin/query.fcgi?+command=query_echo&+competition=eko&+division=Heavy&+filename=newbie_form.html&+region=16097&cname=sunny&fighter_name=Sunny&team_id=1695461">sparring partner.</A>
-
-</UL>
-<P>Sunny may also do any of the following:<UL>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=query_press&+competition=eko&+division=Heavy&+region=16097&+team=Sunny&team_id=1695461">issue a press release.</A> 
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_change_division&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">change weight division.</A>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_rename&+competition=eko&+division=Heavy&+region=16097&+team=Sunny">change his description.</A>
-<LI><A  HREF="/cgi-bin/prompt.fcgi?+command=eko_retire_byid&+competition=eko&+division=Heavy&+region=16097&+team_id=1695461">retire.</A></UL>
-
-</BODY></HTML>
-
-"""
-
-    try:
-        with open('data.json') as f:
-           ftr = json.load(f)
-    except:
-        ftr = {}
-
-    week = int(time.strftime("%W")) * 10000
 
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
@@ -713,12 +632,10 @@ He may <UL>
                         break
 
         team_ids = list(set(map(str, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
-        #team_ids=["1695461"]
         print(team_ids)
 
         for team_id in team_ids:
             text, ftr[team_id], rng = write_msg("eko_control_fighter", f"team_id={team_id}"), {}, random.Random(week + int(team_id))
-            #text, ftr[team_id] = fff, {}
 
 
             ftr[team_id]['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
@@ -744,9 +661,9 @@ He may <UL>
 
             ftr[team_id]['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
             if ftr[team_id]['OPPONENT']:
-                ftr[team_id]['OPPONENT'] = ((int("0%s" % ftr[team_id]['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr[team_id]['OPPONENT'].group(2)), int("0%s" % ftr[team_id]['OPPONENT'].group(3)), ftr[team_id]['OPPONENT'].group(4), 
-                    time.strptime("{} {} {}".format(*re.search(r' on <[Bb]>[A-Z][a-z]+day,\s+([A-Z][a-z]+)\s+(\d{1,2}),\s+(\d{4})\.<\/[Bb]>', text).groups()), "%B %d %Y")
-                )
+                ftr[team_id]['OPPONENT'] = ((int("0%s" % ftr[team_id]['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr[team_id]['OPPONENT'].group(2)), int("0%s" % ftr[team_id]['OPPONENT'].group(3)), ftr[team_id]['OPPONENT'].group(4),
+                time.mktime(time.strptime("{} {} {}".format(*re.search(r' on <[Bb]>[A-Z][a-z]+day,\s+([A-Z][a-z]+)\s+(\d{1,2}),\s+(\d{4})\.<\/[Bb]>', fff).groups()), "%B %d %Y")) )
+
 
             ftr[team_id]['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
             ftr[team_id]['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
@@ -801,12 +718,21 @@ He may <UL>
                     write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
 
 
-        ftr_tmp, tmp = {}, 'data.json.tmp'
-        for team_id in team_ids:
-            ftr_tmp[team_id] = ftr[team_id]
-        with open(tmp, 'w', encoding='utf-8') as f:
-            json.dump(ftr_tmp, f, ensure_ascii=False, indent=4)
-        os.replace(tmp, 'data.json')
+        ftr_new = {k: ftr[k] for k in team_ids if k in ftr}
+
+
+        ftr_by_height = [ { h: 0 for h in range(-2, 21) } for _ in range(len(fighter_builds)) ]
+
+        for f in ftr_new:
+            ftr_by_height[ftr_new[f]['TYPE']][ftr_new[f]['HEIGHT']] += 1
+
+        for f in ftr_by_height:
+            print(f)
+
+
+        with open('data.json.tmp', 'w', encoding='utf-8') as f:
+            json.dump(ftr_new, f, ensure_ascii=False, indent=4)
+        os.replace('data.json.tmp', 'data.json')
 
 
     except KeyboardInterrupt:
