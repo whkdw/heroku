@@ -133,40 +133,14 @@ def write_msg(
 
 
 def find_name():
-    """
-    Generates a fantasy-style name by combining a prefix with the first word
-    from the title of a random Wikipedia page in 'Living people'.
-    """
-    
-    # Configurable prefix pool
-    PREFIXES = ['Byl", "Ell", "Fel", "Kel", "Kul']
-
-    url = "https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"
-    }
-
+    return "Ell'kamogelo"
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people", headers={"User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"}, timeout=10)
         response.raise_for_status()
-    except requests.RequestException:
-        # Fallback if Wikipedia request fails
-        return random.choice(PREFIXES) + "'noname"
+        return random.choice(['Byl', 'Ell', 'Fel', 'Kel', 'Kul']) + "'" + re.search(r"<title>\s*([\w]+)", unicodedata.normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
+    except:
+        return ""
 
-    html = response.text
-
-    # Normalize to ASCII (like PHP iconv)
-    ascii_html = (
-        unicodedata.normalize("NFKD", html)
-        .encode("ascii", "ignore")
-        .decode("ascii", "ignore")
-    )
-
-    # Extract first word from <title>
-    match = re.search(r"<title>\s*([\w]+)", ascii_html, flags=re.IGNORECASE)
-    name_part = match.group(1).lower() if match else "unknown"
-
-    return f"{random.choice(PREFIXES)}'{name_part}"
 
 def convert_height(feet: int, inches: int) -> int:
     """
@@ -184,33 +158,10 @@ def convert_height(feet: int, inches: int) -> int:
     return 12 * (f - 5) + i
 
 def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: int) -> Tuple[int, int]:
-    """
-    Ported from PHP compute_weight().
-    Returns (fwgt, cutweight)
-    """
-    # replicate PHP floating logic carefully
-    if isinstance(strval, (str,)) or isinstance(aglval, (str,)) or isinstance(cndval, (str,)):
-        try:
-            strval = float(strval)
-            aglval = float(aglval)
-            cndval = float(cndval)
-        except Exception:
-            strval = float(10)
-            aglval = float(10)
-            cndval = float(10)
-    # compute the complicated formula:
-    # sqrt branches: PHP used ($strval > 10 ? sqrt($strval - 10.0) : -sqrt(10.0 - $strval))
-    def signed_sqrt_diff(x):
-        if x > 10.0:
-            return math.sqrt(x - 10.0)
-        else:
-            return -math.sqrt(10.0 - x)
-    fwgt = round((hgtval + 60.0) * (hgtval + 60.0) * (hgtval + 60.0) / 2000.0 *
-                 (1.0 + signed_sqrt_diff(strval) * 0.05) *
-                 (1.0 - signed_sqrt_diff(aglval) * 0.05) *
-                 (1.0 + bldval * 0.02) - 0.49999)
-    cutweight = round((1.0 - 0.0025 * (cndval + 2.0)) * fwgt)
-    return fwgt, cutweight
+    wgtval = round((hgtval + 60.0) ** 3.0 * (0.0005 + bldval * 0.00001) *
+        (1.0 + (math.sqrt(strval - 10.0) if (strval > 10) else -math.sqrt(10.0 - strval)) * 0.05) *
+        (1.0 - (math.sqrt(aglval - 10.0) if (aglval > 10) else -math.sqrt(10.0 - aglval)) * 0.05) - 0.49999)
+    return wgtval, round(wgtval * (0.995 - cndval * 0.025))
 
 def fighter_types() -> List[Dict]:
     """
@@ -624,6 +575,17 @@ if __name__ == "__main__":
     now_ts, week = time.time(), int(time.strftime("%W")) * 10000
 
 
+
+    ftr_by_height = [ { h: 0 for h in range(-2, 21) } for _ in range(len(fighter_builds)) ]
+
+    for f in ftr:
+        ftr_by_height[ftr[f]['TYPE']][ftr[f]['HEIGHT']] += 1
+
+
+
+
+    ffff
+
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
@@ -653,10 +615,7 @@ if __name__ == "__main__":
             ftr[team_id]['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
             ftr[team_id]['RECORD'] = [int("0%s" % i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) ([0-9]+)\/([0-9]+)\)', text).groups()]
             ftr[team_id]['DIVISIONS'] = [i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups()]
-            ftr[team_id]['WEIGHT'] = round((ftr[team_id]['HEIGHT'] + 60.0) ** 3.0 * (0.00001 * ftr[team_id]['BUILD'] + 0.0005) *
-                (1.0 + (math.sqrt(ftr[team_id]['STRENGTH'] - 10.0) if (ftr[team_id]['STRENGTH'] > 10) else -math.sqrt(10.0 - ftr[team_id]['STRENGTH'])) * 0.05) *
-                (1.0 - (math.sqrt(ftr[team_id]['AGILITY'] - 10.0) if (ftr[team_id]['AGILITY'] > 10) else -math.sqrt(10.0 - ftr[team_id]['AGILITY'])) * 0.05) - 0.49999)
-            ftr[team_id]['MINIMUMWEIGHT'] = round(ftr[team_id]['WEIGHT'] * (0.995 - 0.0025 * ftr[team_id]['CONDITIONING']))
+            ftr[team_id]['WEIGHT'] = compute_weight(ftr[team_id]['HEIGHT'], ftr[team_id]['STRENGTH'], ftr[team_id]['AGILITY'], ftr[team_id]['CONDITIONING'], ftr[team_id]['BUILD'])
 
 
             ftr[team_id]['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
@@ -726,8 +685,17 @@ if __name__ == "__main__":
         for f in ftr_new:
             ftr_by_height[ftr_new[f]['TYPE']][ftr_new[f]['HEIGHT']] += 1
 
-        for f in ftr_by_height:
-            print(f)
+        for type_new, height, value in ( (i, h, v) for i, d in enumerate(ftr_by_height) for h, v in d.items() ):
+            while value and ftr_by_height[type_new][height] < fighter_builds[type_new]['COUNT']:
+                chin, condition, build = random.randint(12, 13), 6, random.randint(-2, 3)
+                strength = round((63 - height - chin - condition + height // 6) * fighter_builds[type_new]['STRENGTH'])
+                agility = round((63 - height - chin - condition + height // 6) * fighter_builds[type_new]['AGILITY'])
+                ko_punch = strength // 3
+                speed = 69 - height - strength - ko_punch - agility - chin - condition
+                while compute_weight(height, strength, agility, condition, build)[0] < max_weights[0]: build += 1
+                write_msg("eko_create_fighter", f"competition=eko&region=0&team={find_name()}&height={height}&strength={strength}&ko_punch={ko_punch}&speed={speed}&agility={agility}&chin={chin}&condition={condition}&cut=1&build={build}")
+                ftr_by_height[type_new][height] += 1
+                
 
 
         with open('data.json.tmp', 'w', encoding='utf-8') as f:
@@ -740,15 +708,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error during automation run: {e}", file=sys.stderr)
         raise
-
-
-    #print(find_name())
-
-    """for word in write_msg("eko_retired_fighters").split("<H4>Heavyweights")[1].split("Activate</A>"):
-        if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
-            for team_id in re.findall(r"team_id=([0-9]+)", word):
-                print(team_id, write_msg("eko_activate", f"team_id={team_id}"))
-                break
-    """
 
     # git add . && git commit -m "update" && git push
