@@ -681,9 +681,7 @@ if __name__ == "__main__":
 
 
         ftr_by_height = [ { h: 0 for h in range(-2, 21) } for _ in range(len(fighter_builds)) ]
-
-        for f in ftr_new:
-            ftr_by_height[ftr_new[f]['TYPE']][ftr_new[f]['HEIGHT']] += 1
+        for f in ftr_new: ftr_by_height[ftr_new[f]['TYPE']][ftr_new[f]['HEIGHT']] += 1
 
         for type_new, height, value in ( (i, h, v) for i, d in enumerate(ftr_by_height) for h, v in d.items() ):
             while value and ftr_by_height[type_new][height] < fighter_builds[type_new]['COUNT']:
