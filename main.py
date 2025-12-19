@@ -573,7 +573,7 @@ if __name__ == "__main__":
 
     now_ts, week = time.time(), int(time.strftime("%W")) * 10000
 
-
+    #print(write_msg("eko_select_orders", f"your_team=Fel`sandra&strategy_choice=6H122alloutR1"))
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
