@@ -573,7 +573,7 @@ if __name__ == "__main__":
 
     now_ts, week = time.time(), int(time.strftime("%W")) * 10000
 
-    #print(write_msg("eko_select_orders", f"your_team=Fel`sandra&strategy_choice=6H122alloutR1"))
+    #print(write_msg("eko_select_orders", f"your_team=Kil`sharon&strategy_choice=6H122alloutR1"))
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
@@ -632,12 +632,12 @@ if __name__ == "__main__":
                 elif ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0:
                     tr[i] = 4
                     ftr[team_id]['CHIN'] += 1
-                elif ftr[team_id]['SPEED'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']:
-                    tr[i] = 2
-                    ftr[team_id]['SPEED'] += 1
                 elif ftr[team_id]['AGILITY'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY']:
                     tr[i] = 3
                     ftr[team_id]['AGILITY'] += 1
+                elif ftr[team_id]['SPEED'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']:
+                    tr[i] = 2
+                    ftr[team_id]['SPEED'] += 1
                 else:
                     tr[i] = 1 # KP insead of str
                     ftr[team_id]['STRENGTH'] += 1
