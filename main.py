@@ -632,7 +632,7 @@ if __name__ == "__main__":
                 elif ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0:
                     tr[i] = 4
                     ftr[team_id]['CHIN'] += 1
-                elif ftr[team_id]['AGILITY'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY']:
+                elif ftr[team_id]['AGILITY'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] and ftr[team_id]['AGILITY'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] < ftr[team_id]['SPEED'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']:
                     tr[i] = 3
                     ftr[team_id]['AGILITY'] += 1
                 elif ftr[team_id]['SPEED'] < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']:
