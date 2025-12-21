@@ -662,7 +662,7 @@ if __name__ == "__main__":
                     # uses a strange inline ternary combining strings; we'll pick a realistic fallback
                     fp = rng.choice(['5H87clinchR', '5H105ringR'])
                 if ftr[team_id]['WEIGHT'][1] < 200:
-                    if rng.randint(0,6) < 5 and (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] <= -10 or (ftr[team_id]['RECORD'][1] > 9 and ftr[team_id]['RECORD'][4] / ftr[team_id]['RECORD'][0][1] < 0.1)):
+                    if rng.randint(0,6) < 5 and (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] <= -10 or (ftr[team_id]['RECORD'][1] > 9 and ftr[team_id]['RECORD'][4] / ftr[team_id]['RECORD'][1] < 0.1)):
                         fp = '6H122alloutR' + str(rng.randint(1,3))
                     elif (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= 0) and rng.randint(0,4) == 0:
                         fp = '5H114insideR1'
