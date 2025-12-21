@@ -582,7 +582,7 @@ if __name__ == "__main__":
                         write_msg("eko_activate", f"team_id={team_id}")
                         break
 
-        team_ids = list(set(map(str, re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief", "")))))
+        team_ids = sorted(set(re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief"))), key=int)
         print(team_ids)
 
         for team_id in team_ids:
