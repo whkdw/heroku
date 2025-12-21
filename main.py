@@ -647,12 +647,37 @@ if __name__ == "__main__":
                 write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
             if ftr[team_id]['OPPONENT']:
-                fp = None
-                if ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= 0:
-                    fp = rng.choice(['5H87clinchR1', '5H105ringR1', '5H87ringR1'])
-                if ftr[team_id]['FIGHTPLAN'] is None:
-                    fp = "5H114insideR1"
-                if fp and ftr[team_id]['FIGHTPLAN'] != fp:
+                # choose an fp base list, emulate random picks
+                if ftr[team_id]['CHIN'] < 15:
+                    choices = ['417clinchR", "5H105alloutR", "5H105insideR", "5H114alloutR", "5H114insideR", "5H87alloutR']
+                else:
+                    choices = ['417clinchR", "5H105alloutR", "5H105insideR", "5H114alloutR", "5H114insideR", "5H87alloutR", "6H122alloutR']
+                fp_base = rng.choice(choices)
+                # randomly choose repetition factor influenced by heights
+                hfactors = [1,1, (1 if ftr[team_id]['HEIGHT'] > 14 else 3), (1 if ftr[team_id]['HEIGHT'] > 14 else 3), (1 if ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= 0 else 3)]
+                rep = rng.choice(hfactors)
+                fp = f"{fp_base}{rep}"
+                # several PHP special-case branches:
+                if rng.randint(0,6) == 0 and (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0]) >= -3:
+                    # uses a strange inline ternary combining strings; we'll pick a realistic fallback
+                    fp = rng.choice(['5H87clinchR", "5H105ringR'])
+                if ftr[team_id]['WEIGHT'][1] < 200:
+                    if rng.randint(0,6) < 5 and ((ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] <= -10) or (ftr[team_id].get("RECORD") and int(ftr[team_id]['RECORD'][0][1]) > 9 and (int(ftr[team_id]['RECORD'][0][4]) / int(ftr[team_id]['RECORD'][0][1]) < 0.1 if int(ftr[team_id]['RECORD'][0][1]) != 0 else False))):
+                        fp = "6H122alloutR" + str(rng.randint(1,3))
+                    elif (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= 0) and rng.randint(0,4) == 0:
+                        fp = "5H114insideR1"
+                    elif (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= 0):
+                        fp = "5H87ringR1"
+                    elif (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= -3) and rng.randint(0,1) == 1:
+                        fp = "5H105insideR1"
+                    elif (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= -3):
+                        fp = rng.choice(['5H87", "5H105']) + "clinchR1"
+                if rng.randint(0,9) == 0:
+                    fp = "6H113alloutR1"
+                if ftr[team_id]['CHIN'] > 23:
+                    fp = rng.choice(["5H105alloutR", "5H114alloutR", "5H87alloutR", "6H122alloutR" if ftr[team_id]['OPPONENT'][0] > ftr[team_id]['HEIGHT'] else "5H105alloutR"]) + str(rng.randint(1,2))
+
+                if ftr[team_id]['FIGHTPLAN'] != fp:
                     write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
 
             if (ftr[team_id]['STATUS'] > 0 and ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 0.01) > 38.0) or (ftr[team_id]['RECORD'][0] == 0 and ftr[team_id]['RECORD'][1] > 1):
