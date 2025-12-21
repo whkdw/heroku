@@ -573,7 +573,7 @@ if __name__ == "__main__":
 
     now_ts, week = time.time(), int(time.strftime("%W")) * 10000
 
-    #print(write_msg("eko_select_orders", f"your_team=Val`hatsumi&strategy_choice=5H87ringR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
+    print(write_msg("eko_select_orders", f"your_team=Kil`nawasch&strategy_choice=417clinchR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
     
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
