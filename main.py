@@ -644,7 +644,7 @@ if __name__ == "__main__":
 
             ftr[team_id]['DIVISIONS'].insert(3, divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower()) # find correct weight div
             if ftr[team_id]['DIVISIONS'][0] != ftr[team_id]['DIVISIONS'][2]: # in wrong div, make change
-                write_msg("eko_change_division", f"to_manager=77894&your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
+                write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
             if ftr[team_id]['OPPONENT']:
                 fp = None
