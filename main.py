@@ -1711,7 +1711,8 @@ if __name__ == "__main__":
 
     week = int(time.strftime("%W")) * 10000
 
-    try: with open('data.json') as f: ftr = json.load(f)
+    try: 
+        with open('data.json') as f: ftr = json.load(f)
     except: ftr = {}
 
     # print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
