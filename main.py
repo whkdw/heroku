@@ -649,10 +649,10 @@ if __name__ == "__main__":
                     ftr_bouts = {}
                     for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:4]:
                         fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
-                        ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]+) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
+                        ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
                         if len(ftr_intro) > 1:
-                            if ftr[team_id]['OPPONENT'][2] == ftr_intro[0][2]: ftr_order = 1
-                            elif ftr[team_id]['OPPONENT'][2] == ftr_intro[1][2]: ftr_order = 2
+                            if ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip(): ftr_order = 1
+                            elif ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[1][2].strip(): ftr_order = 2
                             elif (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
 
                             for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
