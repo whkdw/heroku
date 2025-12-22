@@ -863,16 +863,16 @@
         "CHIN": 16,
         "CONDITIONING": 5,
         "CUT": 1,
-        "RATING": 16,
+        "RATING": 17,
         "STATUS": 18,
         "HEIGHT": -1,
         "BUILD": 3,
-        "IPS": 534,
+        "IPS": 596,
         "RECORD": [
-            24,
+            25,
             13,
             0,
-            22,
+            23,
             12
         ],
         "DIVISIONS": [
@@ -884,19 +884,14 @@
             119,
             117
         ],
-        "OPPONENT": [
-            4,
-            1133382,
-            "Gonzo Young 4",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "6H113alloutR1",
-        "GRADE": 44.89685687877189,
+        "GRADE": 41.93942051761999,
         "TYPE": 0
     },
     "1651202": {
@@ -993,17 +988,17 @@
         "CHIN": 13,
         "CONDITIONING": 5,
         "CUT": 1,
-        "RATING": 1,
+        "RATING": 0,
         "STATUS": 8,
         "HEIGHT": 1,
         "BUILD": 3,
-        "IPS": 258,
+        "IPS": 301,
         "RECORD": [
             10,
-            15,
+            16,
             0,
             9,
-            8
+            9
         ],
         "DIVISIONS": [
             "super-bantam",
@@ -1014,19 +1009,14 @@
             123,
             121
         ],
-        "OPPONENT": [
-            -2,
-            592235,
-            "The Angry Midget Drawf",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             5,
             null,
-            true
+            false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 26.218434446052434,
+        "GRADE": 20.16577881027951,
         "TYPE": 3
     },
     "1654524": {
@@ -2953,16 +2943,16 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 3,
         "STATUS": 3,
         "HEIGHT": -1,
         "BUILD": 0,
         "IPS": 18,
         "RECORD": [
-            2,
+            3,
             1,
             0,
-            2,
+            3,
             1
         ],
         "DIVISIONS": [
@@ -2974,19 +2964,14 @@
             119,
             117
         ],
-        "OPPONENT": [
-            0,
-            1694403,
-            "Keaton \"USB Cable\" HUFF",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "5H105clinchR1",
-        "GRADE": 49.40909149037987,
+        "GRADE": 52.3069741203317,
         "TYPE": 0
     },
     "1666476": {
@@ -3648,17 +3633,17 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 1,
+        "RATING": 0,
         "STATUS": 1,
         "HEIGHT": 0,
         "BUILD": 1,
-        "IPS": 30,
+        "IPS": 55,
         "RECORD": [
             1,
-            3,
+            4,
             0,
             1,
-            2
+            3
         ],
         "DIVISIONS": [
             "bantam",
@@ -3669,40 +3654,35 @@
             119,
             117
         ],
-        "OPPONENT": [
-            6,
-            1695258,
-            "Rooster Does Not Like you",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             3,
-            3,
+            null,
             false
         ],
         "FIGHTPLAN": "5H87alloutR1",
-        "GRADE": 31.666281746378175,
+        "GRADE": 16.886481459688923,
         "TYPE": 2
     },
     "1666887": {
         "NAME": "Ell`molly",
-        "STRENGTH": 23,
+        "STRENGTH": 24,
         "KP": 7,
-        "SPEED": 13,
+        "SPEED": 15,
         "AGILITY": 17,
         "CHIN": 14,
         "CONDITIONING": 7,
         "CUT": 1,
-        "RATING": 10,
-        "STATUS": 10,
+        "RATING": 12,
+        "STATUS": 12,
         "HEIGHT": 1,
         "BUILD": 2,
         "IPS": 25,
         "RECORD": [
-            6,
+            7,
             1,
             0,
-            6,
+            7,
             1
         ],
         "DIVISIONS": [
@@ -3711,23 +3691,18 @@
             "bantam"
         ],
         "WEIGHT": [
-            120,
-            117
+            121,
+            118
         ],
-        "OPPONENT": [
-            10,
-            1605074,
-            "feat 1",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             2,
             1,
             false
         ],
-        "FIGHTPLAN": "5H114alloutR1",
-        "GRADE": 63.852129448931066,
-        "TYPE": 2
+        "FIGHTPLAN": "5H114insideR1",
+        "GRADE": 66.92966828033136,
+        "TYPE": 3
     },
     "1666889": {
         "NAME": "Ell`david",
@@ -3953,16 +3928,16 @@
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 6,
+        "RATING": 7,
         "STATUS": 7,
         "HEIGHT": 0,
         "BUILD": 3,
         "IPS": 54,
         "RECORD": [
-            5,
+            6,
             2,
             0,
-            5,
+            6,
             1
         ],
         "DIVISIONS": [
@@ -3974,40 +3949,35 @@
             115,
             113
         ],
-        "OPPONENT": [
-            0,
-            673868,
-            "Kramer - Not Pub",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             null,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 53.82749665050991,
+        "FIGHTPLAN": "5H105insideR1",
+        "GRADE": 56.248972378949155,
         "TYPE": 3
     },
     "1666899": {
         "NAME": "Kel`lisandro",
-        "STRENGTH": 18,
+        "STRENGTH": 19,
         "KP": 6,
-        "SPEED": 15,
-        "AGILITY": 15,
+        "SPEED": 16,
+        "AGILITY": 16,
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 4,
-        "STATUS": 4,
+        "RATING": 6,
+        "STATUS": 6,
         "HEIGHT": 1,
         "BUILD": 1,
         "IPS": 50,
         "RECORD": [
-            5,
+            6,
             2,
             0,
-            5,
+            6,
             2
         ],
         "DIVISIONS": [
@@ -4016,22 +3986,17 @@
             "super-fly"
         ],
         "WEIGHT": [
-            117,
-            115
+            116,
+            114
         ],
-        "OPPONENT": [
-            2,
-            1039763,
-            "Prize Fighter James ",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             3,
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "GRADE": 49.356348260667374,
+        "GRADE": 55.39265149905797,
         "TYPE": 3
     },
     "1666900": {
@@ -4043,17 +4008,17 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 1,
         "STATUS": 3,
         "HEIGHT": 2,
         "BUILD": 1,
-        "IPS": 32,
+        "IPS": 57,
         "RECORD": [
             3,
-            3,
+            4,
             0,
             3,
-            1
+            2
         ],
         "DIVISIONS": [
             "super-bantam",
@@ -4064,19 +4029,14 @@
             122,
             120
         ],
-        "OPPONENT": [
-            8,
-            1638941,
-            "LikQid Vanquish",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "GRADE": 45.285133054265394,
+        "GRADE": 37.19895933234028,
         "TYPE": 3
     },
     "1666901": {
@@ -4663,21 +4623,21 @@
         "NAME": "Kul`ippazio",
         "STRENGTH": 22,
         "KP": 7,
-        "SPEED": 9,
+        "SPEED": 11,
         "AGILITY": 12,
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 1,
-        "STATUS": 1,
+        "RATING": 3,
+        "STATUS": 3,
         "HEIGHT": 0,
         "BUILD": 2,
         "IPS": 25,
         "RECORD": [
-            1,
+            2,
             2,
             0,
-            1,
+            2,
             2
         ],
         "DIVISIONS": [
@@ -4689,19 +4649,14 @@
             122,
             120
         ],
-        "OPPONENT": [
-            0,
-            76374,
-            "Cab Driver",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             2,
             2,
             false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 35.365269331741665,
+        "GRADE": 46.39987951007237,
         "TYPE": 2
     },
     "1666932": {
@@ -4713,17 +4668,17 @@
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 4,
+        "RATING": 3,
         "STATUS": 4,
         "HEIGHT": 1,
         "BUILD": 1,
-        "IPS": 50,
+        "IPS": 75,
         "RECORD": [
             4,
-            2,
+            3,
             0,
             4,
-            2
+            3
         ],
         "DIVISIONS": [
             "super-bantam",
@@ -4734,19 +4689,14 @@
             124,
             122
         ],
-        "OPPONENT": [
-            0,
-            1235957,
-            "Sandro \"Gold Medal\" Rios",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             3,
-            1,
+            null,
             false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 47.52365578248023,
+        "GRADE": 40.581063250991114,
         "TYPE": 2
     },
     "1666934": {
@@ -5388,20 +5338,20 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 3,
         "STATUS": 3,
         "HEIGHT": 0,
         "BUILD": 3,
         "IPS": 50,
         "RECORD": [
-            2,
+            3,
             2,
             0,
-            2,
+            3,
             2
         ],
         "DIVISIONS": [
-            "super-bantam",
+            "straw",
             "eurasia",
             "super-bantam"
         ],
@@ -5409,19 +5359,14 @@
             121,
             119
         ],
-        "OPPONENT": [
-            3,
-            1213173,
-            "Mergers are for Wussys",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "GRADE": 38.96103239227787,
+        "GRADE": 42.02526802910094,
         "TYPE": 2
     },
     "1667243": {
@@ -5651,23 +5596,23 @@
     },
     "1667332": {
         "NAME": "Byl`phillip",
-        "STRENGTH": 21,
+        "STRENGTH": 22,
         "KP": 7,
         "SPEED": 12,
-        "AGILITY": 13,
+        "AGILITY": 14,
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
-        "STATUS": 2,
+        "RATING": 4,
+        "STATUS": 4,
         "HEIGHT": 0,
         "BUILD": 2,
         "IPS": 25,
         "RECORD": [
-            3,
+            4,
             1,
             0,
-            3,
+            4,
             1
         ],
         "DIVISIONS": [
@@ -5676,22 +5621,17 @@
             "bantam"
         ],
         "WEIGHT": [
-            119,
-            117
+            118,
+            116
         ],
-        "OPPONENT": [
-            6,
-            1694867,
-            "Karter \"Tea Cup\" BRADSHAW",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             3,
             1,
             false
         ],
-        "FIGHTPLAN": "417clinchR3",
-        "GRADE": 47.63498598625924,
+        "FIGHTPLAN": "5H114insideR1",
+        "GRADE": 54.35342754757319,
         "TYPE": 2
     },
     "1667333": {
@@ -5703,16 +5643,16 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 4,
+        "RATING": 5,
         "STATUS": 5,
         "HEIGHT": -2,
         "BUILD": 3,
         "IPS": 25,
         "RECORD": [
-            3,
+            4,
             1,
             0,
-            3,
+            4,
             1
         ],
         "DIVISIONS": [
@@ -5724,19 +5664,14 @@
             115,
             113
         ],
-        "OPPONENT": [
-            1,
-            1558039,
-            "Storm Trooper 19184 \"Monroe\"",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             null,
             false
         ],
-        "FIGHTPLAN": "5H105clinchR1",
-        "GRADE": 53.11925535533409,
+        "FIGHTPLAN": "5H105insideR1",
+        "GRADE": 55.68376589343785,
         "TYPE": 0
     },
     "1667368": {
@@ -5973,14 +5908,14 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 1,
+        "RATING": 0,
         "STATUS": 1,
         "HEIGHT": -1,
         "BUILD": 0,
-        "IPS": 25,
+        "IPS": 33,
         "RECORD": [
             1,
-            1,
+            2,
             0,
             1,
             1
@@ -5994,19 +5929,14 @@
             119,
             117
         ],
-        "OPPONENT": [
-            7,
-            1695495,
-            "Issac \"iPhone\" STANTON",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             2,
-            2,
+            null,
             false
         ],
         "FIGHTPLAN": "417clinchR1",
-        "GRADE": 36.895497739851876,
+        "GRADE": 30.34504726494677,
         "TYPE": 0
     },
     "1667555": {
@@ -6371,47 +6301,42 @@
     },
     "1667659": {
         "NAME": "Kul`rail",
-        "STRENGTH": 21,
+        "STRENGTH": 22,
         "KP": 7,
         "SPEED": 16,
-        "AGILITY": 10,
+        "AGILITY": 11,
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
-        "STATUS": 2,
+        "RATING": 4,
+        "STATUS": 4,
         "HEIGHT": -2,
         "BUILD": 3,
         "IPS": 30,
         "RECORD": [
-            2,
+            3,
             0,
             0,
-            2,
+            3,
             0
         ],
         "DIVISIONS": [
             "bantam",
             "eurasia",
-            "bantam"
+            "super-fly"
         ],
         "WEIGHT": [
-            120,
-            118
+            115,
+            113
         ],
-        "OPPONENT": [
-            1,
-            546972,
-            "Postman Matrix",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             3,
             1,
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "GRADE": 46.66036838003971,
+        "GRADE": 53.61817079591442,
         "TYPE": 0
     },
     "1667660": {
@@ -6430,7 +6355,7 @@
         "IPS": 0,
         "RECORD": [
             1,
-            1,
+            2,
             0,
             1,
             0
@@ -6444,19 +6369,14 @@
             116,
             114
         ],
-        "OPPONENT": [
-            8,
-            626752,
-            "Gemma \"Tear In My Side\" Hayes",
-            1766361600.0
-        ],
+        "OPPONENT": null,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "5H105insideR3",
-        "GRADE": 50.281784107946024,
+        "GRADE": 48.61667197890558,
         "TYPE": 2
     },
     "1667711": {
