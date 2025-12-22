@@ -1716,7 +1716,7 @@ if __name__ == "__main__":
     except: ftr = {}
 
     # print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
-
+    ddd
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
@@ -1791,9 +1791,7 @@ if __name__ == "__main__":
             if ftr[team_id]['OPPONENT']:
 
                 if ftr[team_id]['OPPONENT'][3] + ftr[team_id]['OPPONENT'][4] > 0 and len(ftr[team_id]['OPPONENT']) < 6:
-
                     ftr_bouts = {}
-
                     for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:4]:
                         fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
                         ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]+) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
@@ -1802,11 +1800,9 @@ if __name__ == "__main__":
                             elif ftr[team_id]['OPPONENT'][2] == ftr_intro[1][2]: ftr_order = 2
                             elif (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
 
-                        for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
-                            ftr_style = next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None)
-                            ftr_target = next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in rnd[ftr_order]), None)
-                            ftr_bouts.setdefault(int(rnd[0]), []).append((ftr_style, ftr_target))
-
+                            for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
+                                ftr_bouts.setdefault(int(rnd[0]), []).append(( next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None),
+                                    next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in rnd[ftr_order]), None) ))
 
                     ftr[team_id]['OPPONENT'].append(ftr_bouts)
                     print(ftr[team_id]['OPPONENT'])
