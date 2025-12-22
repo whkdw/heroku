@@ -1707,45 +1707,12 @@ def process_fighters():
 # ------------------------------
 
 if __name__ == "__main__":
-    #print(requests.get("https://ipinfo.io/json", timeout=5).json())
+    print(requests.get("https://ipinfo.io/json", timeout=5).json())
 
     week = int(time.strftime("%W")) * 10000
 
-    try:
-        with open('data.json') as f:
-           ftr = json.load(f)
-    except:
-        ftr = {}
-
-
-
-    for team_id in ftr:
-        if ftr[team_id]['OPPONENT']:
-            print(ftr[team_id]['NAME'], ftr[team_id]['DIVISIONS'])
-
-    
-
-
-    team_id = "1666934"
-    print(ftr[team_id]['OPPONENT'][2])
-
-    ftr_bouts = []
-    print(re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", kk))
-
-    ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]+) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", llp), 2
-    if len(ftr_intro) > 1:
-        if ftr[team_id]['OPPONENT'][2] == ftr_intro[0][2]: ftr_order = 1
-        elif ftr[team_id]['OPPONENT'][2] == ftr_intro[1][2]: ftr_order = 2
-        elif (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
-
-    for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", llp) + []:
-        ftr_style = next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None)
-        ftr_target = next((i for i, k in enumerate([ " and goes to the body.", " and jabs for cuts.", " and he's head hunting.", "." ]) if k in rnd[ftr_order]), None)
-        ftr_bouts.append([int(rnd[0]), ftr_style, ftr_target])
-
-    ftr[team_id]['OPPONENT'].append(ftr_bouts)
-    print(ftr[team_id]['OPPONENT'])
-
+    try: with open('data.json') as f: ftr = json.load(f)
+    except: ftr = {}
 
     # print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
 
@@ -1821,6 +1788,29 @@ if __name__ == "__main__":
                 write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISIONS'][2]}weight")
 
             if ftr[team_id]['OPPONENT']:
+
+                if ftr[team_id]['OPPONENT'][3] + ftr[team_id]['OPPONENT'][4] > 0 and len(ftr[team_id]['OPPONENT']) < 6:
+
+                    ftr_bouts = {}
+
+                    for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:4]:
+                        fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
+                        ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]+) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
+                        if len(ftr_intro) > 1:
+                            if ftr[team_id]['OPPONENT'][2] == ftr_intro[0][2]: ftr_order = 1
+                            elif ftr[team_id]['OPPONENT'][2] == ftr_intro[1][2]: ftr_order = 2
+                            elif (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
+
+                        for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
+                            ftr_style = next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None)
+                            ftr_target = next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in rnd[ftr_order]), None)
+                            ftr_bouts.setdefault(int(rnd[0]), []).append((ftr_style, ftr_target))
+
+
+                    ftr[team_id]['OPPONENT'].append(ftr_bouts)
+                    print(ftr[team_id]['OPPONENT'])
+
+
                 # choose an fp base list, emulate random picks
                 if ftr[team_id]['CHIN'] < 15:
                     choices = ['417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '5H87alloutR']
