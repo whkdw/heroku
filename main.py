@@ -162,17 +162,6 @@ if __name__ == "__main__":
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
 
-
-    team_ids = [ '1695606', '0' ]
-    for team_id in team_ids:
-        if team_id not in ftr:
-            ftr[team_id] = {}
-        
-            print(ftr[team_id])
-        
-    adsad
-    
-    print(die)
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
