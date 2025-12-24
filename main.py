@@ -162,6 +162,17 @@ if __name__ == "__main__":
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
 
+
+    team_ids = [ '1695606', '0' ]
+    for team_id in team_ids:
+        if team_id not in ftr:
+            ftr[team_id] = {}
+        
+            print(ftr[team_id])
+        
+    adsad
+    
+    print(die)
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
@@ -173,7 +184,8 @@ if __name__ == "__main__":
         print(team_ids)
 
         for team_id in team_ids:
-            text, ftr[team_id], rng = write_msg("eko_control_fighter", f"team_id={team_id}"), {}, random.Random(week + int(team_id))
+            if team_id not in ftr: ftr[team_id] = {}
+            text, rng = write_msg("eko_control_fighter", f"team_id={team_id}"), random.Random(week + int(team_id))
 
 
             ftr[team_id]['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
@@ -193,11 +205,11 @@ if __name__ == "__main__":
             ftr[team_id]['DIVISIONS'] = [i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups()]
             ftr[team_id]['WEIGHT'] = compute_weight(ftr[team_id]['HEIGHT'], ftr[team_id]['STRENGTH'], ftr[team_id]['AGILITY'], ftr[team_id]['CONDITIONING'], ftr[team_id]['BUILD'])
 
-
-            ftr[team_id]['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
-            if ftr[team_id]['OPPONENT']:
-                ftr[team_id]['OPPONENT'] = [ (int("0%s" % ftr[team_id]['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr[team_id]['OPPONENT'].group(2)), int("0%s" % ftr[team_id]['OPPONENT'].group(3)), ftr[team_id]['OPPONENT'].group(4)
-                    ] + [int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
+            if not ftr[team_id]['OPPONENT']:
+                ftr[team_id]['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
+                if ftr[team_id]['OPPONENT']:
+                    ftr[team_id]['OPPONENT'] = [ (int("0%s" % ftr[team_id]['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr[team_id]['OPPONENT'].group(2)), int("0%s" % ftr[team_id]['OPPONENT'].group(3)), ftr[team_id]['OPPONENT'].group(4)
+                        ] + [int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
 
 
             ftr[team_id]['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
