@@ -1498,16 +1498,16 @@
         "CHIN": 11,
         "CONDITIONING": 5,
         "CUT": 1,
-        "RATING": 1,
+        "RATING": 2,
         "STATUS": 3,
         "HEIGHT": 8,
         "BUILD": 0,
         "IPS": 100,
         "RECORD": [
-            4,
+            5,
             7,
             0,
-            4,
+            5,
             6
         ],
         "DIVISIONS": [
@@ -1750,7 +1750,7 @@
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "GRADE": 26.219058657005203,
+        "GRADE": 28.343917142243154,
         "TYPE": 2
     },
     "1650044": {
@@ -2121,7 +2121,7 @@
         "TRAINING": [
             1,
             null,
-            false
+            true
         ],
         "FIGHTPLAN": "5H114insideR1",
         "GRADE": 31.888870117078106,
@@ -2529,7 +2529,7 @@
         "TRAINING": [
             2,
             null,
-            false
+            true
         ],
         "FIGHTPLAN": "417clinchR1",
         "GRADE": 27.074576203183486,
@@ -2544,16 +2544,16 @@
         "CHIN": 16,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 16,
+        "RATING": 17,
         "STATUS": 18,
         "HEIGHT": 9,
         "BUILD": 0,
         "IPS": 424,
         "RECORD": [
-            41,
+            42,
             29,
             0,
-            41,
+            42,
             20
         ],
         "DIVISIONS": [
@@ -2598,7 +2598,7 @@
             false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 50.06372843956926,
+        "GRADE": 50.64471506835283,
         "TYPE": 2
     },
     "1650246": {
@@ -4891,7 +4891,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105clinchR1",
+        "FIGHTPLAN": "5H87ringR1",
         "GRADE": 57.85848250815438,
         "TYPE": 3
     },
@@ -6564,17 +6564,17 @@
         "CHIN": 16,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 18,
+        "RATING": 17,
         "STATUS": 18,
         "HEIGHT": 10,
         "BUILD": 2,
-        "IPS": 471,
+        "IPS": 496,
         "RECORD": [
             24,
-            11,
+            12,
             0,
             23,
-            11
+            12
         ],
         "DIVISIONS": [
             "cruiser",
@@ -6620,11 +6620,11 @@
         ],
         "TRAINING": [
             1,
-            3,
+            null,
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "GRADE": 50.40044666592235,
+        "GRADE": 48.10093640733248,
         "TYPE": 2
     },
     "1659357": {
@@ -7684,17 +7684,17 @@
         "CHIN": 16,
         "CONDITIONING": 7,
         "CUT": 1,
-        "RATING": 18,
+        "RATING": 17,
         "STATUS": 18,
         "HEIGHT": 9,
         "BUILD": 0,
-        "IPS": 427,
+        "IPS": 452,
         "RECORD": [
             17,
-            7,
+            8,
             1,
             16,
-            6
+            7
         ],
         "DIVISIONS": [
             "cruiser",
@@ -7932,11 +7932,11 @@
         ],
         "TRAINING": [
             1,
-            4,
+            null,
             false
         ],
         "FIGHTPLAN": "5H114alloutR3",
-        "GRADE": 51.661661868348,
+        "GRADE": 49.17646213352979,
         "TYPE": 1
     },
     "1661378": {
@@ -8428,16 +8428,16 @@
         "CHIN": 15,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 9,
+        "RATING": 10,
         "STATUS": 11,
         "HEIGHT": 6,
         "BUILD": 0,
         "IPS": 367,
         "RECORD": [
-            16,
+            17,
             10,
             0,
-            15,
+            16,
             9
         ],
         "DIVISIONS": [
@@ -8664,7 +8664,7 @@
             false
         ],
         "FIGHTPLAN": "5H105clinchR1",
-        "GRADE": 36.25538102496347,
+        "GRADE": 37.604574003679495,
         "TYPE": 1
     },
     "1661382": {
@@ -8676,17 +8676,17 @@
         "CHIN": 16,
         "CONDITIONING": 8,
         "CUT": 1,
-        "RATING": 18,
+        "RATING": 17,
         "STATUS": 18,
         "HEIGHT": 11,
         "BUILD": 0,
-        "IPS": 111,
+        "IPS": 136,
         "RECORD": [
             19,
-            7,
+            8,
             0,
             19,
-            5
+            6
         ],
         "DIVISIONS": [
             "cruiser",
@@ -8876,7 +8876,7 @@
             false
         ],
         "FIGHTPLAN": "5H105insideR3",
-        "GRADE": 71.66653563898628,
+        "GRADE": 69.20668662044166,
         "TYPE": 2
     },
     "1661651": {
@@ -9361,23 +9361,23 @@
     },
     "1662391": {
         "NAME": "Zol`kris",
-        "STRENGTH": 27,
+        "STRENGTH": 28,
         "KP": 9,
-        "SPEED": 18,
-        "AGILITY": 8,
+        "SPEED": 19,
+        "AGILITY": 9,
         "CHIN": 16,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 16,
-        "STATUS": 16,
+        "RATING": 18,
+        "STATUS": 18,
         "HEIGHT": 7,
         "BUILD": 1,
         "IPS": 290,
         "RECORD": [
-            16,
+            17,
             6,
             0,
-            16,
+            17,
             6
         ],
         "DIVISIONS": [
@@ -9386,8 +9386,8 @@
             "cruiser"
         ],
         "WEIGHT": [
-            198,
-            194
+            195,
+            191
         ],
         "OPPONENT": [
             24,
@@ -9556,7 +9556,7 @@
             false
         ],
         "FIGHTPLAN": "5H105alloutR3",
-        "GRADE": 56.44717756975818,
+        "GRADE": 60.16930276443824,
         "TYPE": 1
     },
     "1662684": {
@@ -9791,21 +9791,21 @@
         "NAME": "Zol`sean",
         "STRENGTH": 23,
         "KP": 7,
-        "SPEED": 10,
+        "SPEED": 11,
         "AGILITY": 6,
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 1,
-        "STATUS": 1,
+        "RATING": 2,
+        "STATUS": 2,
         "HEIGHT": 4,
         "BUILD": 2,
         "IPS": 25,
         "RECORD": [
-            2,
+            3,
             2,
             0,
-            2,
+            3,
             2
         ],
         "DIVISIONS": [
@@ -9900,11 +9900,11 @@
         ],
         "TRAINING": [
             2,
-            null,
+            2,
             false
         ],
         "FIGHTPLAN": "5H87alloutR3",
-        "GRADE": 38.865977447222924,
+        "GRADE": 46.49124547270997,
         "TYPE": 1
     },
     "1663385": {
@@ -9916,17 +9916,17 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 1,
+        "RATING": 0,
         "STATUS": 1,
         "HEIGHT": 8,
         "BUILD": 0,
-        "IPS": 27,
+        "IPS": 34,
         "RECORD": [
             2,
-            2,
+            3,
             0,
             2,
-            2
+            3
         ],
         "DIVISIONS": [
             "cruiser",
@@ -10112,7 +10112,7 @@
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "GRADE": 37.791483520097415,
+        "GRADE": 32.459326555741484,
         "TYPE": 1
     },
     "1664016": {
@@ -11182,16 +11182,16 @@
         "CHIN": 13,
         "CONDITIONING": 5,
         "CUT": 1,
-        "RATING": 5,
+        "RATING": 6,
         "STATUS": 7,
         "HEIGHT": 4,
         "BUILD": 3,
         "IPS": 116,
         "RECORD": [
-            5,
+            6,
             3,
             0,
-            5,
+            6,
             3
         ],
         "DIVISIONS": [
@@ -11390,7 +11390,7 @@
             false
         ],
         "FIGHTPLAN": "6H122alloutR3",
-        "GRADE": 44.635011055540254,
+        "GRADE": 47.11596225968718,
         "TYPE": 1
     },
     "1665606": {
@@ -11402,16 +11402,16 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 3,
         "STATUS": 4,
         "HEIGHT": 5,
         "BUILD": 2,
         "IPS": 58,
         "RECORD": [
-            4,
+            5,
             4,
             0,
-            4,
+            5,
             4
         ],
         "DIVISIONS": [
@@ -11654,7 +11654,7 @@
             false
         ],
         "FIGHTPLAN": "6H122alloutR3",
-        "GRADE": 43.603616159822124,
+        "GRADE": 46.22340957985082,
         "TYPE": 1
     },
     "1666094": {
@@ -11914,7 +11914,7 @@
         ],
         "TRAINING": [
             1,
-            2,
+            1,
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
@@ -12864,16 +12864,16 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 3,
         "STATUS": 3,
         "HEIGHT": 8,
         "BUILD": 0,
         "IPS": 0,
         "RECORD": [
-            2,
+            3,
             1,
             0,
-            2,
+            3,
             1
         ],
         "DIVISIONS": [
@@ -13064,7 +13064,7 @@
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "GRADE": 54.700244905833394,
+        "GRADE": 57.598127535785224,
         "TYPE": 1
     },
     "1666809": {
@@ -13699,7 +13699,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105clinchR1",
+        "FIGHTPLAN": "417clinchR1",
         "GRADE": 57.67107853874352,
         "TYPE": 0
     },
@@ -14295,8 +14295,8 @@
             }
         ],
         "TRAINING": [
+            4,
             2,
-            1,
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
@@ -14306,22 +14306,22 @@
     "1666868": {
         "NAME": "Kel`aleksandr",
         "STRENGTH": 21,
-        "KP": 7,
-        "SPEED": 13,
+        "KP": 6,
+        "SPEED": 14,
         "AGILITY": 9,
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 3,
         "STATUS": 5,
         "HEIGHT": 6,
         "BUILD": 0,
         "IPS": 75,
         "RECORD": [
-            3,
+            4,
             3,
             0,
-            3,
+            4,
             3
         ],
         "DIVISIONS": [
@@ -14429,10 +14429,10 @@
         "TRAINING": [
             2,
             null,
-            true
+            false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 40.62656512280884,
+        "GRADE": 43.40749829411148,
         "TYPE": 0
     },
     "1666870": {
@@ -14444,16 +14444,16 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 4,
+        "RATING": 5,
         "STATUS": 5,
         "HEIGHT": 8,
         "BUILD": 2,
         "IPS": 50,
         "RECORD": [
-            3,
+            4,
             2,
             0,
-            3,
+            4,
             2
         ],
         "DIVISIONS": [
@@ -14676,7 +14676,7 @@
             false
         ],
         "FIGHTPLAN": "417clinchR3",
-        "GRADE": 47.1207750894347,
+        "GRADE": 49.85174962892822,
         "TYPE": 0
     },
     "1666876": {
@@ -15931,7 +15931,7 @@
             3,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H105insideR1",
         "GRADE": 61.377841314727306,
         "TYPE": 2
     },
@@ -16080,16 +16080,16 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 0,
+        "RATING": 1,
         "STATUS": 1,
         "HEIGHT": 8,
         "BUILD": 1,
-        "IPS": 20,
+        "IPS": 38,
         "RECORD": [
-            1,
+            2,
             1,
             0,
-            1,
+            2,
             1
         ],
         "DIVISIONS": [
@@ -16218,7 +16218,7 @@
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "GRADE": 39.33716271309581,
+        "GRADE": 33.12085724749837,
         "TYPE": 2
     },
     "1666896": {
@@ -17207,7 +17207,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87clinchR1",
+        "FIGHTPLAN": "417clinchR1",
         "GRADE": 30.99636832646475,
         "TYPE": 3
     },
@@ -17448,16 +17448,16 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 4,
+        "RATING": 5,
         "STATUS": 5,
         "HEIGHT": 8,
         "BUILD": 2,
         "IPS": 40,
         "RECORD": [
-            4,
+            5,
             2,
             0,
-            4,
+            5,
             2
         ],
         "DIVISIONS": [
@@ -17664,7 +17664,7 @@
             false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 51.18932527536137,
+        "GRADE": 53.729844501268886,
         "TYPE": 2
     },
     "1666912": {
@@ -17893,7 +17893,7 @@
             0
         ],
         "DIVISIONS": [
-            "middle",
+            "super-welter",
             "eurasia",
             "super-welter"
         ],
@@ -17953,8 +17953,8 @@
             }
         ],
         "TRAINING": [
-            4,
-            4,
+            1,
+            2,
             false
         ],
         "FIGHTPLAN": "5H105clinchR1",
@@ -18217,7 +18217,7 @@
             }
         ],
         "TRAINING": [
-            1,
+            3,
             null,
             false
         ],
@@ -18230,30 +18230,30 @@
         "STRENGTH": 21,
         "KP": 6,
         "SPEED": 13,
-        "AGILITY": 8,
+        "AGILITY": 11,
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 4,
-        "STATUS": 4,
+        "RATING": 6,
+        "STATUS": 6,
         "HEIGHT": 5,
         "BUILD": 1,
         "IPS": 25,
         "RECORD": [
-            4,
+            5,
             1,
             0,
-            4,
+            5,
             1
         ],
         "DIVISIONS": [
             "light-heavy",
             "eurasia",
-            "light-heavy"
+            "super-welter"
         ],
         "WEIGHT": [
-            174,
-            171
+            155,
+            152
         ],
         "OPPONENT": [
             12,
@@ -18386,28 +18386,28 @@
             false
         ],
         "FIGHTPLAN": "417clinchR1",
-        "GRADE": 54.514141833287475,
+        "GRADE": 58.8551716317957,
         "TYPE": 0
     },
     "1666917": {
         "NAME": "Fel`sandra",
-        "STRENGTH": 17,
+        "STRENGTH": 18,
         "KP": 5,
-        "SPEED": 13,
+        "SPEED": 14,
         "AGILITY": 9,
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 3,
-        "STATUS": 3,
+        "RATING": 5,
+        "STATUS": 5,
         "HEIGHT": 8,
         "BUILD": 3,
         "IPS": 8,
         "RECORD": [
-            2,
+            3,
             1,
             0,
-            2,
+            3,
             1
         ],
         "DIVISIONS": [
@@ -18416,8 +18416,8 @@
             "cruiser"
         ],
         "WEIGHT": [
-            198,
-            194
+            199,
+            195
         ],
         "OPPONENT": [
             8,
@@ -18532,7 +18532,7 @@
             false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 52.68713520851318,
+        "GRADE": 56.795526521053276,
         "TYPE": 0
     },
     "1666918": {
@@ -18544,16 +18544,16 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 3,
         "STATUS": 3,
         "HEIGHT": 9,
         "BUILD": 0,
         "IPS": 50,
         "RECORD": [
-            3,
+            4,
             2,
             0,
-            3,
+            4,
             2
         ],
         "DIVISIONS": [
@@ -18752,7 +18752,7 @@
             false
         ],
         "FIGHTPLAN": "417clinchR3",
-        "GRADE": 41.61774923210846,
+        "GRADE": 44.348723771601975,
         "TYPE": 0
     },
     "1666923": {
@@ -18991,7 +18991,7 @@
             }
         ],
         "TRAINING": [
-            2,
+            1,
             null,
             false
         ],
@@ -19008,16 +19008,16 @@
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 4,
+        "RATING": 5,
         "STATUS": 5,
         "HEIGHT": 7,
         "BUILD": 1,
         "IPS": 25,
         "RECORD": [
-            3,
+            4,
             1,
             0,
-            2,
+            3,
             1
         ],
         "DIVISIONS": [
@@ -19260,7 +19260,7 @@
             false
         ],
         "FIGHTPLAN": "5H105insideR3",
-        "GRADE": 53.52757513853192,
+        "GRADE": 56.09208567663568,
         "TYPE": 1
     },
     "1666929": {
@@ -20065,7 +20065,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105clinchR1",
+        "FIGHTPLAN": "5H114insideR1",
         "GRADE": 66.35548395072907,
         "TYPE": 2
     },
@@ -20073,21 +20073,21 @@
         "NAME": "Fel`florence",
         "STRENGTH": 21,
         "KP": 6,
-        "SPEED": 8,
+        "SPEED": 9,
         "AGILITY": 11,
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 3,
-        "STATUS": 3,
+        "RATING": 4,
+        "STATUS": 4,
         "HEIGHT": 7,
         "BUILD": 3,
         "IPS": 60,
         "RECORD": [
-            4,
+            5,
             2,
             0,
-            4,
+            5,
             2
         ],
         "DIVISIONS": [
@@ -20294,42 +20294,42 @@
         ],
         "TRAINING": [
             2,
-            null,
+            2,
             false
         ],
         "FIGHTPLAN": "5H114insideR3",
-        "GRADE": 41.73951324528619,
+        "GRADE": 47.55740731073156,
         "TYPE": 2
     },
     "1666939": {
         "NAME": "Ell`tatjana",
         "STRENGTH": 20,
         "KP": 6,
-        "SPEED": 11,
-        "AGILITY": 11,
+        "SPEED": 12,
+        "AGILITY": 13,
         "CHIN": 13,
         "CONDITIONING": 7,
         "CUT": 1,
-        "RATING": 6,
-        "STATUS": 6,
+        "RATING": 8,
+        "STATUS": 8,
         "HEIGHT": 8,
         "BUILD": 1,
         "IPS": 25,
         "RECORD": [
-            5,
+            6,
             1,
             0,
-            5,
+            6,
             1
         ],
         "DIVISIONS": [
             "light-heavy",
             "eurasia",
-            "light-heavy"
+            "super-middle"
         ],
         "WEIGHT": [
-            176,
-            172
+            169,
+            165
         ],
         "OPPONENT": [
             15,
@@ -20518,7 +20518,7 @@
             false
         ],
         "FIGHTPLAN": "5H114alloutR1",
-        "GRADE": 58.88374306036713,
+        "GRADE": 62.43250513084597,
         "TYPE": 2
     },
     "1666940": {
@@ -20534,13 +20534,13 @@
         "STATUS": 1,
         "HEIGHT": 9,
         "BUILD": 1,
-        "IPS": 30,
+        "IPS": 55,
         "RECORD": [
             2,
-            2,
+            3,
             0,
             2,
-            1
+            2
         ],
         "DIVISIONS": [
             "cruiser",
@@ -20602,7 +20602,7 @@
             false
         ],
         "FIGHTPLAN": "417clinchR3",
-        "GRADE": 35.37368903388188,
+        "GRADE": 20.558449362759024,
         "TYPE": 2
     },
     "1666945": {
@@ -21313,21 +21313,21 @@
         "NAME": "Ell`alphonse",
         "STRENGTH": 20,
         "KP": 6,
-        "SPEED": 12,
+        "SPEED": 14,
         "AGILITY": 9,
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
-        "STATUS": 2,
+        "RATING": 4,
+        "STATUS": 4,
         "HEIGHT": 6,
         "BUILD": 3,
         "IPS": 25,
         "RECORD": [
-            3,
+            4,
             1,
             0,
-            3,
+            4,
             1
         ],
         "DIVISIONS": [
@@ -21452,28 +21452,28 @@
             false
         ],
         "FIGHTPLAN": "6H122alloutR3",
-        "GRADE": 47.76454968872856,
+        "GRADE": 54.40949067049678,
         "TYPE": 0
     },
     "1666952": {
         "NAME": "Byl`tom",
         "STRENGTH": 21,
         "KP": 6,
-        "SPEED": 12,
+        "SPEED": 13,
         "AGILITY": 8,
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 3,
-        "STATUS": 3,
+        "RATING": 4,
+        "STATUS": 4,
         "HEIGHT": 7,
         "BUILD": 3,
-        "IPS": 50,
+        "IPS": 54,
         "RECORD": [
-            3,
+            4,
             2,
             0,
-            3,
+            4,
             2
         ],
         "DIVISIONS": [
@@ -21684,12 +21684,12 @@
         ],
         "TRAINING": [
             2,
-            null,
+            1,
             false
         ],
         "FIGHTPLAN": "5H105alloutR1",
-        "GRADE": 42.19756768066889,
-        "TYPE": 1
+        "GRADE": 46.77090422272979,
+        "TYPE": 0
     },
     "1666953": {
         "NAME": "Kel`shawn",
@@ -21700,13 +21700,13 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 1,
+        "RATING": 2,
         "STATUS": 2,
         "HEIGHT": 8,
         "BUILD": 2,
         "IPS": 61,
         "RECORD": [
-            3,
+            4,
             2,
             0,
             3,
@@ -21952,7 +21952,7 @@
             false
         ],
         "FIGHTPLAN": "417clinchR3",
-        "GRADE": 32.5431878285997,
+        "GRADE": 35.2741623680932,
         "TYPE": 0
     },
     "1666955": {
@@ -21977,7 +21977,7 @@
             1
         ],
         "DIVISIONS": [
-            "super-middle",
+            "middle",
             "eurasia",
             "middle"
         ],
@@ -22211,7 +22211,7 @@
             }
         ],
         "TRAINING": [
-            4,
+            1,
             3,
             false
         ],
@@ -22443,8 +22443,8 @@
             }
         ],
         "TRAINING": [
-            2,
-            2,
+            1,
+            1,
             false
         ],
         "FIGHTPLAN": "5H87alloutR1",
@@ -22680,20 +22680,20 @@
         "STRENGTH": 24,
         "KP": 7,
         "SPEED": 12,
-        "AGILITY": 9,
-        "CHIN": 12,
+        "AGILITY": 10,
+        "CHIN": 13,
         "CONDITIONING": 7,
         "CUT": 1,
-        "RATING": 7,
-        "STATUS": 7,
+        "RATING": 8,
+        "STATUS": 8,
         "HEIGHT": 6,
         "BUILD": 3,
         "IPS": 25,
         "RECORD": [
-            5,
+            6,
             1,
             0,
-            5,
+            6,
             1
         ],
         "DIVISIONS": [
@@ -22702,8 +22702,8 @@
             "cruiser"
         ],
         "WEIGHT": [
-            189,
-            185
+            180,
+            176
         ],
         "OPPONENT": [
             15,
@@ -22932,11 +22932,11 @@
         ],
         "TRAINING": [
             4,
-            null,
+            1,
             false
         ],
         "FIGHTPLAN": "417clinchR3",
-        "GRADE": 59.97716411299871,
+        "GRADE": 62.6286749031027,
         "TYPE": 1
     },
     "1667185": {
@@ -23567,21 +23567,21 @@
         "NAME": "Kel`alison",
         "STRENGTH": 18,
         "KP": 6,
-        "SPEED": 13,
-        "AGILITY": 8,
+        "SPEED": 14,
+        "AGILITY": 9,
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 1,
-        "STATUS": 1,
+        "RATING": 3,
+        "STATUS": 3,
         "HEIGHT": 7,
         "BUILD": 0,
         "IPS": 25,
         "RECORD": [
-            1,
+            2,
             1,
             0,
-            1,
+            2,
             1
         ],
         "DIVISIONS": [
@@ -23590,8 +23590,8 @@
             "cruiser"
         ],
         "WEIGHT": [
-            183,
-            179
+            180,
+            176
         ],
         "OPPONENT": [
             23,
@@ -23728,28 +23728,28 @@
             false
         ],
         "FIGHTPLAN": "6H113alloutR1",
-        "GRADE": 36.91582741018155,
+        "GRADE": 47.951528602880906,
         "TYPE": 0
     },
     "1667287": {
         "NAME": "Byl`makoto",
         "STRENGTH": 21,
         "KP": 7,
-        "SPEED": 11,
-        "AGILITY": 5,
+        "SPEED": 12,
+        "AGILITY": 6,
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 3,
-        "STATUS": 3,
+        "RATING": 5,
+        "STATUS": 5,
         "HEIGHT": 8,
         "BUILD": 0,
         "IPS": 31,
         "RECORD": [
-            2,
+            3,
             1,
             0,
-            2,
+            3,
             1
         ],
         "DIVISIONS": [
@@ -23758,8 +23758,8 @@
             "cruiser"
         ],
         "WEIGHT": [
-            203,
-            199
+            201,
+            197
         ],
         "OPPONENT": [
             17,
@@ -23956,7 +23956,7 @@
             false
         ],
         "FIGHTPLAN": "6H113alloutR1",
-        "GRADE": 46.6435491122955,
+        "GRADE": 52.773662527109686,
         "TYPE": 1
     },
     "1667288": {
@@ -25020,16 +25020,16 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 2,
+        "RATING": 3,
         "STATUS": 3,
         "HEIGHT": 5,
         "BUILD": 3,
         "IPS": 25,
         "RECORD": [
-            2,
+            3,
             1,
             0,
-            2,
+            3,
             1
         ],
         "DIVISIONS": [
@@ -25212,28 +25212,28 @@
             false
         ],
         "FIGHTPLAN": "417clinchR3",
-        "GRADE": 47.48724288859519,
+        "GRADE": 50.385125518547014,
         "TYPE": 0
     },
     "1667451": {
         "NAME": "Byl`patti",
         "STRENGTH": 18,
-        "KP": 5,
-        "SPEED": 14,
+        "KP": 6,
+        "SPEED": 15,
         "AGILITY": 10,
         "CHIN": 12,
-        "CONDITIONING": 6,
+        "CONDITIONING": 7,
         "CUT": 1,
-        "RATING": 5,
-        "STATUS": 5,
+        "RATING": 7,
+        "STATUS": 7,
         "HEIGHT": 9,
         "BUILD": 1,
-        "IPS": 0,
+        "IPS": 10,
         "RECORD": [
-            3,
+            4,
             0,
             0,
-            3,
+            4,
             0
         ],
         "DIVISIONS": [
@@ -25392,7 +25392,7 @@
             false
         ],
         "FIGHTPLAN": "5H114alloutR1",
-        "GRADE": 60.73614430110598,
+        "GRADE": 61.806450166615534,
         "TYPE": 0
     },
     "1667452": {
@@ -25408,13 +25408,13 @@
         "STATUS": 1,
         "HEIGHT": 4,
         "BUILD": 1,
-        "IPS": 25,
+        "IPS": 128,
         "RECORD": [
             1,
-            2,
+            3,
             0,
             1,
-            2
+            3
         ],
         "DIVISIONS": [
             "light-heavy",
@@ -25438,7 +25438,7 @@
             false
         ],
         "FIGHTPLAN": "5H105alloutR3",
-        "GRADE": 35.212253742679565,
+        "GRADE": 6.1952790648491725,
         "TYPE": 1
     },
     "1667521": {
@@ -26347,7 +26347,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H105alloutR1",
         "GRADE": 55.202262360818374,
         "TYPE": 1
     },
@@ -26543,8 +26543,8 @@
             }
         ],
         "TRAINING": [
-            2,
-            2,
+            3,
+            3,
             false
         ],
         "FIGHTPLAN": "5H105alloutR1",
@@ -26560,14 +26560,14 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 3,
+        "RATING": 2,
         "STATUS": 3,
         "HEIGHT": 7,
         "BUILD": 3,
-        "IPS": 0,
+        "IPS": 19,
         "RECORD": [
             2,
-            0,
+            1,
             0,
             2,
             0
@@ -26676,11 +26676,11 @@
         ],
         "TRAINING": [
             3,
-            1,
+            null,
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "GRADE": 58.23726664542294,
+        "GRADE": 49.19275667305634,
         "TYPE": 0
     },
     "1667630": {
@@ -26699,10 +26699,10 @@
         "IPS": 0,
         "RECORD": [
             1,
-            1,
+            2,
             0,
             1,
-            0
+            1
         ],
         "DIVISIONS": [
             "cruiser",
@@ -26872,7 +26872,7 @@
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "GRADE": 50.22763212988101,
+        "GRADE": 48.562520000840564,
         "TYPE": 0
     },
     "1667659": {
@@ -27319,7 +27319,63 @@
             146,
             143
         ],
-        "OPPONENT": null,
+        "OPPONENT": [
+            10,
+            1682356,
+            "Pro-02",
+            0,
+            1,
+            {
+                "1": [
+                    [
+                        3,
+                        3
+                    ]
+                ],
+                "2": [
+                    [
+                        3,
+                        0
+                    ]
+                ],
+                "3": [
+                    [
+                        3,
+                        0
+                    ]
+                ],
+                "4": [
+                    [
+                        3,
+                        3
+                    ]
+                ],
+                "5": [
+                    [
+                        3,
+                        0
+                    ]
+                ],
+                "6": [
+                    [
+                        3,
+                        0
+                    ]
+                ],
+                "7": [
+                    [
+                        3,
+                        0
+                    ]
+                ],
+                "8": [
+                    [
+                        null,
+                        null
+                    ]
+                ]
+            }
+        ],
         "TRAINING": [
             2,
             null,
@@ -27681,7 +27737,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H114insideR3",
         "GRADE": 37.17226541661955,
         "TYPE": 1
     },
@@ -27902,20 +27958,20 @@
         "STRENGTH": 17,
         "KP": 5,
         "SPEED": 13,
-        "AGILITY": 8,
+        "AGILITY": 9,
         "CHIN": 13,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 0,
-        "STATUS": 0,
+        "RATING": 1,
+        "STATUS": 1,
         "HEIGHT": 7,
         "BUILD": -2,
         "IPS": 0,
         "RECORD": [
+            1,
             0,
             0,
-            0,
-            0,
+            1,
             0
         ],
         "DIVISIONS": [
@@ -27924,8 +27980,8 @@
             "light-heavy"
         ],
         "WEIGHT": [
-            175,
-            172
+            171,
+            168
         ],
         "OPPONENT": [
             10,
@@ -27936,32 +27992,32 @@
         ],
         "TRAINING": [
             3,
-            null,
+            1,
             false
         ],
         "FIGHTPLAN": "5H105clinchR1",
-        "GRADE": 43.67543859649123,
+        "GRADE": 55.69432234432235,
         "TYPE": 0
     },
     "1695600": {
         "NAME": "Ell`nadine",
-        "STRENGTH": 16,
+        "STRENGTH": 17,
         "KP": 5,
         "SPEED": 12,
         "AGILITY": 8,
         "CHIN": 12,
         "CONDITIONING": 6,
         "CUT": 1,
-        "RATING": 0,
-        "STATUS": 0,
+        "RATING": 1,
+        "STATUS": 1,
         "HEIGHT": 10,
         "BUILD": -2,
         "IPS": 0,
         "RECORD": [
+            1,
             0,
             0,
-            0,
-            0,
+            1,
             0
         ],
         "DIVISIONS": [
@@ -27970,8 +28026,8 @@
             "cruiser"
         ],
         "WEIGHT": [
-            197,
-            193
+            199,
+            195
         ],
         "OPPONENT": [
             10,
@@ -27990,11 +28046,11 @@
         ],
         "TRAINING": [
             1,
-            null,
+            2,
             false
         ],
         "FIGHTPLAN": "5H87ringR1",
-        "GRADE": 43.66666666666667,
+        "GRADE": 55.765008415008424,
         "TYPE": 0
     },
     "1695601": {
@@ -28383,7 +28439,7 @@
         "IPS": 0,
         "RECORD": [
             0,
-            0,
+            1,
             0,
             0,
             0
