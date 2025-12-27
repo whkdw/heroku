@@ -195,11 +195,10 @@ if __name__ == "__main__":
             ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower() ] # find correct weight div
 
 
-            if "</A> gym  for   $" in text:
-                ftr[team_id]['OPPONENT'] = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
-                if ftr[team_id]['OPPONENT']:
-                    ftr[team_id]['OPPONENT'] = [ (int("0%s" % ftr[team_id]['OPPONENT'].group(1)) - 5) * 12 + int("0%s" % ftr[team_id]['OPPONENT'].group(2)), int("0%s" % ftr[team_id]['OPPONENT'].group(3)), ftr[team_id]['OPPONENT'].group(4)
-                        ] + [int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
+            fgt = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
+            if fgt:
+                if not ftr[team_id]['OPPONENT'] or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
+                    ftr[team_id]['OPPONENT'] = [ (int("0%s" % fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int("0%s" % fgt.group(3)), fgt.group(4)] + [ int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
             else: ftr[team_id]['OPPONENT'] = None
 
             ftr[team_id]['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
@@ -213,8 +212,8 @@ if __name__ == "__main__":
 
             print(ftr[team_id])
 
-            if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2]: # in wrong div, make change
-                write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&+division={ftr[team_id]['DIVISION'][2]}weight")
+            if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2]: # in wrong div
+                write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
 
             tr = [None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2)]
             for i in range(2):
@@ -319,5 +318,3 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error during automation run: {e}", file=sys.stderr)
         raise
-
-    # git add . && git commit -m "update" && git push
