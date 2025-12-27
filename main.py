@@ -21,7 +21,7 @@ try:
     GYM_PASSWORD = os.environ['GYM_PASSWORD']
     GYM_USERNAME = os.environ['GYM_USERNAME']
 except KeyError:
-    GYM_PASSWORD = "bannerlrd"
+    GYM_PASSWORD = ""
     GYM_USERNAME = ""
 
 
@@ -49,17 +49,6 @@ fighter_builds = [
     { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "HEIGHT":  7, "COUNT": 1 }, # zam
     { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "HEIGHT": 12, "COUNT": 2 }, # agl
     { "STRENGTH": 0.40, "SPEED": 0.29, "AGILITY": 0.31, "CHIN": 17, "HEIGHT": 13, "COUNT": 0 }, # bal
-]
-
-# day_fps parallels the PHP array (index 0 = Sunday)
-DAY_FPS = [
-    [DIVISIONS[3], DIVISIONS[4], DIVISIONS[5], DIVISIONS[6], DIVISIONS[7], DIVISIONS[8]],  # sun
-    [DIVISIONS[6], DIVISIONS[7], DIVISIONS[8], DIVISIONS[9], DIVISIONS[10], DIVISIONS[11]],  # mon
-    [DIVISIONS[9], DIVISIONS[10], DIVISIONS[11], DIVISIONS[12], DIVISIONS[13]],  # tues
-    [DIVISIONS[12], DIVISIONS[13], DIVISIONS[14], DIVISIONS[15]],  # weds
-    [DIVISIONS[14], DIVISIONS[15], DIVISIONS[16]],  # thurs
-    [DIVISIONS[16], DIVISIONS[0], DIVISIONS[1], DIVISIONS[2]],  # fri
-    [DIVISIONS[0], DIVISIONS[1], DIVISIONS[2], DIVISIONS[3], DIVISIONS[4], DIVISIONS[5]]  # sat
 ]
 
 
@@ -147,6 +136,7 @@ def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: i
         (1.0 - (math.sqrt(aglval - 10.0) if (aglval > 10) else -math.sqrt(10.0 - aglval)) * 0.05) - 0.49999)
     return wgtval, round(wgtval * (0.995 - cndval * 0.0025))
 
+
 # ------------------------------
 # Main
 # ------------------------------
@@ -233,21 +223,22 @@ if __name__ == "__main__":
             if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
                 write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
-            if ftr[team_id]['OPPONENT'] and len(ftr[team_id]['OPPONENT']) < 6:
-                ftr_bouts = {}
-                for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:5]:
-                    fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
-                    ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
-                    if len(ftr_intro) > 1:
-                        if ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip(): ftr_order = 1
-                        elif ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[1][2].strip(): ftr_order = 2
-                        elif ftr[team_id]['HEIGHT'] == (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
+            if ftr[team_id]['OPPONENT']:
+                
+                if len(ftr[team_id]['OPPONENT']) < 6:
+                    ftr_bouts = {}
+                    for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:5]:
+                        fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
+                        ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
+                        if len(ftr_intro) > 1:
+                            if ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip(): ftr_order = 1
+                            elif ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[1][2].strip(): ftr_order = 2
+                            elif ftr[team_id]['HEIGHT'] == (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
 
-                        for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
-                            ftr_bouts.setdefault(int(rnd[0]), []).append(( next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None),
-                                next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in rnd[ftr_order]), None) ))
-
-                ftr[team_id]['OPPONENT'].append(ftr_bouts)
+                            for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
+                                ftr_bouts.setdefault(int(rnd[0]), []).append(( next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None),
+                                    next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in rnd[ftr_order]), None) ))
+                    ftr[team_id]['OPPONENT'].append(ftr_bouts)
 
 
                 # choose an fp base list, emulate random picks
