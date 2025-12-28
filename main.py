@@ -281,8 +281,8 @@ if __name__ == "__main__":
                         fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
                     else:
                         fp = rng.choice([ ['5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if ftr[team_id]['OPPONENT'][0] - 2 > ftr[team_id]['HEIGHT'] else '5H105alloutR'] ])
-                elif opptac[0][1][3] > 0.9: # always no target round 1
-                    fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
+                #elif opptac[0][1][3] > 0.9: # always no target round 1
+                #    fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
 
 
                 if ftr[team_id]['FIGHTPLAN'] != fp:
