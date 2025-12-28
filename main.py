@@ -269,19 +269,20 @@ if __name__ == "__main__":
                 if ftr[team_id]['CHIN'] > 23:
                     fp = rng.choice(['5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if ftr[team_id]['OPPONENT'][0] > ftr[team_id]['HEIGHT'] else '5H105alloutR']) + str(rng.randint(1,2))
 
-                opptac = [( tuple(round(s.count(i) / (len(s) + 0.0001), 2) for i in range(len(style_str))), tuple(round(t.count(i) / (len(t) + 0.0001), 2) for i in range(4))) for f in ftr[team_id]['OPPONENT'][5].values() for s, t in (( [x[0] for x in f ], [ x[1] for x in f ]),) ]
-                if opptac[0][0][7] > 0.9: # always allout
-                    fp = rng.choice(['5H87clinchR1', '5H87ringR1'])
-                if opptac[0][0][1] > 0.9 and opptac[0][1][3] > 0.9: # always inside head
-                    fp = rng.choice(['5H87clinchR1', '5H87ringR1', '5H105clinchR1', '5H105ringR1', ])
-                elif opptac[0][1][0] > 0.9: # always body round 1
-                    if opptac[0][0][0] + opptac[0][0][1] + opptac[0][0][7] > 0.9: # always inside/clinch/allout round 1
-                        fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
-                    else:
-                        fp = rng.choice([ ['5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if ftr[team_id]['OPPONENT'][0] - 2 > ftr[team_id]['HEIGHT'] else '5H105alloutR'] ])
-                #elif opptac[0][1][3] > 0.9: # always no target round 1
-                #    fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
-
+                if len(ftr[team_id]['OPPONENT']) > 5:
+                    opptac = [( tuple(round(s.count(i) / (len(s) + 0.0001), 2) for i in range(len(style_str))), tuple(round(t.count(i) / (len(t) + 0.0001), 2) for i in range(4))) for f in ftr[team_id]['OPPONENT'][5].values() for s, t in (( [x[0] for x in f ], [ x[1] for x in f ]),) ]
+                    if len(opptac) > 1:
+                        if opptac[0][0][7] > 0.9: # always allout
+                            fp = rng.choice(['5H87clinchR1', '5H87ringR1'])
+                        if opptac[0][0][1] > 0.9 and opptac[0][1][3] > 0.9: # always inside head
+                            fp = rng.choice(['5H87clinchR1', '5H87ringR1', '5H105clinchR1', '5H105ringR1', ])
+                        elif opptac[0][1][0] > 0.9: # always body round 1
+                            if opptac[0][0][0] + opptac[0][0][1] + opptac[0][0][7] > 0.9: # always inside/clinch/allout round 1
+                                fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
+                            else:
+                                fp = rng.choice([ ['5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if ftr[team_id]['OPPONENT'][0] - 2 > ftr[team_id]['HEIGHT'] else '5H105alloutR'] ])
+                        #elif opptac[0][1][3] > 0.9: # always no target round 1
+                        #    fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
 
                 if ftr[team_id]['FIGHTPLAN'] != fp:
                     write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
