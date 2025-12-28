@@ -269,9 +269,7 @@ if __name__ == "__main__":
                 if ftr[team_id]['CHIN'] > 23:
                     fp = rng.choice(['5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if ftr[team_id]['OPPONENT'][0] > ftr[team_id]['HEIGHT'] else '5H105alloutR']) + str(rng.randint(1,2))
 
-
-                opptac = [( tuple(round(s.count(i) / (len(s) + 0.0001), 2) for i in range(len(style_str))), tuple(round(t.count(i) / (len(t) + 0.0001), 2) for i in range(4))) for r in ftr[team_id]['OPPONENT'][5] for s, t in ([ [ a[0] for a in ftr[team_id]['OPPONENT'][5][r] ], [ b[1] for b in ftr[team_id]['OPPONENT'][5][r] ] ], )]
-
+                opptac = [( tuple(round(s.count(i) / (len(s) + 0.0001), 2) for i in range(len(style_str))), tuple(round(t.count(i) / (len(t) + 0.0001), 2) for i in range(4))) for f in ftr[team_id]['OPPONENT'][5].values() for s, t in (( [x[0] for x in f ], [ x[1] for x in f ]),) ]
                 if opptac[0][0][7] > 0.9: # always allout
                     fp = rng.choice(['5H87clinchR1', '5H87ringR1'])
                 if opptac[0][0][1] > 0.9 and opptac[0][1][3] > 0.9: # always inside head
