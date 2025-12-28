@@ -151,6 +151,8 @@ if __name__ == "__main__":
     except: ftr = {}
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
+    print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114ringR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
+    print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
     
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
