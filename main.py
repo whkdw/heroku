@@ -151,7 +151,7 @@ if __name__ == "__main__":
     except: ftr = {}
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
-
+    
     try:
         for word in write_msg("eko_retired_fighters").split("Activate</A>"):
                 if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
@@ -185,10 +185,23 @@ if __name__ == "__main__":
             ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower() ] # find correct weight div
 
 
-            fgt = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)
+            fgt, fgt_tacs = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text), {}
             if fgt:
                 if not ftr[team_id]['OPPONENT'] or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
                     ftr[team_id]['OPPONENT'] = [ (int("0%s" % fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int("0%s" % fgt.group(3)), fgt.group(4)] + [ int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
+                if len(ftr[team_id]['OPPONENT']) < 6:
+                    for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:5]:
+                        fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
+                        ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
+                        if len(ftr_intro) > 1:
+                            if ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip(): ftr_order = 1
+                            elif ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[1][2].strip(): ftr_order = 2
+                            elif ftr[team_id]['HEIGHT'] == (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
+
+                            for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
+                                fgt_tacs.setdefault(int(rnd[0]), []).append(( next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None),
+                                    next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in rnd[ftr_order]), None) ))
+                    ftr[team_id]['OPPONENT'].append(fgt_tacs)
             else: ftr[team_id]['OPPONENT'] = None
 
             ftr[team_id]['TRAINING'] = [stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups()] + [" (intensive) <" in text]
@@ -224,23 +237,6 @@ if __name__ == "__main__":
                 write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
             if ftr[team_id]['OPPONENT']:
-                
-                if len(ftr[team_id]['OPPONENT']) < 6:
-                    ftr_bouts = {}
-                    for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:5]:
-                        fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
-                        ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 2
-                        if len(ftr_intro) > 1:
-                            if ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip(): ftr_order = 1
-                            elif ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[1][2].strip(): ftr_order = 2
-                            elif ftr[team_id]['HEIGHT'] == (int("0%s" % ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 1
-
-                            for rnd in re.findall(r"<[Bb][Rr]><[Hh][Rr]> *ROUND *([0-9]+).*[\n](.+)[\n](.+)", fght_text) + []:
-                                ftr_bouts.setdefault(int(rnd[0]), []).append(( next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in rnd[ftr_order]), None),
-                                    next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in rnd[ftr_order]), None) ))
-                    ftr[team_id]['OPPONENT'].append(ftr_bouts)
-
-
                 # choose an fp base list, emulate random picks
                 if ftr[team_id]['CHIN'] < 15:
                     choices = ['417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '5H87alloutR']
@@ -266,10 +262,26 @@ if __name__ == "__main__":
                         fp = '5H105insideR1'
                     elif (ftr[team_id]['HEIGHT'] - ftr[team_id]['OPPONENT'][0] >= -3):
                         fp = rng.choice(['5H87', '5H105']) + 'clinchR1'
-                if rng.randint(0,9) == 0:
+                if rng.randint(0,9) == 0 and ftr[team_id]['STATUS'] > 18:
                     fp = '6H113alloutR1'
                 if ftr[team_id]['CHIN'] > 23:
                     fp = rng.choice(['5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if ftr[team_id]['OPPONENT'][0] > ftr[team_id]['HEIGHT'] else '5H105alloutR']) + str(rng.randint(1,2))
+
+
+                opptac = [( tuple(round(s.count(i) / (len(s) + 0.0001), 2) for i in range(len(style_str))), tuple(round(t.count(i) / (len(t) + 0.0001), 2) for i in range(4))) for r in ftr[team_id]['OPPONENT'][5] for s, t in ([ [ a[0] for a in ftr[team_id]['OPPONENT'][5][r] ], [ b[1] for b in ftr[team_id]['OPPONENT'][5][r] ] ], )]
+
+                if opptac[0][0][7] > 0.9: # always allout
+                    fp = rng.choice(['5H87clinchR1', '5H87ringR1'])
+                if opptac[0][0][1] > 0.9 and opptac[0][1][3] > 0.9: # always inside head
+                    fp = rng.choice(['5H87clinchR1', '5H87ringR1', '5H105clinchR1', '5H105ringR1', ])
+                elif opptac[0][1][0] > 0.9: # always body round 1
+                    if opptac[0][0][0] + opptac[0][0][1] + opptac[0][0][7] > 0.9: # always inside/clinch/allout round 1
+                        fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
+                    else:
+                        fp = rng.choice([ ['5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if ftr[team_id]['OPPONENT'][0] - 2 > ftr[team_id]['HEIGHT'] else '5H105alloutR'] ])
+                elif opptac[0][1][3] > 0.9: # always no target round 1
+                    fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
+
 
                 if ftr[team_id]['FIGHTPLAN'] != fp:
                     write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
