@@ -184,7 +184,7 @@ if __name__ == "__main__":
             ftr[team_id]['RECORD'] = [ int("0%s" % i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) ([0-9]+)\/([0-9]+)\)', text).groups() ]
             ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower() ] # find correct weight div
 
-            fgt, fgt_tacs, rng = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text), {}, random.Random(int(team_id) + sum(ftr[team_id]['RECORD']) * ftr[team_id]['HEIGHT'])
+            fgt, fgt_tacs, rng = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text), {}, random.Random(int(team_id) + sum(ftr[team_id]['RECORD']) * ftr[team_id]['WEIGHT'][0])
             if fgt:
                 if not ftr[team_id]['OPPONENT'] or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
                     ftr[team_id]['OPPONENT'] = [ (int("0%s" % fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int("0%s" % fgt.group(3)), fgt.group(4)] + [ int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
