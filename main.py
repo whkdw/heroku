@@ -144,8 +144,6 @@ def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: i
 if __name__ == "__main__":
     #print(requests.get("https://ipinfo.io/json", timeout=5).json())
 
-    week = int(time.strftime("%W")) * 10000
-
     try: 
         with open('data.json') as f: ftr = json.load(f)
     except: ftr = {}
@@ -166,7 +164,7 @@ if __name__ == "__main__":
 
         for team_id in team_ids:
             if team_id not in ftr: ftr[team_id] = {}
-            text, rng = write_msg("eko_control_fighter", f"team_id={team_id}"), random.Random(week + int(team_id))
+            text = write_msg("eko_control_fighter", "team_id=" + team_id)
 
 
             ftr[team_id]['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
@@ -188,6 +186,7 @@ if __name__ == "__main__":
 
 
             fgt, fgt_tacs = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text), {}
+            fgt, fgt_tacs, rng = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text), {}, random.Random(sum(ftr[team_id]['RECORD']))
             if fgt:
                 if not ftr[team_id]['OPPONENT'] or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
                     ftr[team_id]['OPPONENT'] = [ (int("0%s" % fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int("0%s" % fgt.group(3)), fgt.group(4)] + [ int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
