@@ -186,7 +186,7 @@ if __name__ == "__main__":
 
             fgt, fgt_tacs, rng = re.search(r' ([0-9]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text), {}, random.Random(int(team_id) + sum(ftr[team_id]['RECORD']) * ftr[team_id]['WEIGHT'][0])
             if fgt:
-                if not ftr[team_id]['OPPONENT'] or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
+                if 'OPPONENT' not in ftr.get(team_id, {}) or not ftr[team_id]['OPPONENT'] or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
                     ftr[team_id]['OPPONENT'] = [ (int("0%s" % fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int("0%s" % fgt.group(3)), fgt.group(4)] + [ int("0%s" % i) for i in re.search(r'([0-9]+)-([0-9]+)-[0-9]+ [0-9]+\/[0-9]+\)  from the', text).groups() ]
                 if len(ftr[team_id]['OPPONENT']) < 6:
                     for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:5]:
