@@ -213,8 +213,9 @@ if __name__ == "__main__":
                 if opp[0][0] == 7 and opp[0][1] <= 2: fp = '5H87ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H87clinchR1' # allout rd1 def
                 elif opp[0][2] > 0.7 or (opp[0][0] == 7 and opp[0][1] <= 1): fp = rng.choice([ '5H87ringR1', '5H105ringR1', '5H114ringR1' ] if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ '5H87clinchR1', '5H105clinchR1' ]) # anti flash
                 elif opp[0][3] > 0.8: # always body rd1
-                    if hd > 6: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
-                    elif hd > 2: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
+                    if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
+                    elif hd > 5: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
+                    elif hd > 2: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 13 else 4 ])
                     else: fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
                 elif opp[0][4] > 0.9: # always balanced tactics rd1
                         if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H114alloutR1' ])
