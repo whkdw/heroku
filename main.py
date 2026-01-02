@@ -171,14 +171,14 @@ if __name__ == "__main__":
                             for i, r in enumerate(re.findall(r"<[Bb][Rr]><[Hh][Rr]> +ROUND[^\n]+\n([^\n]+)\n([^\n]+)\n", fght_text)):
                                 s = next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in r[ftr_order]), None)
                                 a = next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in r[ftr_order]), None)
-                                t, n = ((t := [int(x) for x in p[i]]) + [t[2] / (t[1] + 0.001)] if i < len(p) else [ None ] * 4), None
-                                if a == 2 and (s in (0, 7) or (s in (1, 5) and not t[0])) and (not t[1] or t[1] > 5): n = 0 # flash
-                                elif a == 0 and s != 7 and (not t[1] or t[1] > 4) and (not t[0] or t[3] < 2): n = 1 # weardown
-                                elif a == 3 and s != 7 and (not t[1] or t[1] > 4) and (not t[0] or t[3] < 3.2):  n = 2 # balanced
-                                elif (a == 3 and s in (2, 4, 6, 8)) or (t[0] and t[3] >= 3.2): n = 3 # slap
+                                t, n = ((t := [int(x) for x in p[i]]) + [t[2] / (t[1] + 0.001)] if i < len(p) else [ 0 ] * 4), None
+                                if a == 2 and (s in (0, 7) or (s in (1, 5) and not t[0])) and (not t[1] or t[0] > 38 or t[1] > 5): n = 0 # flash
+                                elif a == 0 and s != 7 and (not t[1] or t[0] > 32 or t[1] > 4) and (not t[0] or t[3] < 2): n = 1 # weardown
+                                elif a == 3 and s != 7 and (not t[1] or t[0] > 32 or t[1] > 4) and (not t[0] or t[3] < 3.2):  n = 2 # balanced
+                                elif (a == 3 and s in (2, 4, 6, 8)) or (t[0] > 32 and t[3] >= 3.2): n = 3 # slap
                                 elif a == 2 and (not t[0] or t[1] > 4): n = 4 # defend
                                 fgt_tacs[min(i, len(fgt_tacs) - 1)].append([ s, a, n ])
-                        ftr[team_id]['OPPONENT'][4] = [ ([None, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
+                    ftr[team_id]['OPPONENT'][4] = [ ([-1, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
             else: ftr[team_id]['OPPONENT'] = None
 
             ftr[team_id]['TYPE'] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]['STRENGTH'] - ftr[team_id]['STRENGTH']) + abs(baseaps * fighter_builds[i]['SPEED'] - ftr[team_id]['SPEED']) + abs(baseaps * fighter_builds[i]['AGILITY'] - ftr[team_id]['AGILITY'])))
@@ -214,22 +214,22 @@ if __name__ == "__main__":
                     else: fp = rng.choice( [ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '5H87alloutR', '6H122alloutR' ][:6 if ftr[team_id]['CHIN'] < 15 else 7] ) + str(rng.randint(1, 2 if ftr[team_id]['HEIGHT'] > ftr[team_id]['OPPONENT'][0] else 3))
                 else: fp = rng.choice([ '5H105alloutR', '5H87alloutR', '6H122alloutR', '5H114insideR', '5H105insideR', '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
 
-
-                if len(if ftr[team_id]['OPPONENT'][4]) > 0:
-                    if ftr[team_id]['OPPONENT'][4][0][0] == 7 and ftr[team_id]['OPPONENT'][4][0][1] <= 2: # allout rd1 def
-                        fp = '5H87ringR1' if ftr[team_id]['OPPONENT'][0] <= ftr[team_id]['HEIGHT'] or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H87clinchR1'
-                    if ftr[team_id]['OPPONENT'][4][0][2] > 0.7 or (ftr[team_id]['OPPONENT'][4][0][0] == 7 and ftr[team_id]['OPPONENT'][4][0][1] <= 1): # anti flash
-                        fp = rng.choice( [ '5H87ringR1', '5H105ringR1', '5H114ringR1' ] if ftr[team_id]['OPPONENT'][0] <= ftr[team_id]['HEIGHT'] or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ '5H87clinchR1', '5H105clinchR1' ])
-                    elif ftr[team_id]['OPPONENT'][4][0][3] > 0.7: # always body rd1
-                        if ftr[team_id]['OPPONENT'][4][0][0] == 1: # usually clinch rd1
-                            fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
-                            fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
-                        else:
-                            fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '6H122alloutR1' if ftr[team_id]['OPPONENT'][0] - 5 > ftr[team_id]['HEIGHT'] else '5H105alloutR1' ])
-                    elif ftr[team_id]['OPPONENT'][4][0][5] > 0.9: # always slap rd1
-                         fp = '6H122alloutR1' if ftr[team_id]['OPPONENT'][0] - 5 > ftr[team_id]['HEIGHT'] else '5H114alloutR1'
-                    #elif opptac[0][1][3] > 0.9: # always no target round 1
-                    #    fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
+                if ftr[team_id]['OPPONENT'][4][0][0] == 7 and ftr[team_id]['OPPONENT'][4][0][1] <= 2: # allout rd1 def
+                    fp = '5H87ringR1' if ftr[team_id]['OPPONENT'][0] <= ftr[team_id]['HEIGHT'] or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H87clinchR1'
+                if ftr[team_id]['OPPONENT'][4][0][2] > 0.7 or (ftr[team_id]['OPPONENT'][4][0][0] == 7 and ftr[team_id]['OPPONENT'][4][0][1] <= 1): # anti flash
+                    fp = rng.choice( [ '5H87ringR1', '5H105ringR1', '5H114ringR1' ] if ftr[team_id]['OPPONENT'][0] <= ftr[team_id]['HEIGHT'] or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ '5H87clinchR1', '5H105clinchR1' ])
+                elif ftr[team_id]['OPPONENT'][4][0][3] > 0.8: # always body rd1
+                    if ftr[team_id]['OPPONENT'][0] - 6 > ftr[team_id]['HEIGHT']:
+                        fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
+                    elif ftr[team_id]['OPPONENT'][0] - 2 > ftr[team_id]['HEIGHT']:
+                        fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
+                    else:
+                        fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
+                        fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
+                elif ftr[team_id]['OPPONENT'][4][0][5] > 0.9: # always slap rd1
+                     fp = '6H122alloutR1' if ftr[team_id]['OPPONENT'][0] - 5 > ftr[team_id]['HEIGHT'] else '5H114alloutR1'
+                #elif opptac[0][1][3] > 0.9: # always no target round 1
+                #    fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
 
                 if ftr[team_id]['FIGHTPLAN'] != fp:
                     write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
