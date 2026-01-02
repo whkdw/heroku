@@ -119,7 +119,6 @@ if __name__ == "__main__":
         with open('data.json') as f: ftr = json.load(f)
     except: ftr = {}
 
-    #add 5h/11/4 ring r1 r2, 4/1/7 cinch make 2nd round inside more pow, confirm 5H105ringR has r2
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 5H87ringR1 5H105insideR1
 
     try:
@@ -216,14 +215,12 @@ if __name__ == "__main__":
                 elif opp[0][3] > 0.8: # always body rd1
                     if hd > 6: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
                     elif hd > 2: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
-                    else:
-                        fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1', '5H114ringR1' ])
-                        fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
+                    else: fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
                 elif opp[0][4] > 0.9: # always balanced tactics rd1
                         if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H114alloutR1' ])
-                        elif hd > 5: fp = rng.choice([ '6H122alloutR1', '5H114alloutR1' ] if opp[0][0] in (4, 6) else [ '5H87alloutR1', '5H105alloutR', '5H114insideR' ]) + rng.choice([ '1', '1', '2' ])
-                        elif hd > 2: fp = rng.choice([ '5H105alloutR', '5H114alloutR1' ] if opp[0][0] in (4, 6) else [ '5H87alloutR1', '5H105alloutR', '5H114insideR', '5H114ringR1' ]) + rng.choice([ '1', '1', '2' ])
-                        else: rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ]) + rng.choice([ '1', '1', '2' ])
+                        elif hd > 5: fp = rng.choice([ '6H122alloutR', '5H114alloutR' ] if opp[0][0] in (4, 6) else [ '5H87alloutR', '5H105alloutR', '5H114insideR' ]) + rng.choice([ '1', '1', '2' ])
+                        elif hd > 2: fp = rng.choice([ '5H105alloutR', '5H114alloutR' ] if opp[0][0] in (4, 6) else [ '5H87alloutR', '5H105alloutR', '5H114insideR', '5H114ringR' ]) + rng.choice([ '1', '1', '2' ])
+                        else: rng.choice([ '5H105insideR', '5H114insideR', '5H87alloutR' if ftr[team_id]['CHIN'] > 12 else '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
                 elif opp[0][5] > 0.9: # always slap rd1
                      fp = '6H122alloutR1' if hd > 5 else '5H114alloutR1'
                 # make everything height based
