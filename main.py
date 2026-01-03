@@ -227,6 +227,7 @@ if __name__ == "__main__":
 
             if ftr[team_id]['FIGHTPLAN'] != fp:
                 write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
+                ftr[team_id]['FIGHTPLAN'] = fp
 
         if ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 1) > 35:
             if ftr[team_id]['DIVISION'][1] == "contenders" or ftr[team_id]['STATUS'] > 18:
