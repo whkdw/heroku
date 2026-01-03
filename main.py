@@ -198,7 +198,7 @@ if __name__ == "__main__":
         if ftr[team_id]['OPPONENT']: # [ Most used style, Amount of unique styles, flash %, weardown %, balanced %, slap %, defend % ]
             rng, hd, opp = random.Random(int(team_id) + sum(ftr[team_id]['RECORD']) * ftr[team_id]['WEIGHT'][0]), ftr[team_id]['OPPONENT'][0] - ftr[team_id]['HEIGHT'], ftr[team_id]['OPPONENT'][4]
 
-            if ftr[team_id]['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1'
+            if ftr[team_id]['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
             elif ftr[team_id]['RATING'] > 25: fp = rng.choice([ '5H114insideR', '5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
             elif ftr[team_id]['WEIGHT'][1] < 200: # None heavyweights
                 if (hd >= 10 or ftr[team_id]['OPPONENT'][3] > 4) and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr[team_id]['RECORD'][0] > 9 else 3)) # He is much taller
@@ -210,7 +210,9 @@ if __name__ == "__main__":
             if opp[0][0] == 7 and opp[0][1] <= 2: fp = '5H87ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H87clinchR1' # allout rd1 def
             elif opp[0][2] > 0.7 or (opp[0][0] == 7 and opp[0][1] <= 1): fp = rng.choice([ '5H87ringR1', '5H105ringR1', '5H114ringR1' ] if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ '5H87clinchR1', '5H105clinchR1' ]) # anti flash
             elif opp[0][3] > 0.8: # always body rd1
-                if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
+                if opp[0][0] == 0: fp = '5H114ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H114clinchR1'  # usually inside
+                elif opp[0][0] == 4: fp = rng.choice([ '5H114alloutR1', '5H105alloutR1', '5H114insideR2' ] if hd > 3 else [ '5H87alloutR1', '5H114insideR1', '5H114insideR2', '5H105insideR1' ]) # usually ring
+                elif hd > 9: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
                 elif hd > 5: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
                 elif hd > 2: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 13 else 4 ])
                 else: fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
