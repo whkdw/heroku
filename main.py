@@ -212,9 +212,9 @@ if __name__ == "__main__":
             elif opp[0][3] > 0.8: # always body rd1
                 if opp[0][0] == 0: fp = '5H114ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H114clinchR1'  # usually inside
                 elif opp[0][0] == 4: fp = rng.choice([ '5H114alloutR1', '5H105alloutR1', '5H114insideR2' ] if hd > 3 else [ '5H87alloutR1', '5H114insideR1', '5H114insideR2', '5H105insideR1' ]) # usually ring
-                elif hd > 9: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
-                elif hd > 5: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
-                elif hd > 2: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 15 else 4 ])
+                elif hd > 9 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
+                elif hd > 5 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
+                elif hd > 2 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 15 else 4 ])
                 else: fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
             elif opp[0][4] > 0.9: # always balanced tactics rd1
                     if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H114alloutR1' ])

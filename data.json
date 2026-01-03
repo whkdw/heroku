@@ -32,7 +32,7 @@
             4,
             false
         ],
-        "FIGHTPLAN": "5H114alloutR1",
+        "FIGHTPLAN": "5H105alloutR1",
         "OPPONENT": [
             2,
             1666447,
@@ -192,7 +192,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H87ringR1",
         "OPPONENT": [
             -2,
             1659522,
@@ -272,7 +272,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105clinchR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             1,
             1032376,
@@ -432,7 +432,7 @@
             3,
             false
         ],
-        "FIGHTPLAN": "6H122alloutR1",
+        "FIGHTPLAN": "5H87alloutR1",
         "OPPONENT": [
             5,
             439195,
@@ -512,7 +512,7 @@
             5,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             -1,
             1257079,
@@ -592,7 +592,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87clinchR1",
+        "FIGHTPLAN": "6H122alloutR2",
         "OPPONENT": [
             2,
             1002507,
@@ -672,7 +672,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "417clinchR1",
+        "FIGHTPLAN": "5H114alloutR3",
         "OPPONENT": [
             11,
             1501483,
@@ -799,43 +799,6 @@
         ],
         "TYPE": 2
     },
-    "1650023": {
-        "NAME": "Kil`guy",
-        "STRENGTH": 20,
-        "KP": 6,
-        "SPEED": 11,
-        "AGILITY": 11,
-        "CHIN": 11,
-        "CONDITIONING": 5,
-        "CUT": 1,
-        "RATING": 1,
-        "STATUS": 3,
-        "HEIGHT": 8,
-        "BUILD": 0,
-        "WEIGHT": [
-            172,
-            169
-        ],
-        "IPS": 125,
-        "RECORD": [
-            5,
-            8,
-            0
-        ],
-        "DIVISION": [
-            "light-heavy",
-            "eurasia",
-            "light-heavy"
-        ],
-        "TRAINING": [
-            1,
-            null,
-            false
-        ],
-        "FIGHTPLAN": "417clinchR2",
-        "OPPONENT": null,
-        "TYPE": 2
-    },
     "1650044": {
         "NAME": "Xel`kieran",
         "STRENGTH": 24,
@@ -869,7 +832,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "5H87ringR1",
         "OPPONENT": [
             6,
             1415206,
@@ -1140,7 +1103,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             5,
             1622385,
@@ -1220,7 +1183,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H105ringR2",
         "OPPONENT": [
             25,
             1584509,
@@ -1300,7 +1263,7 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H87alloutR1",
         "OPPONENT": [
             13,
             131496,
@@ -1540,7 +1503,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR2",
+        "FIGHTPLAN": "5H105ringR2",
         "OPPONENT": [
             15,
             706532,
@@ -1700,7 +1663,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             25,
             1559876,
@@ -1780,7 +1743,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "6H122alloutR2",
+        "FIGHTPLAN": "5H114insideR2",
         "OPPONENT": [
             2,
             1557112,
@@ -1860,7 +1823,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             14,
             1470001,
@@ -2020,7 +1983,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "5H105clinchR1",
         "OPPONENT": [
             6,
             1482743,
@@ -2100,7 +2063,7 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             14,
             1125542,
@@ -2180,7 +2143,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             16,
             1689305,
@@ -2260,7 +2223,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             13,
             1116598,
@@ -2340,7 +2303,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             17,
             845419,
@@ -2420,7 +2383,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             12,
             1545576,
@@ -2500,7 +2463,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H87alloutR1",
         "OPPONENT": [
             15,
             1625499,
@@ -2580,7 +2543,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H105clinchR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             10,
             1516754,
@@ -2625,43 +2588,6 @@
                 ]
             ]
         ],
-        "TYPE": 2
-    },
-    "1659201": {
-        "NAME": "Kil`yoram",
-        "STRENGTH": 27,
-        "KP": 8,
-        "SPEED": 12,
-        "AGILITY": 14,
-        "CHIN": 16,
-        "CONDITIONING": 6,
-        "CUT": 1,
-        "RATING": 16,
-        "STATUS": 18,
-        "HEIGHT": 10,
-        "BUILD": 2,
-        "WEIGHT": [
-            193,
-            189
-        ],
-        "IPS": 812,
-        "RECORD": [
-            24,
-            13,
-            0
-        ],
-        "DIVISION": [
-            "cruiser",
-            "eurasia",
-            "cruiser"
-        ],
-        "TRAINING": [
-            1,
-            null,
-            false
-        ],
-        "FIGHTPLAN": "6H122alloutR2",
-        "OPPONENT": null,
         "TYPE": 2
     },
     "1659357": {
@@ -2857,7 +2783,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H114insideR2",
         "OPPONENT": [
             7,
             1600049,
@@ -3017,7 +2943,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "5H105alloutR3",
         "OPPONENT": [
             1,
             1656134,
@@ -3134,7 +3060,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "5H105ringR1",
         "OPPONENT": [
             25,
             951940,
@@ -3214,7 +3140,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114insideR1",
+        "FIGHTPLAN": "5H87clinchR1",
         "OPPONENT": [
             4,
             1653464,
@@ -3368,7 +3294,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR2",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             25,
             1656956,
@@ -3565,7 +3491,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H87alloutR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             2,
             922857,
@@ -3649,43 +3575,6 @@
         "OPPONENT": null,
         "TYPE": 1
     },
-    "1663385": {
-        "NAME": "Gul`scott",
-        "STRENGTH": 21,
-        "KP": 7,
-        "SPEED": 9,
-        "AGILITY": 5,
-        "CHIN": 14,
-        "CONDITIONING": 6,
-        "CUT": 1,
-        "RATING": 0,
-        "STATUS": 1,
-        "HEIGHT": 8,
-        "BUILD": 0,
-        "WEIGHT": [
-            203,
-            199
-        ],
-        "IPS": 59,
-        "RECORD": [
-            2,
-            4,
-            0
-        ],
-        "DIVISION": [
-            "cruiser",
-            "eurasia",
-            "cruiser"
-        ],
-        "TRAINING": [
-            1,
-            null,
-            false
-        ],
-        "FIGHTPLAN": "6H122alloutR2",
-        "OPPONENT": null,
-        "TYPE": 1
-    },
     "1664016": {
         "NAME": "Xel`patricia",
         "STRENGTH": 27,
@@ -3719,7 +3608,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             8,
             1571388,
@@ -3799,7 +3688,7 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H114alloutR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             18,
             94147,
@@ -3879,7 +3768,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             25,
             1558939,
@@ -3959,7 +3848,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR2",
+        "FIGHTPLAN": "5H105alloutR1",
         "OPPONENT": [
             25,
             567292,
@@ -4150,7 +4039,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87clinchR1",
+        "FIGHTPLAN": "5H105clinchR1",
         "OPPONENT": [
             21,
             947020,
@@ -4470,7 +4359,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR3",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             7,
             1474051,
@@ -4550,7 +4439,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             10,
             1517372,
@@ -4626,7 +4515,7 @@
             "cruiser"
         ],
         "TRAINING": [
-            2,
+            1,
             1,
             false
         ],
@@ -4667,7 +4556,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             -1,
             1695509,
@@ -4907,7 +4796,7 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             3,
             1694797,
@@ -4987,7 +4876,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87alloutR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             11,
             1471958,
@@ -5137,7 +5026,7 @@
             "cruiser"
         ],
         "TRAINING": [
-            2,
+            3,
             1,
             false
         ],
@@ -5178,7 +5067,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H114ringR1",
         "OPPONENT": [
             2,
             666326,
@@ -5295,7 +5184,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H87alloutR1",
+        "FIGHTPLAN": "5H114alloutR1",
         "OPPONENT": [
             2,
             284499,
@@ -5455,7 +5344,7 @@
             3,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "417clinchR1",
         "OPPONENT": [
             9,
             1545119,
@@ -5689,7 +5578,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114alloutR1",
+        "FIGHTPLAN": "5H105alloutR1",
         "OPPONENT": [
             3,
             1692879,
@@ -5769,7 +5658,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H87clinchR1",
         "OPPONENT": [
             -1,
             1560875,
@@ -5849,7 +5738,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114insideR1",
+        "FIGHTPLAN": "5H87ringR1",
         "OPPONENT": [
             -2,
             1689094,
@@ -6009,7 +5898,7 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H105clinchR1",
         "OPPONENT": [
             2,
             34949,
@@ -6089,7 +5978,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H105ringR1",
         "OPPONENT": [
             4,
             1695490,
@@ -6169,7 +6058,7 @@
             3,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             -1,
             1644104,
@@ -6286,7 +6175,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR3",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             -1,
             1498914,
@@ -6366,7 +6255,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105clinchR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             12,
             1633468,
@@ -6446,7 +6335,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "6H122alloutR3",
+        "FIGHTPLAN": "5H114alloutR1",
         "OPPONENT": [
             7,
             1487043,
@@ -6526,7 +6415,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             6,
             1295362,
@@ -6639,8 +6528,8 @@
             "cruiser"
         ],
         "TRAINING": [
+            3,
             2,
-            1,
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
@@ -6713,7 +6602,7 @@
             "cruiser"
         ],
         "TRAINING": [
-            2,
+            1,
             null,
             false
         ],
@@ -6834,7 +6723,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H105clinchR1",
         "OPPONENT": [
             0,
             144180,
@@ -6914,7 +6803,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114insideR3",
+        "FIGHTPLAN": "417clinchR3",
         "OPPONENT": [
             8,
             1638941,
@@ -6994,7 +6883,7 @@
             3,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "5H114ringR1",
         "OPPONENT": [
             -1,
             1240932,
@@ -7070,8 +6959,8 @@
             "light-heavy"
         ],
         "TRAINING": [
-            2,
-            2,
+            3,
+            3,
             false
         ],
         "FIGHTPLAN": "5H114alloutR1",
@@ -7228,7 +7117,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             4,
             911912,
@@ -7308,7 +7197,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H87clinchR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             10,
             1551294,
@@ -7612,7 +7501,7 @@
             "cruiser"
         ],
         "TRAINING": [
-            4,
+            1,
             null,
             false
         ],
@@ -7653,7 +7542,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
+        "FIGHTPLAN": "5H114insideR1",
         "OPPONENT": [
             2,
             1695055,
@@ -7733,7 +7622,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114insideR1",
+        "FIGHTPLAN": "5H105clinchR1",
         "OPPONENT": [
             5,
             1693660,
@@ -8314,8 +8203,8 @@
             "cruiser"
         ],
         "TRAINING": [
-            1,
-            1,
+            4,
+            2,
             false
         ],
         "FIGHTPLAN": "5H114alloutR1",
@@ -8435,7 +8324,7 @@
             3,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             12,
             1515388,
@@ -8515,7 +8404,7 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H114insideR1",
+        "FIGHTPLAN": "5H114alloutR3",
         "OPPONENT": [
             8,
             1092741,
@@ -8675,7 +8564,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
+        "FIGHTPLAN": "417clinchR1",
         "OPPONENT": [
             10,
             1694952,
@@ -8909,7 +8798,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR1",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             0,
             1695497,
@@ -9069,7 +8958,7 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H87alloutR1",
+        "FIGHTPLAN": "5H105alloutR1",
         "OPPONENT": [
             7,
             1695657,
@@ -9262,8 +9151,8 @@
             "light-heavy"
         ],
         "TRAINING": [
+            3,
             1,
-            2,
             false
         ],
         "FIGHTPLAN": "5H105ringR1",
@@ -9660,7 +9549,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105alloutR3",
+        "FIGHTPLAN": "5H105insideR1",
         "OPPONENT": [
             1,
             1695719,
@@ -9894,7 +9783,7 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H87ringR1",
+        "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
             15,
             1504705,
@@ -10056,6 +9945,43 @@
                 ]
             ]
         ],
+        "TYPE": 0
+    },
+    "1695887": {
+        "NAME": "Kul`alex",
+        "STRENGTH": 17,
+        "KP": 5,
+        "SPEED": 12,
+        "AGILITY": 8,
+        "CHIN": 13,
+        "CONDITIONING": 6,
+        "CUT": 1,
+        "RATING": 0,
+        "STATUS": 0,
+        "HEIGHT": 8,
+        "BUILD": 3,
+        "WEIGHT": [
+            202,
+            198
+        ],
+        "IPS": 0,
+        "RECORD": [
+            0,
+            0,
+            0
+        ],
+        "DIVISION": [
+            "cruiser",
+            "eurasia",
+            "cruiser"
+        ],
+        "TRAINING": [
+            null,
+            null,
+            false
+        ],
+        "FIGHTPLAN": null,
+        "OPPONENT": null,
         "TYPE": 0
     }
 }
