@@ -155,7 +155,7 @@ if __name__ == "__main__":
         if fgt:
             if not ftr[team_id].get('OPPONENT') or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
                 ftr[team_id]['OPPONENT'] = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ]
-                for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:max(2, min(6, ftr[team_id]['OPPONENT'][3] + 1))]:
+                for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:max(2, ftr[team_id]['OPPONENT'][3] + 1)]:
                     fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
                     ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 1
                     if len(ftr_intro) > 1:
@@ -214,7 +214,7 @@ if __name__ == "__main__":
                 elif opp[0][0] == 4: fp = rng.choice([ '5H114alloutR1', '5H105alloutR1', '5H114insideR2' ] if hd > 3 else [ '5H87alloutR1', '5H114insideR1', '5H114insideR2', '5H105insideR1' ]) # usually ring
                 elif hd > 9: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
                 elif hd > 5: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
-                elif hd > 2: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 13 else 4 ])
+                elif hd > 2: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 15 else 4 ])
                 else: fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
             elif opp[0][4] > 0.9: # always balanced tactics rd1
                     if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H114alloutR1' ])
