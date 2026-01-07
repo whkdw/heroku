@@ -41,6 +41,7 @@
 
     .label {
         font-weight: bold;
+        width: 110px;
     }
 
     .value {
@@ -50,7 +51,6 @@
 </head>
 <body>
 
-<h1>Fighters (Sorted by Height)</h1>
 <div class="fighters" id="fighters"></div>
 
 <script>
@@ -78,7 +78,7 @@ fetch("data.json")
 
                 <div class="row">
                     <div class="label">Strength</div><div class="value">${f.STRENGTH}</div>
-                    <div class="label">Knockout Punch</div><div class="value">${f.KP}</div>
+                    <div class="label">KP Bonus</div><div class="value">${f.KP}</div>
                     <div class="label">Training</div><div class="value">${JSON.stringify(f.TRAINING)}</div>
                 </div>
 
