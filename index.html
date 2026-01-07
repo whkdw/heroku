@@ -1,79 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>JSON Viewer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            margin-bottom: 40px;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 6px 10px;
-            text-align: left;
-        }
-        th {
-            background: #f2f2f2;
-        }
-        h2 {
-            margin-top: 40px;
-        }
-        .key {
-            color: #555;
-            font-weight: bold;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Fighter Viewer</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+    }
+
+    /* Container that fills horizontally first */
+    .fighters {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 16px;
+    }
+
+    .fighter {
+        background: #fff;
+        border: 1px solid #000;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .header {
+        font-weight: bold;
+        margin-bottom: 6px;
+        border-bottom: 1px solid #000;
+        padding-bottom: 4px;
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto;
+        gap: 6px 10px;
+        margin-top: 4px;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .value {
+        text-align: right;
+    }
+</style>
 </head>
 <body>
 
-<h1>JSON Data</h1>
-<div id="output">Loading...</div>
+<h1>Fighters (Sorted by Height)</h1>
+<div class="fighters" id="fighters"></div>
 
 <script>
 fetch("data.json")
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-        const container = document.getElementById("output");
-        container.innerHTML = "";
+        const fighters = Object.values(data);
 
-        for (const id in data) {
-            const fighter = data[id];
+        // SORT BY HEIGHT (DESCENDING — change to a.HEIGHT - b.HEIGHT for ascending)
+        fighters.sort((a, b) => b.HEIGHT - a.HEIGHT);
 
-            const title = document.createElement("h2");
-            title.textContent = `ID: ${id} — ${fighter.NAME}`;
-            container.appendChild(title);
+        const container = document.getElementById("fighters");
 
-            const table = document.createElement("table");
+        fighters.forEach(f => {
+            const record = f.RECORD.join("-");
+            const division = f.DIVISION.join(" ");
 
-            for (const key in fighter) {
-                const row = document.createElement("tr");
+            const card = document.createElement("div");
+            card.className = "fighter";
 
-                const cellKey = document.createElement("td");
-                cellKey.className = "key";
-                cellKey.textContent = key;
+            card.innerHTML = `
+                <div class="header">
+                    ${f.NAME} (${record}) ${f.RATING}(${f.STATUS}) ${division}
+                </div>
 
-                const cellValue = document.createElement("td");
-                cellValue.textContent = JSON.stringify(fighter[key]);
+                <div class="row">
+                    <div class="label">Strength</div><div class="value">${f.STRENGTH}</div>
+                    <div class="label">Knockout Punch</div><div class="value">${f.KP}</div>
+                    <div class="label">Training</div><div class="value">${JSON.stringify(f.TRAINING)}</div>
+                </div>
 
-                row.appendChild(cellKey);
-                row.appendChild(cellValue);
-                table.appendChild(row);
-            }
+                <div class="row">
+                    <div class="label">Speed</div><div class="value">${f.SPEED}</div>
+                    <div class="label">Agility</div><div class="value">${f.AGILITY}</div>
+                    <div class="label">Injury Points</div><div class="value">${f.IPS}</div>
+                </div>
 
-            container.appendChild(table);
-        }
+                <div class="row">
+                    <div class="label">Chin</div><div class="value">${f.CHIN}</div>
+                    <div class="label">Conditioning</div><div class="value">${f.CONDITIONING}</div>
+                    <div class="label">Fight Plan</div><div class="value">${f.FIGHTPLAN}</div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Height</div><div class="value">${f.HEIGHT}</div>
+                    <div class="label">Weight</div><div class="value">${f.WEIGHT.join(", ")}</div>
+                    <div class="label">Build</div><div class="value">${f.BUILD}</div>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
     })
-    .catch(err => {
-        document.getElementById("output").textContent =
-            "Failed to load JSON. Are you using a local server?";
-        console.error(err);
-    });
+    .catch(err => console.error(err));
 </script>
 
 </body>
