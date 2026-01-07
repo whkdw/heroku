@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+            text-align: left;
+        }
+        th {
+            background: #f2f2f2;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+        .key {
+            color: #555;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>JSON Data</h1>
+<div id="output">Loading...</div>
+
+<script>
+fetch("data.json")
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById("output");
+        container.innerHTML = "";
+
+        for (const id in data) {
+            const fighter = data[id];
+
+            const title = document.createElement("h2");
+            title.textContent = `ID: ${id} — ${fighter.NAME}`;
+            container.appendChild(title);
+
+            const table = document.createElement("table");
+
+            for (const key in fighter) {
+                const row = document.createElement("tr");
+
+                const cellKey = document.createElement("td");
+                cellKey.className = "key";
+                cellKey.textContent = key;
+
+                const cellValue = document.createElement("td");
+                cellValue.textContent = JSON.stringify(fighter[key]);
+
+                row.appendChild(cellKey);
+                row.appendChild(cellValue);
+                table.appendChild(row);
+            }
+
+            container.appendChild(table);
+        }
+    })
+    .catch(err => {
+        document.getElementById("output").textContent =
+            "Failed to load JSON. Are you using a local server?";
+        console.error(err);
+    });
+</script>
+
+</body>
+</html>
