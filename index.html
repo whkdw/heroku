@@ -51,7 +51,8 @@ fetch("data.json")
     .then(data => {
         const fighters = Object.values(data);
 		const build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ];
-		const stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning", "free" ];
+		const stats_str = [ "strength", "kp", "speed", "agility", "chin", "cond", "free" ];
+		const archtype_str = [ "albino", "zam", "agl", "bal" ];
 
         // SORT BY HEIGHT (DESCENDING — change to a.HEIGHT - b.HEIGHT for ascending)
         fighters.sort((a, b) => b.HEIGHT - a.HEIGHT);
@@ -64,7 +65,7 @@ fetch("data.json")
 
             card.innerHTML = `
                 <div class="header">
-                    <b>${f.NAME} (${f.RECORD.join("-")})</b> ${f.RATING}(${f.STATUS}) <b>${f.DIVISION[1]}</b><BR>
+                    <b>${f.NAME}</b> (${f.RECORD.join("-")}) ${f.RATING}(${f.STATUS}) <b>${f.DIVISION[1]}</b><BR>
 					${Math.floor(f.HEIGHT / 12) + 5}'${((f.HEIGHT % 12) + 12) % 12}" ${f.DIVISION[0]}weight<BR>
 					${f.WEIGHT[0]}/${f.WEIGHT[1]} pounds (${build_str[f.BUILD + 3]} ${f.BUILD})
                 </div>
@@ -86,18 +87,18 @@ fetch("data.json")
 
 				<div class="row">
                     <div class="label">Injury Points</div><div>${f.IPS}</div>
-					<div class="label">Archtype</div><div>${f.TYPE}</div>
+					<div class="label">Archtype</div><div>${archtype_str[f.TYPE]} ${f.TYPE}</div>
                 </div>
 
                 <div class="row">
-					<div class="label">Training</div><div>${stats_str[f.TRAINING[0]]}, ${f.TRAINING[1] ? stats_str[f.TRAINING[1]] : 'None'}, ${f.TRAINING[2]}</div>
+					<div class="label">Training</div><div>${stats_str[f.TRAINING[0]]}, ${f.TRAINING[1] ? stats_str[f.TRAINING[1]] : 'none'}, ${f.TRAINING[2]}</div>
                 </div>
 
 				<div class="row">
 					<div class="label">Fight Plan</div><div>${f.FIGHTPLAN}</div>
                 </div>
 
-				<div class="row">
+				<div>
 					<div>${JSON.stringify(f.OPPONENT)}</div>
                 </div>
             `;
