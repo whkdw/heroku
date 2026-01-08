@@ -37,7 +37,7 @@
 
     .label {
         font-weight: bold;
-        width: 105px;
+        width: 100px;
     }
 </style>
 </head>
@@ -52,7 +52,7 @@ fetch("data.json")
         const fighters = Object.values(data);
 		const build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ];
 		const stats_str = [ "strength", "kp", "speed", "agility", "chin", "cond", "free" ];
-		const archtype_str = [ "albino", "zam", "agl", "bal" ];
+		const archtype_str = [ "alb", "zam", "agl", "bal" ];
 
         // SORT BY HEIGHT (DESCENDING — change to a.HEIGHT - b.HEIGHT for ascending)
         fighters.sort((a, b) => b.HEIGHT - a.HEIGHT);
@@ -66,7 +66,7 @@ fetch("data.json")
             card.innerHTML = `
                 <div class="header">
                     <b>${f.NAME}</b> (${f.RECORD.join("-")}) ${f.RATING}(${f.STATUS}) <b>${f.DIVISION[1]}</b><BR>
-					${Math.floor(f.HEIGHT / 12) + 5}'${((f.HEIGHT % 12) + 12) % 12}" ${f.DIVISION[0]}weight<BR>
+					<font size='+1'>${Math.floor(f.HEIGHT / 12) + 5}'${((f.HEIGHT % 12) + 12) % 12}"</font> <i>${f.DIVISION[0]}weight</i><BR>
 					${f.WEIGHT[0]}/${f.WEIGHT[1]} pounds (${build_str[f.BUILD + 3]} ${f.BUILD})
                 </div>
 
@@ -87,7 +87,7 @@ fetch("data.json")
 
 				<div class="row">
                     <div class="label">Injury Points</div><div>${f.IPS}</div>
-					<div class="label">Archtype</div><div>${archtype_str[f.TYPE]} ${f.TYPE}</div>
+					<div class="label">Archtype</div><div><font size='-2'>${archtype_str[f.TYPE]}</font> ${f.TYPE}</div>
                 </div>
 
                 <div class="row">
