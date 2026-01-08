@@ -57,6 +57,7 @@ fetch("data.json")
     .then(res => res.json())
     .then(data => {
         const fighters = Object.values(data);
+		const builds = array("very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy")
 
         // SORT BY HEIGHT (DESCENDING — change to a.HEIGHT - b.HEIGHT for ascending)
         fighters.sort((a, b) => b.HEIGHT - a.HEIGHT);
@@ -64,39 +65,42 @@ fetch("data.json")
         const container = document.getElementById("fighters");
 
         fighters.forEach(f => {
-            const record = f.RECORD.join("-");
-			const line2 = `${Math.floor(f.HEIGHT / 12)}'${f.HEIGHT % 12}" - ${f.DIVISION[0]}weight - ${f.WEIGHT[0]} lbs`;
-
             const card = document.createElement("div");
             card.className = "fighter";
 
             card.innerHTML = `
                 <div class="header">
-                    ${f.NAME} (${record}) ${f.RATING}(${f.STATUS}) ${f.DIVISION[1]}<BR>${line2}
+                    ${f.NAME} (${f.RECORD.join("-")}) ${f.RATING}(${f.STATUS}) ${f.DIVISION[1]}<BR>
+					${Math.floor(f.HEIGHT / 12) + 5}'${f.HEIGHT % 12}" ${f.DIVISION[0]}weight<BR>
+					${f.WEIGHT[0]}/${f.WEIGHT[1]} pounds (${builds[f.BUILD - 3]} ${f.BUILD})
                 </div>
 
                 <div class="row">
                     <div class="label">Strength</div><div class="value">${f.STRENGTH}</div>
                     <div class="label">KP Bonus</div><div class="value">${f.KP}</div>
-                    <div class="label">Training</div><div class="value">${JSON.stringify(f.TRAINING)}</div>
                 </div>
 
                 <div class="row">
                     <div class="label">Speed</div><div class="value">${f.SPEED}</div>
                     <div class="label">Agility</div><div class="value">${f.AGILITY}</div>
-                    <div class="label">Injury Points</div><div class="value">${f.IPS}</div>
                 </div>
 
                 <div class="row">
                     <div class="label">Chin</div><div class="value">${f.CHIN}</div>
-                    <div class="label">Conditioning</div><div class="value">${f.CONDITIONING}</div>
-                    <div class="label">Fight Plan</div><div class="value">${f.FIGHTPLAN}</div>
+                    <div class="label">Condition</div><div class="value">${f.CONDITIONING}</div>
+
                 </div>
 
                 <div class="row">
-                    <div class="label">Height</div><div class="value">${f.HEIGHT}</div>
-                    <div class="label">Weight</div><div class="value">${f.WEIGHT.join(", ")}</div>
-                    <div class="label">Build</div><div class="value">${f.BUILD}</div>
+					<div class="label">Training</div><div class="value">${JSON.stringify(f.TRAINING)}</div>
+                </div>
+				
+				<div class="row">
+                    <div class="label">Injury Points</div><div class="value">${f.IPS}</div>
+                </div>
+				
+				<div class="row">
+					<div class="label">Fight Plan</div><div class="value">${f.FIGHTPLAN}</div>
                 </div>
             `;
 
