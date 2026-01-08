@@ -17,11 +17,11 @@ import datetime
 from typing import List, Dict, Tuple
 
 try:
-    GYM_PASSWORD = os.environ['GYM_PASSWORD']
     GYM_USERNAME = os.environ['GYM_USERNAME']
+    GYM_PASSWORD = os.environ['GYM_PASSWORD']
 except KeyError:
-    GYM_PASSWORD = ""
     GYM_USERNAME = ""
+    GYM_PASSWORD = ""
 
 
 # ------------------------------
@@ -70,7 +70,7 @@ def write_msg(command: str = "", etc: str = "", script: str = "query.fcgi"):
 
     cookies = {
         "timezone": "480",
-        "username": GYM_PASSWORD,
+        "username": GYM_USERNAME,
         "password": GYM_PASSWORD,
         "block_ad": "1",
         "is_commish": "1",
@@ -81,7 +81,7 @@ def write_msg(command: str = "", etc: str = "", script: str = "query.fcgi"):
         time.sleep(2.75 + 15 * attempt)
         try:
             print(command, etc)
-            resp = requests.post("https://webl.vivi.com/cgi-bin/" + script, data=data, headers=headers, cookies=cookies, timeout=10)
+            resp = requests.post(f"https://webl.vivi.com/cgi-bin/{script}", data=data, headers=headers, cookies=cookies, timeout=10)
             resp.raise_for_status()
             if "eeeeee" not in resp.text:
                 raise requests.RequestException("Invalid WeBL response content")
@@ -97,7 +97,8 @@ def find_name():
     try:
         response = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people", headers={"User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"}, timeout=10)
         response.raise_for_status()
-        return random.choice(['Byl', 'Ell', 'Fel', 'Kel', 'Kul']) + "'" + re.search(r"<title>\s*([\w]+)", unicodedata.normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
+        name = re.search(r"<title>\s*([\w]+)", unicodedata.normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
+        return f"{random.choice(['Byl', 'Ell', 'Fel', 'Kel', 'Kul'])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang', '', '', '', '', '', '', '', '', '' ] else ""
     except:
         return ""
 
@@ -183,7 +184,7 @@ if __name__ == "__main__":
         if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2]: # in wrong div
             write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
 
-        tr = [None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2)]
+        tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
         for i in range(2):
             baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY'] + int(tr[0] is not None and 1 <= tr[0] <= 3) # add ap if training str/apd/agl primarily
             if not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS']): tr[i] = 1 # float KP if no chance to gain a ap
@@ -200,30 +201,33 @@ if __name__ == "__main__":
 
             if ftr[team_id]['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
             elif ftr[team_id]['RATING'] > 25: fp = rng.choice([ '5H114insideR', '5H105alloutR', '5H114alloutR', '5H87alloutR', '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
-            elif ftr[team_id]['WEIGHT'][1] < 200: # None heavyweights
-                if (hd >= 10 or ftr[team_id]['OPPONENT'][3] > 4) and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr[team_id]['RECORD'][0] > 9 else 3)) # He is much taller
+            elif ftr[team_id]['WEIGHT'][1] < 200: # non hw
+                if hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr[team_id]['RECORD'][0] > 9 else 3)) # He is much taller
                 elif hd <= 2: fp = rng.choice([ '5H87clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # Im slightly taller
                 elif hd <= 0: fp = rng.choice([ '5H87ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
                 else: fp = rng.choice([ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '5H87alloutR', '6H122alloutR' ][ :6 if ftr[team_id]['CHIN'] < 15 else 7 ]) + rng.choice([ '1', '2', '3' ])
             else: fp = rng.choice([ '5H105alloutR', '5H87alloutR', '6H122alloutR', '5H114insideR', '5H105insideR', '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
 
-            if opp[0][0] == 7 and opp[0][1] <= 2: fp = '5H87ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H87clinchR1' # allout rd1 def
-            elif opp[0][2] > 0.7 or (opp[0][0] == 7 and opp[0][1] <= 1): fp = rng.choice([ '5H87ringR1', '5H105ringR1', '5H114ringR1' ] if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ '5H87clinchR1', '5H105clinchR1' ]) # anti flash
-            elif opp[0][3] > 0.8: # always body rd1
-                if opp[0][0] == 0: fp = '5H114ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H114clinchR1'  # usually inside
-                elif opp[0][0] == 4: fp = rng.choice([ '5H114alloutR1', '5H105alloutR1', '5H114insideR2' ] if hd > 3 else [ '5H87alloutR1', '5H114insideR1', '5H114insideR2', '5H105insideR1' ]) # usually ring
-                elif hd > 9 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
-                elif hd > 5 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
-                elif hd > 2 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 15 else 4 ])
-                else: fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
-            elif opp[0][4] > 0.9: # always balanced tactics rd1
-                    if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H114alloutR1' ])
-                    elif hd > 5: fp = rng.choice([ '6H122alloutR', '5H114alloutR' ] if opp[0][0] in (4, 6) else [ '5H87alloutR', '5H105alloutR', '5H114insideR' ]) + rng.choice([ '1', '1', '2' ])
-                    elif hd > 2: fp = rng.choice([ '5H105alloutR', '5H114alloutR' ] if opp[0][0] in (4, 6) else [ '5H87alloutR', '5H105alloutR', '5H114insideR', '5H114ringR' ]) + rng.choice([ '1', '1', '2' ])
-                    else: rng.choice([ '5H105insideR', '5H114insideR', '5H87alloutR' if ftr[team_id]['CHIN'] > 12 else '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
-            elif opp[0][5] > 0.9: # always slap rd1
-                 fp = '6H122alloutR1' if hd > 5 else '5H114alloutR1'
-            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash
+            for r in (2, 1, 0):
+                if opp[r][0] == 7 and opp[r][1] <= 2: fp = '5H87ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H87clinchR1' # allout def
+                elif opp[r][2] > 0.7 or (opp[r][0] == 7 and opp[r][1] <= 1): fp = rng.choice([ '5H87ringR1', '5H105ringR1', '5H114ringR1' ] if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ '5H87clinchR1', '5H105clinchR1' ]) # anti flash
+                elif opp[r][3] > 0.8: # always body
+                    if opp[r][0] == 0: fp = '5H114ringR1' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else '5H114clinchR1'  # usually inside
+                    elif opp[r][0] == 4: fp = rng.choice([ '5H114alloutR1', '5H105alloutR1', '5H114insideR2' ] if hd > 3 else [ '5H87alloutR1', '5H114insideR1', '5H114insideR2', '5H105insideR1' ]) # usually ring
+                    elif hd > 9 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '6H122alloutR1', '5H105alloutR1' ])
+                    elif hd > 5 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '5H105alloutR1', '5H114alloutR1', '5H87alloutR1', '5H105alloutR1' ])
+                    elif hd > 2 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ '5H114insideR1', '5H105insideR1', '5H87alloutR1', '5H105alloutR1' ][ :3 if ftr[team_id]['CHIN'] > 15 else 4 ])
+                    else: fp = rng.choice([ '5H105insideR1', '5H114insideR1', '5H87alloutR1' if ftr[team_id]['CHIN'] > 12 else '5H105insideR1', '5H105ringR1' ])
+                elif opp[r][4] > 0.9: # always balanced tactics
+                        if hd > 9: fp = rng.choice([ '6H122alloutR1', '5H114alloutR1' ])
+                        elif hd > 5: fp = rng.choice([ '6H122alloutR', '5H114alloutR' ] if opp[r][0] in (4, 6) else [ '5H87alloutR', '5H105alloutR', '5H114insideR' ]) + rng.choice([ '1', '1', '2' ])
+                        elif hd > 2: fp = rng.choice([ '5H105alloutR', '5H114alloutR' ] if opp[r][0] in (4, 6) else [ '5H87alloutR', '5H105alloutR', '5H114insideR', '5H114ringR' ]) + rng.choice([ '1', '1', '2' ])
+                        else: rng.choice([ '5H105insideR', '5H114insideR', '5H87alloutR' if ftr[team_id]['CHIN'] > 12 else '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
+                elif opp[r][5] > 0.9: # always slap
+                    fp = '6H122alloutR1' if hd > 5 else '5H114alloutR1'
+
+            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash, add counter for hw
+            #5h114 clinch 2)if hisstuns=0then5h105allout
 
             if ftr[team_id]['FIGHTPLAN'] != fp:
                 write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
@@ -251,7 +255,7 @@ if __name__ == "__main__":
             while ((w := compute_weight(height, strength, agility, condition, build))[0] < max_weights[0] or 185 < w[0] < 200) and build < 3: build += 1
             write_msg("eko_create_fighter", f"competition=eko&region=0&team={find_name()}&height={height}&strength={strength}&ko_punch={ko_punch}&speed={speed}&agility={agility}&chin={chin}&condition={condition}&cut=1&build={build}")
             ftr_by_height[type_new][height] += 1
-
+    # set build limit for min and max height, set max height and add hws
 
     with open('data.json.tmp', 'w', encoding='utf-8') as f:
         json.dump(ftr_new, f, ensure_ascii=False, indent=4)
