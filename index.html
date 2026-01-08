@@ -57,7 +57,8 @@ fetch("data.json")
     .then(res => res.json())
     .then(data => {
         const fighters = Object.values(data);
-		const builds = array("very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy")
+		const builds = ["very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy"];
+
 
         // SORT BY HEIGHT (DESCENDING — change to a.HEIGHT - b.HEIGHT for ascending)
         fighters.sort((a, b) => b.HEIGHT - a.HEIGHT);
