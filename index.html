@@ -65,14 +65,14 @@ fetch("data.json")
 
         fighters.forEach(f => {
             const record = f.RECORD.join("-");
-            const division = f.DIVISION.join(" ");
+			const line2 = `${Math.floor(f.HEIGHT / 12)}'${f.HEIGHT % 12}" - ${f.DIVISION[0]}weight - ${f.WEIGHT[0]} lbs`;
 
             const card = document.createElement("div");
             card.className = "fighter";
 
             card.innerHTML = `
                 <div class="header">
-                    ${f.NAME} (${record}) ${f.RATING}(${f.STATUS}) ${division}
+                    ${f.NAME} (${record}) ${f.RATING}(${f.STATUS}) ${f.DIVISION[1]}<BR>${line2}
                 </div>
 
                 <div class="row">
