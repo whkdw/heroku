@@ -55,7 +55,7 @@ fetch("data.json")
 		const archtype_str = [ "alb", "zam", "agl", "bal" ];
 
         // SORT BY HEIGHT (DESCENDING — change to a.HEIGHT - b.HEIGHT for ascending)
-        fighters.sort((a, b) => b.HEIGHT - a.HEIGHT);
+        fighters.sort((a, b) => b.WEIGHT[0] - a.WEIGHT[0]);
 
         const container = document.getElementById("fighters");
 
@@ -66,7 +66,7 @@ fetch("data.json")
             card.innerHTML = `
                 <div class="header">
                     <b>${f.NAME}</b> (${f.RECORD.join("-")}) ${f.RATING}(${f.STATUS}) <b>${f.DIVISION[1]}</b><BR>
-					<font size='+1'>${Math.floor(f.HEIGHT / 12) + 5}'${((f.HEIGHT % 12) + 12) % 12}"</font> <i>${f.DIVISION[0]}weight</i><BR>
+					${Math.floor(f.HEIGHT / 12) + 5}'${((f.HEIGHT % 12) + 12) % 12}" <i>${f.DIVISION[0]}weight</i><BR>
 					${f.WEIGHT[0]}/${f.WEIGHT[1]} pounds (${build_str[f.BUILD + 3]} ${f.BUILD})
                 </div>
 

@@ -156,7 +156,7 @@ if __name__ == "__main__":
         if fgt:
             if not ftr[team_id].get('OPPONENT') or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
                 ftr[team_id]['OPPONENT'] = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ]
-                for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:max(2, ftr[team_id]['OPPONENT'][3] + 1)]:
+                for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:max(3, ftr[team_id]['OPPONENT'][3] + 1)]:
                     fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
                     ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 1
                     if len(ftr_intro) > 1:
@@ -168,10 +168,10 @@ if __name__ == "__main__":
                             s = next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in r[ftr_order]), None)
                             a = next((i for i, k in enumerate([ "to the body.<", "for the cut.<", "s head hunting.<", "." ]) if k in r[ftr_order]), None)
                             t, n = ((t := [int(x) for x in p[i]]) + [t[2] / (t[1] + 0.001)] if i < len(p) else [ 0 ] * 4), None
-                            if a == 2 and (s in (0, 7) or (s in (1, 5) and not t[0])) and (not t[1] or t[0] > 38 or t[1] > 5): n = 0 # flash
-                            elif a == 0 and s != 7 and (not t[1] or t[0] > 32 or t[1] > 4) and (not t[0] or t[3] < 2): n = 1 # weardown
-                            elif a == 3 and s != 7 and (not t[1] or t[0] > 32 or t[1] > 4) and (not t[0] or t[3] < 3.2):  n = 2 # balanced
-                            elif (a == 3 and s in (2, 4, 6, 8)) or (t[0] > 32 and t[3] >= 3.2): n = 3 # slap
+                            if a == 2 and (s in (0, 7) or (s in (1, 5) and not t[0])) and (not t[1] or t[0] > 34 or t[1] > 5): n = 0 # flash
+                            elif a == 0 and s != 7 and (not t[1] or t[0] > 29 or t[1] > 4) and (not t[0] or t[3] < 2): n = 1 # weardown
+                            elif a == 3 and s != 7 and (not t[1] or t[0] > 29 or t[1] > 4) and (not t[0] or t[3] < 3.2):  n = 2 # balanced
+                            elif (a == 3 and s in (2, 4, 6, 8)) or (t[0] > 29 and t[3] >= 3.2): n = 3 # slap
                             elif a == 2 and (not t[0] or t[1] > 4): n = 4 # defend
                             fgt_tacs[min(i, len(fgt_tacs) - 1)].append([ s, a, n ])
                 ftr[team_id]['OPPONENT'][4] = [ ([-1, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
         print(ftr[team_id])
 
-        if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2]: # in wrong div
+        if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2] and (ftr[team_id]['RATING'] != 18 or ftr[team_id]['DIVISION'][1] == "contenders"): # in wrong div
             write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
 
         tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
@@ -226,9 +226,11 @@ if __name__ == "__main__":
                 elif opp[r][5] > 0.9: # always slap
                     fp = f'6H122alloutR{f}' if hd > 5 else f'5H114alloutR{f}'
 
-            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash, add counter for hw
-            #5h114 clinch 2)if hisstuns=0then5h105allout
-            #5H87ringR15H87clinchR1 add r2 r3
+            if ftr[team_id]['NAME'] == "Val`andrea": fp = "417clinchR2"
+            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash, sort session fight history based on non flash fights to scout
+
+            # 5H87ringR15H87clinchR1 add r2 r3   add counter for hw
+            # add more def to the defensive fps so they dont get KOd rd1 if they are r2 or r3 plans
 
             if ftr[team_id]['FIGHTPLAN'] != fp:
                 write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
