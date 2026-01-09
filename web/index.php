@@ -12,8 +12,8 @@ function writeMsg($command = "", $etc = "", $script = "query.fcgi") {
 
     parse_str($etc, $params);
     $params = array_merge($params, array(
-        'username' => 'bannerlrd',
-        'password' => 'bannerlrd',
+        'username' => '',
+        'password' => '',
         'block_ad' => '1',
         'command' => $command,
     ));
@@ -43,8 +43,8 @@ function writeMsg($command = "", $etc = "", $script = "query.fcgi") {
 echo writeMsg("query_change", "");
 
 if (isset($_REQUEST["thread_id"]))
-    echo str_replace("https://webl.vivi.com/cgi-bin/", "?", writeMsg("", "", "Forum.fpl?operation=thread&topic_id=2&thread_id={$_REQUEST["thread_id"]}&username=bannerlrd&password=bannerlrd"));
+    echo str_replace("https://webl.vivi.com/cgi-bin/", "?", writeMsg("", "", "Forum.fpl?operation=thread&topic_id=2&thread_id={$_REQUEST["thread_id"]}&username=&password="));
 else
-    echo str_replace("https://webl.vivi.com/cgi-bin/", "?", writeMsg("", "", "Forum.fpl?operation=topic&topic_id=" . (isset($_REQUEST["topic_id"]) ? $_REQUEST["topic_id"] : "2") . "&username=bannerlrd&password=bannerlrd"));
+    echo str_replace("https://webl.vivi.com/cgi-bin/", "?", writeMsg("", "", "Forum.fpl?operation=topic&topic_id=" . (isset($_REQUEST["topic_id"]) ? $_REQUEST["topic_id"] : "2") . "&username=&password="));
 
 ?>
