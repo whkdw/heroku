@@ -225,11 +225,9 @@ if __name__ == "__main__":
                         else: rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'5H87alloutR{f}' if ftr[team_id]['CHIN'] > 12 else f'5H105insideR{f}', f'5H105ringR{f}' ])
                 elif opp[r][5] > 0.9: # always slap
                     fp = f'6H122alloutR{f}' if hd > 5 else f'5H114alloutR{f}'
-
-            if ftr[team_id]['NAME'] == "Val`andrea": fp = "417clinchR2"
-            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash, sort session fight history based on non flash fights to scout
-
-            # 5H87ringR15H87clinchR1 add r2 r3   add counter for hw
+            if ftr[team_id]['NAME'] == "Val`andrea": fp = "417clinchR3"
+            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash
+            # 5H87ringR15H87clinchR1 add r2 r3    change from 587 to 497    add counter for hw
             # add more def to the defensive fps so they dont get KOd rd1 if they are r2 or r3 plans
 
             if ftr[team_id]['FIGHTPLAN'] != fp:
