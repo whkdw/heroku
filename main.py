@@ -210,7 +210,7 @@ if __name__ == "__main__":
             else: fp = rng.choice([ '5H105alloutR', '4H97alloutR', '6H122alloutR', '5H114insideR', '5H105insideR', '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
 
             for r, f in ( (2, 3), (1, 2), (0, 1) ):
-                if r == 0 and ftr[team_id]['WEIGHT'][1] > 199 and hd > 5 and (opp[r][0] == 0 or (opp[r][0] == 1 and opp[r][3] > 0.9) or opp[r][0] == 7) and rng.random() < 0.8: fp = f'{'4H97' if hd > 8 else '5H105'}counterR{f}' # taller heavyweight
+                if r == 0 and ftr[team_id]['WEIGHT'][1] > 199 and hd > 5 and (opp[r][0] == 0 or (opp[r][0] == 1 and opp[r][3] > 0.9) or opp[r][0] == 7) and rng.random() < 0.8: fp = f'{"4H97" if hd > 8 else "5H105"}counterR{f}' # taller heavyweight
                 elif opp[r][0] == 7 and opp[r][1] <= 2: fp = f'4H97ringR{f}' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else f'4H97clinchR{f}' # allout def
                 elif opp[r][2] > 0.7 or (opp[r][0] == 7 and opp[r][1] <= 1): fp = rng.choice([ f'4H97ringR{f}', f'5H105ringR{f}', f'5H114ringR{f}' ] if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ f'4H97clinchR{f}', f'5H105clinchR{f}' ]) # anti flash
                 elif opp[r][3] > 0.8: # always body
