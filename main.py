@@ -193,7 +193,7 @@ if __name__ == "__main__":
             elif ftr[team_id]['AGILITY'] + int(tr[0] == 3) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] and ftr[team_id]['AGILITY'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] <= ftr[team_id]['SPEED'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 3
             elif ftr[team_id]['SPEED'] + int(tr[0] == 2) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 2
             else: tr[i] = 1 # KP insead of str
-        if ftr[team_id]['NAME'] == 'Ell`molly' and ftr[team_id]['TYPE'] == 3: tr = [ 1, 1, True ]
+        if ftr[team_id]['NAME'] in ('Ell`molly', 'Val`ichiro', 'Zol`lanai') and ftr[team_id]['TYPE'] == 3: tr = [ 1 if ftr[team_id]['CONDITIONING'] > 5 else 5, 1, True ]
         if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
             write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
