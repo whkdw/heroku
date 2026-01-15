@@ -117,7 +117,7 @@ if __name__ == "__main__":
     except: ftr = {}
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 4H97ringR1 5H105insideR1
-    sdasdda
+
     for word in write_msg("eko_retired_fighters").split("Activate</A>"):
             if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
                 for team_id in re.findall(r"team_id=([0-9]+)", word):
