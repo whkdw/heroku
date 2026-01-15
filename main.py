@@ -1,20 +1,16 @@
-import logging
-import logging.handlers
 import os
+import sys
+import time
+import math
 
 import requests
 import random
 import re
+import json
 import unicodedata
 
-import time
-import math
-import sys
-
-import json
-import datetime
-
 from typing import List, Dict, Tuple
+
 
 try:
     GYM_USERNAME = os.environ['GYM_USERNAME']
@@ -41,7 +37,7 @@ fighter_builds = [
     { "STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "HEIGHT":  9, "COUNT": 3 }, # albino
     { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "HEIGHT":  7, "COUNT": 1 }, # zam
     { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "HEIGHT": 12, "COUNT": 2 }, # agl
-    { "STRENGTH": 0.40, "SPEED": 0.29, "AGILITY": 0.31, "CHIN": 17, "HEIGHT": 13, "COUNT": 0 }, # bal
+    { "STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 17, "HEIGHT": 13, "COUNT": 0 }, # bal
 ]
 
 
@@ -89,7 +85,7 @@ def write_msg(command: str = "", etc: str = "", script: str = "query.fcgi"):
         except requests.RequestException as e:
             if attempt == 6:
                 print(f"[write_msg] FAILED after 7 attempts:  script={script}, command={command}, etc='{etc}'\n{e}", file=sys.stderr)
-    
+
     return ""
 
 
@@ -98,7 +94,7 @@ def find_name():
         response = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people", headers={"User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"}, timeout=10)
         response.raise_for_status()
         name = re.search(r"<title>\s*([\w]+)", unicodedata.normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
-        return f"{random.choice(['Byl', 'Ell', 'Fel', 'Kel', 'Kul'])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang', '', '', '', '', '', '', '', '', '' ] else ""
+        return f"{random.choice(['Byl', 'Ell', 'Fel', 'Kel', 'Kul'])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang', '' ] else ""
     except:
         return ""
 
@@ -121,7 +117,7 @@ if __name__ == "__main__":
     except: ftr = {}
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 4H97ringR1 5H105insideR1
-
+    sdasdda
     for word in write_msg("eko_retired_fighters").split("Activate</A>"):
             if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
                 for team_id in re.findall(r"team_id=([0-9]+)", word):
@@ -193,7 +189,7 @@ if __name__ == "__main__":
             elif ftr[team_id]['AGILITY'] + int(tr[0] == 3) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] and ftr[team_id]['AGILITY'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] <= ftr[team_id]['SPEED'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 3
             elif ftr[team_id]['SPEED'] + int(tr[0] == 2) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 2
             else: tr[i] = 1 # KP insead of str
-        if ftr[team_id]['NAME'] in ('Ell`molly', 'Val`ichiro', 'Zol`lanai') and ftr[team_id]['TYPE'] == 3: tr = [ 1 if ftr[team_id]['CONDITIONING'] > 5 else 5, 1, True ]
+        if ftr[team_id]['NAME'] in ('Ell`molly', 'Val`ichiro', 'Zol`lanai', 'Xel`sunu') and ftr[team_id]['TYPE'] == 3: tr = [ 1 if ftr[team_id]['CONDITIONING'] > 5 else 5, 1, True ]
         if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
             write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
