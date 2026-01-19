@@ -29,15 +29,14 @@ build_str = [ "very light", "light", "a little light", "normal", "a little heavy
 divis_str = [ "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam", "Feather", "Super-Feather", "Light", "Super-Light", "Welter", "Super-Welter", "Middle", "Super-Middle", "Light-Heavy", "Cruiser", "Heavy" ]
 style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside", "allout" ]
 cut_str = [ "low", "normal", "high" ]
-
 stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning" ]
 train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
 
 fighter_builds = [
-    { "STRENGTH": 0.45, "SPEED": 0.33, "AGILITY": 0.22, "CHIN": 19, "HEIGHT":  9, "COUNT": 3 }, # albino
+    { "STRENGTH": 0.46, "SPEED": 0.32, "AGILITY": 0.22, "CHIN": 19, "HEIGHT":  9, "COUNT": 3 }, # albino
     { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "HEIGHT":  7, "COUNT": 1 }, # zam
     { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "HEIGHT": 12, "COUNT": 2 }, # agl
-    { "STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 17, "HEIGHT": 13, "COUNT": 0 }, # bal
+#    { "STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 17, "HEIGHT": 13, "COUNT": 0 }, # bal
 ]
 
 
@@ -65,11 +64,11 @@ def write_msg(command: str = "", etc: str = "", script: str = "query.fcgi"):
     }
 
     cookies = {
+        "is_commish": "1",
         "timezone": "480",
         "username": GYM_USERNAME,
         "password": GYM_PASSWORD,
         "block_ad": "1",
-        "is_commish": "1",
         "vivi-date": time.strftime("%m/%d/%y %H:%M"),
     }
 
@@ -94,7 +93,7 @@ def find_name():
         response = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people", headers={"User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"}, timeout=10)
         response.raise_for_status()
         name = re.search(r"<title>\s*([\w]+)", unicodedata.normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
-        return f"{random.choice(['Byl', 'Ell', 'Fel', 'Kel', 'Kul'])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang', '' ] else ""
+        return f"{random.choice([ 'Byl', 'Ell', 'Fel', 'Kel', 'Kul' ])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang', '' ] else ""
     except:
         return ""
 
@@ -152,7 +151,7 @@ if __name__ == "__main__":
         if fgt:
             if not ftr[team_id].get('OPPONENT') or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
                 ftr[team_id]['OPPONENT'] = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ]
-                for sess in re.findall(r"query_scout.*team_id=([0-9]+)&session=([0-9]+)", write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}"))[:max(3, ftr[team_id]['OPPONENT'][3] + 1)]:
+                for sess in sorted([ [ m.group(1), int(m.group(2)), 'round 1 (' in w, 'Managed by' in w ] for w in write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}").split("query_scout") if (m := re.search(r'team_id=([0-9]+)&session=([0-9]+)', w)) ], key=lambda x: (x[3], x[2], -x[1]))[ :max(3, ftr[team_id]['OPPONENT'][3] + 1) ]:
                     fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
                     ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 1
                     if len(ftr_intro) > 1:
@@ -169,13 +168,16 @@ if __name__ == "__main__":
                             elif a == 3 and s != 7 and (not t[1] or t[0] > 29 or t[1] > 4) and (not t[0] or t[3] < 3.2):  n = 2 # balanced
                             elif (a == 3 and s in (2, 4, 6, 8)) or (t[0] > 29 and t[3] >= 3.2): n = 3 # slap
                             elif a == 2 and (not t[0] or t[1] > 4): n = 4 # defend
-                            fgt_tacs[min(i, len(fgt_tacs) - 1)].append([ s, a, n ])
+                            fgt_tacs[min(i, len(fgt_tacs) - 1) if not sess[3] else len(fgt_tacs) - 1].append([ s, a, n ])
                 ftr[team_id]['OPPONENT'][4] = [ ([-1, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
         else: ftr[team_id]['OPPONENT'] = None
 
         ftr[team_id]['TYPE'] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]['STRENGTH'] - ftr[team_id]['STRENGTH']) + abs(baseaps * fighter_builds[i]['SPEED'] - ftr[team_id]['SPEED']) + abs(baseaps * fighter_builds[i]['AGILITY'] - ftr[team_id]['AGILITY'])))
 
         print(ftr[team_id])
+
+        if ftr[team_id]['NAME'] == 'Fel`george': ftr[team_id]['DIVISION'][2] = 'fly'
+        if ftr[team_id]['NAME'] == 'Ell`molly': ftr[team_id]['TYPE'] = 0
 
         if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2] and (ftr[team_id]['RATING'] != 18 or ftr[team_id]['DIVISION'][1] == "contenders"): # in wrong div
             write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
@@ -189,7 +191,6 @@ if __name__ == "__main__":
             elif ftr[team_id]['AGILITY'] + int(tr[0] == 3) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] and ftr[team_id]['AGILITY'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] <= ftr[team_id]['SPEED'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 3
             elif ftr[team_id]['SPEED'] + int(tr[0] == 2) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 2
             else: tr[i] = 1 # KP insead of str
-        if ftr[team_id]['NAME'] in ('Ell`molly', 'Val`ichiro', 'Zol`lanai', 'Xel`sunu') and ftr[team_id]['TYPE'] == 3: tr = [ 1 if ftr[team_id]['CONDITIONING'] > 5 else 5, 1, True ]
         if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
             write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
 
@@ -224,7 +225,7 @@ if __name__ == "__main__":
                 elif opp[r][5] > 0.9: # always slap
                     fp = f'6H122alloutR{f}' if hd > 5 else f'5H114alloutR{f}'
 
-            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash
+            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash, dont overwrite a slap round
 
             if ftr[team_id]['FIGHTPLAN'] != fp:
                 write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
