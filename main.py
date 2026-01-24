@@ -153,11 +153,9 @@ if __name__ == "__main__":
                 ftr[team_id]['OPPONENT'] = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ]
                 for sess in sorted([ [ m.group(1), int(m.group(2)), 'round 1 (' in w, 'Managed by' in w ] for w in write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}").split("query_scout") if (m := re.search(r'team_id=([0-9]+)&session=([0-9]+)', w)) ], key=lambda x: (x[3], x[2], -x[1]))[ :max(3, ftr[team_id]['OPPONENT'][3] + 1) ]:
                     fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
-                    ftr_intro, ftr_order = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text), 1
+                    ftr_intro = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text)
                     if len(ftr_intro) > 1:
-                        if ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip(): ftr_order = 0
-                        elif ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[1][2].strip(): ftr_order = 1
-                        elif ftr[team_id]['HEIGHT'] == (int(ftr_intro[0][0]) - 5) * 12 + int("0%s" % ftr_intro[0][1]): ftr_order = 0
+                        ftr_order = 0 if ftr[team_id]['OPPONENT'][2].strip() != ftr_intro[1][2].strip() and (ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip() or ftr[team_id]['HEIGHT'] == (int(ftr_intro[0][0]) - 5) * 12 + int(f"0{ftr_intro[0][1]}")) else 1
                         p = re.findall(r" landed \d+ [^\d]+(\d+)[^\d]+(\d+)[^\d]+(\d+)[^\d]+\d+ right", fght_text)[ftr_order :: 2]
                         for i, r in enumerate(re.findall(r"<[Bb][Rr]><[Hh][Rr]> +ROUND[^\n]+\n([^\n]+)\n([^\n]+)\n", fght_text)):
                             s = next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in r[ftr_order]), None)
@@ -185,7 +183,7 @@ if __name__ == "__main__":
         tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CONDITIONING'] > 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
         for i in range(2):
             baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY'] + int(tr[0] is not None and 1 <= tr[0] <= 3) # add ap if training str/apd/agl primarily
-            if not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS']): tr[i] = 1 # float KP if no chance to gain a ap
+            if not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
             elif ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
             elif ftr[team_id]['AGILITY'] + int(tr[0] == 3) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] and ftr[team_id]['AGILITY'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] <= ftr[team_id]['SPEED'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 3
