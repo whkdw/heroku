@@ -191,12 +191,13 @@ if __name__ == "__main__":
             else: tr[i] = 1 # KP insead of str
         if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
             write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
+            ftr[team_id]['TRAINING'] = [ tr[0], ftr[team_id]['TRAINING'][1] and tr[1], tr[2] ]
 
         if ftr[team_id]['OPPONENT']: # [ Most used style, Amount of unique styles, flash %, weardown %, balanced %, slap %, defend % ]
             rng, hd, opp = random.Random(int(team_id) + sum(ftr[team_id]['RECORD']) * ftr[team_id]['WEIGHT'][0]), ftr[team_id]['OPPONENT'][0] - ftr[team_id]['HEIGHT'], ftr[team_id]['OPPONENT'][4]
 
             if ftr[team_id]['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
-            elif ftr[team_id]['RATING'] > 25: fp = rng.choice([ '417clinchR', '5H114insideR', '5H105alloutR', '5H114alloutR', '4H97alloutR', '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
+            elif ftr[team_id]['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
             elif ftr[team_id]['WEIGHT'][1] < 200: # non hw
                 if hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr[team_id]['RECORD'][0] > 9 else 3)) # He is much taller
                 elif hd <= 2: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # Im slightly taller
