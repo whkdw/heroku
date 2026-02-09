@@ -174,9 +174,6 @@ if __name__ == "__main__":
 
         print(ftr[team_id])
 
-        if ftr[team_id]['NAME'] == 'Fel`george': ftr[team_id]['DIVISION'][2] = 'fly'
-        if ftr[team_id]['NAME'] == 'Ell`molly': ftr[team_id]['TYPE'] = 0
-
         if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2] and (ftr[team_id]['RATING'] != 18 or ftr[team_id]['DIVISION'][1] == "contenders"): # in wrong div
             write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
 
