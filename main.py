@@ -64,7 +64,6 @@ def write_msg(command: str = "", etc: str = "", script: str = "query.fcgi"):
     }
 
     cookies = {
-        "is_commish": "1",
         "timezone": "480",
         "username": GYM_USERNAME,
         "password": GYM_PASSWORD,
@@ -110,8 +109,8 @@ def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: i
 # ------------------------------
 
 if __name__ == "__main__":
-    
-    try: 
+
+    try:
         with open('data.json') as f: ftr = json.load(f)
     except: ftr = {}
 
@@ -229,9 +228,9 @@ if __name__ == "__main__":
 
         if ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 1) > 35:
             if ftr[team_id]['DIVISION'][1] == "contenders" or ftr[team_id]['STATUS'] > 18:
-                write_msg("eko_retire_byid", f"verify_retire=1&team_id={team_id}")
+                write_msg("eko_retire_byid", f"team_id={team_id}&verify_retire=1")
             else:
-                write_msg("eko_transfer", f"to_manager=77894&your_team={ftr[team_id]['NAME']}")
+                write_msg("eko_transfer", f"your_team={ftr[team_id]['NAME']}&to_manager=77894")
 
 
     ftr_new = {k: ftr[k] for k in team_ids if k in ftr}
@@ -241,7 +240,7 @@ if __name__ == "__main__":
 
     for type_new, height, value in ( (i, h, v) for i, d in enumerate(ftr_by_height) for h, v in d.items() ):
         while value and ftr_by_height[type_new][height] < fighter_builds[type_new]['COUNT']:
-            chin, condition, build = random.randint(12, 13), 6, random.randint(-2, 3)
+            chin, condition, build = random.randint(12, 13), 6, random.randint(-2 if height > -2 else 3, 3) 
             strength = round((63 - height - chin - condition + height // 6) * fighter_builds[type_new]['STRENGTH'])
             agility = round((63 - height - chin - condition + height // 6) * fighter_builds[type_new]['AGILITY'])
             ko_punch = strength // 3
