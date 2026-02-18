@@ -28,14 +28,14 @@ max_weights = [ 106, 109, 112, 115, 118, 122, 126, 130, 135, 141, 147, 153, 160,
 build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ]
 divis_str = [ "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam", "Feather", "Super-Feather", "Light", "Super-Light", "Welter", "Super-Welter", "Middle", "Super-Middle", "Light-Heavy", "Cruiser", "Heavy" ]
 style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside", "allout" ]
-cut_str = [ "low", "normal", "high" ]
 stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning" ]
 train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
 
 fighter_builds = [
     { "STRENGTH": 0.46, "SPEED": 0.32, "AGILITY": 0.22, "CHIN": 19, "HEIGHT":  9, "COUNT": 3 }, # albino
     { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "HEIGHT":  7, "COUNT": 1 }, # zam
-    { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "HEIGHT": 12, "COUNT": 2 }, # agl
+    { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "HEIGHT": 11, "COUNT": 4 }, # agl
+    { "STRENGTH": 0.42, "SPEED": 0.32, "AGILITY": 0.26, "CHIN": 18, "HEIGHT": 10, "COUNT": 2 }, # ghettoconcept
 #    { "STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 17, "HEIGHT": 13, "COUNT": 0 }, # bal
 ]
 
@@ -114,6 +114,7 @@ if __name__ == "__main__":
         with open('data.json') as f: ftr = json.load(f)
     except: ftr = {}
 
+
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 4H97ringR1 5H105insideR1
 
     for word in write_msg("eko_retired_fighters").split("Activate</A>"):
@@ -134,13 +135,13 @@ if __name__ == "__main__":
         ftr[team_id]['AGILITY'] = int(re.search(r'[\w]>[Aa]gility[^0-9]+(\d+)', text).group(1))
         ftr[team_id]['CHIN'] = int(re.search(r'[\w]>[Cc]hin[^0-9]+(\d+)', text).group(1))
         ftr[team_id]['CONDITIONING'] = int(re.search(r'[\w]>[Cc]onditioning[^0-9]+(\d+)', text).group(1))
-        ftr[team_id]['CUT'] = cut_str.index(re.search(r'[\w]>[Cc]ut [Rr]esista[^>]+>([HLNaghilmnorw]{1,6})', text).group(1).lower()) + 1
         ftr[team_id]['RATING'] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
         ftr[team_id]['STATUS'] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
+        ftr[team_id]['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
         ftr[team_id]['HEIGHT'] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
         ftr[team_id]['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
         ftr[team_id]['WEIGHT'] = compute_weight(ftr[team_id]['HEIGHT'], ftr[team_id]['STRENGTH'], ftr[team_id]['AGILITY'], ftr[team_id]['CONDITIONING'], ftr[team_id]['BUILD'])
-        ftr[team_id]['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
+        ftr[team_id]['RANK'] = int(m.group(1)) if (m := re.search(r'[\w]>[Rr]ank[^0-9]+(\d+)', text)) else 0
         ftr[team_id]['RECORD'] = [ int(i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) [0-9]+\/[0-9]+\)', text).groups() ]
         ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower() ] # find correct weight div
         ftr[team_id]['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
@@ -173,13 +174,14 @@ if __name__ == "__main__":
 
         print(ftr[team_id])
 
-        if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2] and (ftr[team_id]['RATING'] != 18 or ftr[team_id]['DIVISION'][1] == "contenders"): # in wrong div
+        if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2] and not 1 <= ftr[team_id]['RANK'] <= 2: # in wrong div
             write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
 
         tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or not 6 <= ftr[team_id]['CONDITIONING'] <= 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
         for i in range(2):
             baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY'] + int(tr[0] is not None and 1 <= tr[0] <= 3) # add ap if training str/apd/agl primarily
-            if not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
+            if not i and ftr[team_id]['WEIGHT'][0] < max_weights[ len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ] and ftr[team_id]['WEIGHT'][1] < max_weights[ len(max_weights) - 2 ]: tr[i], tr[2] = 1, True # underweight
+            elif not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
             elif ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
             elif ftr[team_id]['AGILITY'] + int(tr[0] == 3) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] and ftr[team_id]['AGILITY'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] <= ftr[team_id]['SPEED'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 3
@@ -235,20 +237,18 @@ if __name__ == "__main__":
 
     ftr_new = {k: ftr[k] for k in team_ids if k in ftr}
 
-    ftr_by_height = [ { h: 0 for h in range(-2, 21) } for _ in range(len(fighter_builds)) ]
-    for f in ftr_new: ftr_by_height[ftr_new[f]['TYPE']][ftr_new[f]['HEIGHT']] += 1
-
-    for type_new, height, value in ( (i, h, v) for i, d in enumerate(ftr_by_height) for h, v in d.items() ):
-        while value and ftr_by_height[type_new][height] < fighter_builds[type_new]['COUNT']:
-            chin, condition, build = random.randint(12, 13), 6, random.randint(-2 if height > -2 else 3, 3) 
-            strength = round((63 - height - chin - condition + height // 6) * fighter_builds[type_new]['STRENGTH'])
-            agility = round((63 - height - chin - condition + height // 6) * fighter_builds[type_new]['AGILITY'])
+    height_tot = {h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 21)} # add hws
+    for height, count in { h: sum(b["COUNT"] for b in fighter_builds if b["COUNT"] > 0 and h <= b["HEIGHT"]) for h in range(-2, 21) }.items():
+        while height_tot.get(height, 0) < count:
+            chin, condition, build, new_build = random.randint(13, 14), 6, random.randint(-2 if height > -2 else 3, 3), random.choice([ b for b in fighter_builds for _ in range(b["COUNT"]) if b["COUNT"] > 0 and height <= b["HEIGHT"] ])
+            strength = round((63 - height - chin - condition + height // 6) * new_build['STRENGTH'])
+            agility = round((63 - height - chin - condition + height // 6) * new_build['AGILITY'])
             ko_punch = strength // 3
             speed = 69 - height - strength - ko_punch - agility - chin - condition
             while ((w := compute_weight(height, strength, agility, condition, build))[0] < max_weights[0] or 185 < w[0] < 200) and build < 3: build += 1
             write_msg("eko_create_fighter", f"competition=eko&region=0&team={find_name()}&height={height}&strength={strength}&ko_punch={ko_punch}&speed={speed}&agility={agility}&chin={chin}&condition={condition}&cut=1&build={build}")
-            ftr_by_height[type_new][height] += 1
-    # set build limit for min and max height, set max height and add hws
+            height_tot[height] += 1
+
 
     with open('data.json.tmp', 'w', encoding='utf-8') as f:
         json.dump(ftr_new, f, ensure_ascii=False, indent=4)
