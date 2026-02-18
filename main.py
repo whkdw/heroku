@@ -180,7 +180,7 @@ if __name__ == "__main__":
         tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or not 6 <= ftr[team_id]['CONDITIONING'] <= 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
         for i in range(2):
             baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY'] + int(tr[0] is not None and 1 <= tr[0] <= 3) # add ap if training str/apd/agl primarily
-            if not i and ftr[team_id]['WEIGHT'][0] < max_weights[ len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ] and ftr[team_id]['WEIGHT'][1] < max_weights[ len(max_weights) - 2 ]: tr[i], tr[2] = 1, True # underweight
+            if not i and ftr[team_id]['WEIGHT'][0] < max_weights[ len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ] and ftr[team_id]['WEIGHT'][1] < max_weights[ len(max_weights) - 2 ] and ftr[team_id]['CONDITIONING'] > 5: tr[i], tr[2] = 1, True # underweight
             elif not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
             elif ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
