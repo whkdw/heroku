@@ -92,7 +92,7 @@ def find_name():
         response = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people", headers={"User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"}, timeout=10)
         response.raise_for_status()
         name = re.search(r"<title>\s*([\w]+)", unicodedata.normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
-        return f"{random.choice([ 'Byl', 'Ell', 'Fel', 'Kel', 'Kul' ])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang', '' ] else ""
+        return f"{random.choice([ 'Byl', 'Ell', 'Fel', 'Kel', 'Kul' ])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'ryan', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang' ] else ""
     except:
         return ""
 
@@ -147,14 +147,12 @@ if __name__ == "__main__":
         ftr[team_id]['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
         ftr[team_id]['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
-        fgt, fgt_tacs, baseaps = re.search(r' ([4-7]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text), [ [], [], [], [] ], ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']
-        if fgt:
+        if (fgt := re.search(r' ([4-7]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)):
             if not ftr[team_id].get('OPPONENT') or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
-                ftr[team_id]['OPPONENT'] = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ]
+                ftr[team_id]['OPPONENT'], fgt_tacs = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ], [ [], [], [], [] ]
                 for sess in sorted([ [ m.group(1), int(m.group(2)), 'round 1 (' in w, 'Managed by' in w ] for w in write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}").split("query_scout") if (m := re.search(r'team_id=([0-9]+)&session=([0-9]+)', w)) ], key=lambda x: (x[3], x[2], -x[1]))[ :max(3, ftr[team_id]['OPPONENT'][3] + 1) ]:
                     fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
-                    ftr_intro = re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text)
-                    if len(ftr_intro) > 1:
+                    if (ftr_intro := re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text)) and len(ftr_intro) > 1:
                         ftr_order = 0 if ftr[team_id]['OPPONENT'][2].strip() != ftr_intro[1][2].strip() and (ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip() or ftr[team_id]['HEIGHT'] == (int(ftr_intro[0][0]) - 5) * 12 + int(f"0{ftr_intro[0][1]}")) else 1
                         p = re.findall(r" landed \d+ [^\d]+(\d+)[^\d]+(\d+)[^\d]+(\d+)[^\d]+\d+ right", fght_text)[ftr_order :: 2]
                         for i, r in enumerate(re.findall(r"<[Bb][Rr]><[Hh][Rr]> +ROUND[^\n]+\n([^\n]+)\n([^\n]+)\n", fght_text)):
@@ -170,6 +168,7 @@ if __name__ == "__main__":
                 ftr[team_id]['OPPONENT'][4] = [ ([-1, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
         else: ftr[team_id]['OPPONENT'] = None
 
+        baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']
         ftr[team_id]['TYPE'] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]['STRENGTH'] - ftr[team_id]['STRENGTH']) + abs(baseaps * fighter_builds[i]['SPEED'] - ftr[team_id]['SPEED']) + abs(baseaps * fighter_builds[i]['AGILITY'] - ftr[team_id]['AGILITY'])))
 
         print(ftr[team_id])
@@ -233,9 +232,9 @@ if __name__ == "__main__":
                 write_msg("eko_transfer", f"your_team={ftr[team_id]['NAME']}&to_manager=77894")
 
 
-    ftr_new = {k: ftr[k] for k in team_ids if k in ftr}
+    ftr_new = { k: ftr[k] for k in team_ids if k in ftr }
 
-    height_tot = {h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 20)}
+    height_tot = { h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 20) }
     for height, count in { h: sum(b["COUNT"] for b in fighter_builds if b["COUNT"] > 0 and h <= b["HEIGHT"] or h == 19) for h in range(-2, 20) }.items():
         while height_tot.get(height, 0) < count:
             chin, condition, build, new_build = random.randint(13, 14), 6, random.randint(-2 if height > -2 else 3, 3), random.choice([ b for b in fighter_builds for _ in range(b["COUNT"]) if b["COUNT"] > 0 and height <= b["HEIGHT"] or height == 19 ])
@@ -248,6 +247,6 @@ if __name__ == "__main__":
             height_tot[height] += 1
 
 
-    with open('data.json.tmp', 'w', encoding='utf-8') as f:
+    with open("data.json.tmp", "w", encoding="utf-8") as f:
         json.dump(ftr_new, f, ensure_ascii=False, indent=4)
-    os.replace('data.json.tmp', 'data.json')
+    os.replace("data.json.tmp", "data.json")
