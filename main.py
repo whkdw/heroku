@@ -222,8 +222,6 @@ if __name__ == "__main__":
                 elif opp[r][5] > 0.9: # always slap
                     fp = f'6H122alloutR{f}' if hd > 5 else f'5H114alloutR{f}'
 
-            # make everything height based, add check for rd2 rd3 or 3 if they are better targets for flash, dont overwrite a slap round
-
             if ftr[team_id]['FIGHTPLAN'] != fp:
                 write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
                 ftr[team_id]['FIGHTPLAN'] = fp
@@ -237,10 +235,10 @@ if __name__ == "__main__":
 
     ftr_new = {k: ftr[k] for k in team_ids if k in ftr}
 
-    height_tot = {h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 21)} # add hws
-    for height, count in { h: sum(b["COUNT"] for b in fighter_builds if b["COUNT"] > 0 and h <= b["HEIGHT"]) for h in range(-2, 21) }.items():
+    height_tot = {h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 20)}
+    for height, count in { h: sum(b["COUNT"] for b in fighter_builds if b["COUNT"] > 0 and h <= b["HEIGHT"] or h == 19) for h in range(-2, 20) }.items():
         while height_tot.get(height, 0) < count:
-            chin, condition, build, new_build = random.randint(13, 14), 6, random.randint(-2 if height > -2 else 3, 3), random.choice([ b for b in fighter_builds for _ in range(b["COUNT"]) if b["COUNT"] > 0 and height <= b["HEIGHT"] ])
+            chin, condition, build, new_build = random.randint(13, 14), 6, random.randint(-2 if height > -2 else 3, 3), random.choice([ b for b in fighter_builds for _ in range(b["COUNT"]) if b["COUNT"] > 0 and height <= b["HEIGHT"] or height == 19 ])
             strength = round((63 - height - chin - condition + height // 6) * new_build['STRENGTH'])
             agility = round((63 - height - chin - condition + height // 6) * new_build['AGILITY'])
             ko_punch = strength // 3
