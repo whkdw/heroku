@@ -31,7 +31,7 @@ style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside"
 stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning" ]
 train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
 
-fighter_builds = [
+archetypes = [
     { "STRENGTH": 0.46, "SPEED": 0.32, "AGILITY": 0.22, "CHIN": 19, "HEIGHT":  9, "COUNT": 3 }, # albino
     { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "HEIGHT":  7, "COUNT": 1 }, # zam
     { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "HEIGHT": 11, "COUNT": 4 }, # agl
@@ -141,9 +141,10 @@ if __name__ == "__main__":
         ftr[team_id]['HEIGHT'] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
         ftr[team_id]['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
         ftr[team_id]['WEIGHT'] = compute_weight(ftr[team_id]['HEIGHT'], ftr[team_id]['STRENGTH'], ftr[team_id]['AGILITY'], ftr[team_id]['CONDITIONING'], ftr[team_id]['BUILD'])
+        ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower() ] # find correct weight div
         ftr[team_id]['RANK'] = int(m.group(1)) if (m := re.search(r'[\w]>[Rr]ank[^0-9]+(\d+)', text)) else 0
         ftr[team_id]['RECORD'] = [ int(i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) [0-9]+\/[0-9]+\)', text).groups() ]
-        ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower() ] # find correct weight div
+        ftr[team_id]['TYPE'] = min(range(len(archetypes)), key=lambda i: (abs(archetypes[i]['SPEED'] / archetypes[i]['STRENGTH'] - ftr[team_id]['SPEED'] / ftr[team_id]['STRENGTH']) + abs(archetypes[i]['AGILITY'] / archetypes[i]['STRENGTH'] - ftr[team_id]['AGILITY'] / ftr[team_id]['STRENGTH'])))
         ftr[team_id]['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
         ftr[team_id]['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
@@ -164,27 +165,23 @@ if __name__ == "__main__":
                             elif a == 3 and s != 7 and (not t[1] or t[0] > 29 or t[1] > 4) and (not t[0] or t[3] < 3.2):  n = 2 # balanced
                             elif (a == 3 and s in (2, 4, 6, 8)) or (t[0] > 29 and t[3] >= 3.2): n = 3 # slap
                             elif a == 2 and (not t[0] or t[1] > 4): n = 4 # defend
-                            fgt_tacs[min(i, len(fgt_tacs) - 1) if not sess[3] else len(fgt_tacs) - 1].append([ s, a, n ])
+                            fgt_tacs[ min(i, len(fgt_tacs) - 1) if not sess[3] else len(fgt_tacs) - 1 ].append([ s, a, n ])
                 ftr[team_id]['OPPONENT'][4] = [ ([-1, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
         else: ftr[team_id]['OPPONENT'] = None
 
-        baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY']
-        ftr[team_id]['TYPE'] = min(range(len(fighter_builds)), key=lambda i: (abs(baseaps * fighter_builds[i]['STRENGTH'] - ftr[team_id]['STRENGTH']) + abs(baseaps * fighter_builds[i]['SPEED'] - ftr[team_id]['SPEED']) + abs(baseaps * fighter_builds[i]['AGILITY'] - ftr[team_id]['AGILITY'])))
-
-        print(ftr[team_id])
+        print(ftr[team_id]) # all data collected
 
         if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2] and not 1 <= ftr[team_id]['RANK'] <= 2: # in wrong div
             write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
 
         tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or not 6 <= ftr[team_id]['CONDITIONING'] <= 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
         for i in range(2):
-            baseaps = ftr[team_id]['STRENGTH'] + ftr[team_id]['SPEED'] + ftr[team_id]['AGILITY'] + int(tr[0] is not None and 1 <= tr[0] <= 3) # add ap if training str/apd/agl primarily
             if not i and ftr[team_id]['WEIGHT'][0] < max_weights[ len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ] and ftr[team_id]['WEIGHT'][1] < max_weights[ len(max_weights) - 2 ] and ftr[team_id]['RATING'] > 9 and ftr[team_id]['CONDITIONING'] > 5: tr[i], tr[2] = 1, True # underweight
             elif not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
-            elif ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (fighter_builds[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 3.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
-            elif ftr[team_id]['AGILITY'] + int(tr[0] == 3) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] and ftr[team_id]['AGILITY'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['AGILITY'] <= ftr[team_id]['SPEED'] - baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 3
-            elif ftr[team_id]['SPEED'] + int(tr[0] == 2) < baseaps * fighter_builds[ftr[team_id]['TYPE']]['SPEED']: tr[i] = 2
+            elif ftr[team_id]['CHIN'] + int(tr[0] == 4) < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 5.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
+            elif 0 < archetypes[ftr[team_id]['TYPE']]['AGILITY'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['AGILITY'] + int(tr[0] == 3)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1) > archetypes[ftr[team_id]['TYPE']]['SPEED'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['SPEED'] + int(tr[0] == 2)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1): tr[i] = 3
+            elif 0 < archetypes[ftr[team_id]['TYPE']]['SPEED'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['SPEED'] + int(tr[0] == 2)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1)): tr[i] = 2
             else: tr[i] = 1 # KP insead of str
         if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
             write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
@@ -235,9 +232,9 @@ if __name__ == "__main__":
     ftr_new = { k: ftr[k] for k in team_ids if k in ftr }
 
     height_tot = { h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 20) }
-    for height, count in { h: sum(b["COUNT"] for b in fighter_builds if b["COUNT"] > 0 and h <= b["HEIGHT"] or h == 19) for h in range(-2, 20) }.items():
+    for height, count in { h: sum(b["COUNT"] for b in archetypes if b["COUNT"] > 0 and h <= b["HEIGHT"] or h == 19) for h in range(-2, 20) }.items():
         while height_tot.get(height, 0) < count:
-            chin, condition, build, new_build = random.randint(13, 14), 6, random.randint(-2 if height > -2 else 3, 3), random.choice([ b for b in fighter_builds for _ in range(b["COUNT"]) if b["COUNT"] > 0 and height <= b["HEIGHT"] or height == 19 ])
+            chin, condition, build, new_build = random.randint(13, 14), 6, random.randint(-2 if height > -2 else 3, 3), random.choice([ b for b in archetypes for _ in range(b["COUNT"]) if b["COUNT"] > 0 and height <= b["HEIGHT"] or height == 19 ])
             strength = round((63 - height - chin - condition + height // 6) * new_build['STRENGTH'])
             agility = round((63 - height - chin - condition + height // 6) * new_build['AGILITY'])
             ko_punch = strength // 3
