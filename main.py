@@ -12,24 +12,21 @@ import unicodedata
 from typing import List, Dict, Tuple
 
 
-try:
-    GYM_USERNAME = os.environ['GYM_USERNAME']
-    GYM_PASSWORD = os.environ['GYM_PASSWORD']
-except KeyError:
-    GYM_USERNAME = ""
-    GYM_PASSWORD = ""
-
-
 # ------------------------------
 # Configuration / Constants
 # ------------------------------
 
+try:
+    GYM_USERNAME, GYM_PASSWORD = os.environ['GYM_USERNAME'], os.environ['GYM_PASSWORD']
+except KeyError:
+    GYM_USERNAME, GYM_PASSWORD = "", ""
+
 max_weights = [ 106, 109, 112, 115, 118, 122, 126, 130, 135, 141, 147, 153, 160, 167, 175, 200, 1000 ]
-build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ]
 divis_str = [ "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam", "Feather", "Super-Feather", "Light", "Super-Light", "Welter", "Super-Welter", "Middle", "Super-Middle", "Light-Heavy", "Cruiser", "Heavy" ]
-style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside", "allout" ]
+build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ]
 stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning" ]
 train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
+style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside", "allout" ]
 
 archetypes = [
     { "STRENGTH": 0.46, "SPEED": 0.32, "AGILITY": 0.22, "CHIN": 19, "HEIGHT":  9, "COUNT": 3 }, # albino
@@ -180,7 +177,7 @@ if __name__ == "__main__":
             elif not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
             elif ftr[team_id]['CHIN'] + int(tr[0] == 4) < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 5.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
-            else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0,  # KP insead of str
+            else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
                 2: archetypes[ftr[team_id]['TYPE']]['SPEED'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['SPEED'] + int(tr[0] == 2)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1)), 
                 3: archetypes[ftr[team_id]['TYPE']]['AGILITY'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['AGILITY'] + int(tr[0] == 3)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1))}[x])
         if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
