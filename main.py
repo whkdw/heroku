@@ -180,9 +180,9 @@ if __name__ == "__main__":
             elif not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
             elif ftr[team_id]['CHIN'] + int(tr[0] == 4) < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 5.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
-            elif 0 < archetypes[ftr[team_id]['TYPE']]['AGILITY'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['AGILITY'] + int(tr[0] == 3)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1) > archetypes[ftr[team_id]['TYPE']]['SPEED'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['SPEED'] + int(tr[0] == 2)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1): tr[i] = 3
-            elif 0 < archetypes[ftr[team_id]['TYPE']]['SPEED'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['SPEED'] + int(tr[0] == 2)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1)): tr[i] = 2
-            else: tr[i] = 1 # KP insead of str
+            else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0,  # KP insead of str
+                2: archetypes[ftr[team_id]['TYPE']]['SPEED'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['SPEED'] + int(tr[0] == 2)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1)), 
+                3: archetypes[ftr[team_id]['TYPE']]['AGILITY'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['AGILITY'] + int(tr[0] == 3)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1))}[x])
         if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
             write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
             ftr[team_id]['TRAINING'] = [ tr[0], ftr[team_id]['TRAINING'][1] and tr[1], tr[2] ]
