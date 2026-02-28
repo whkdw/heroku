@@ -22,7 +22,7 @@ except KeyError:
     GYM_USERNAME, GYM_PASSWORD = "", ""
 
 max_weights = [ 106, 109, 112, 115, 118, 122, 126, 130, 135, 141, 147, 153, 160, 167, 175, 200, 1000 ]
-divis_str = [ "Straw", "Junior-Fly", "Fly", "Super-Fly", "Bantam", "Super-Bantam", "Feather", "Super-Feather", "Light", "Super-Light", "Welter", "Super-Welter", "Middle", "Super-Middle", "Light-Heavy", "Cruiser", "Heavy" ]
+divis_str = [ "straw", "junior-fly", "fly", "super-fly", "bantam", "super-bantam", "feather", "super-feather", "light", "super-light", "welter", "super-welter", "middle", "super-middle", "light-heavy", "cruiser", "heavy" ]
 build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ]
 stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning" ]
 train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
@@ -138,7 +138,7 @@ if __name__ == "__main__":
         ftr[team_id]['HEIGHT'] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
         ftr[team_id]['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
         ftr[team_id]['WEIGHT'] = compute_weight(ftr[team_id]['HEIGHT'], ftr[team_id]['STRENGTH'], ftr[team_id]['AGILITY'], ftr[team_id]['CONDITIONING'], ftr[team_id]['BUILD'])
-        ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ divis_str[len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ].lower() ] # find correct weight div
+        ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ sum(i < ftr[team_id]['WEIGHT'][1] for i in max_weights) ] # find correct weight div
         ftr[team_id]['RANK'] = int(m.group(1)) if (m := re.search(r'[\w]>[Rr]ank[^0-9]+(\d+)', text)) else 0
         ftr[team_id]['RECORD'] = [ int(i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) [0-9]+\/[0-9]+\)', text).groups() ]
         ftr[team_id]['TYPE'] = min(range(len(archetypes)), key=lambda i: (abs(archetypes[i]['SPEED'] / archetypes[i]['STRENGTH'] - ftr[team_id]['SPEED'] / ftr[team_id]['STRENGTH']) + abs(archetypes[i]['AGILITY'] / archetypes[i]['STRENGTH'] - ftr[team_id]['AGILITY'] / ftr[team_id]['STRENGTH'])))
@@ -168,12 +168,12 @@ if __name__ == "__main__":
 
         print(ftr[team_id]) # all data collected
 
-        if ftr[team_id]['DIVISION'][0] != ftr[team_id]['DIVISION'][2] and not 1 <= ftr[team_id]['RANK'] <= 2: # in wrong div
-            write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={ftr[team_id]['DIVISION'][2]}weight")
+        if divis_str.index(ftr[team_id]['DIVISION'][0]) != ftr[team_id]['DIVISION'][2] and not 1 <= ftr[team_id]['RANK'] <= 2: # in wrong div
+            write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={divis_str[ftr[team_id]['DIVISION'][2]]}weight")
 
         tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or not 6 <= ftr[team_id]['CONDITIONING'] <= 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
         for i in range(2):
-            if not i and ftr[team_id]['WEIGHT'][0] < max_weights[ len([ True for i in max_weights if i < ftr[team_id]['WEIGHT'][1]]) ] and ftr[team_id]['WEIGHT'][1] < max_weights[ len(max_weights) - 2 ] and ftr[team_id]['RATING'] > 9 and ftr[team_id]['CONDITIONING'] > 5: tr[i], tr[2] = 1, True # underweight
+            if not i and max_weights[ ftr[team_id]['DIVISION'][2] ] - 10 < ftr[team_id]['WEIGHT'][0] < max_weights[ ftr[team_id]['DIVISION'][2] ] and ftr[team_id]['AGILITY'] > 10 and ftr[team_id]['CONDITIONING'] > 5: tr[i], tr[2] = 1, True # underweight
             elif not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
             elif ftr[team_id]['CHIN'] + int(tr[0] == 4) < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 5.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
