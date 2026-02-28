@@ -108,8 +108,8 @@ def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: i
 if __name__ == "__main__":
 
     try:
-        with open('data.json') as f: ftr = json.load(f)
-    except: ftr = {}
+        with open('data.json') as f: ftrs = json.load(f)
+    except: ftrs = {}
 
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 4H97ringR1 5H105insideR1
@@ -122,36 +122,35 @@ if __name__ == "__main__":
 
     team_ids = sorted(set(re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief"))), key=int)
     for team_id in team_ids:
-        if team_id not in ftr: ftr[team_id] = {}
-        text = write_msg("eko_control_fighter", "team_id=" + team_id)
+        ftr, text = ftrs.setdefault(team_id, {}), write_msg("eko_control_fighter", "team_id=" + team_id)
 
-        ftr[team_id]['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
-        ftr[team_id]['STRENGTH'] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
-        ftr[team_id]['KP'] = int(re.search(r'[\w]>[Kk]nockout[^0-9]+(\d+)', text).group(1))
-        ftr[team_id]['SPEED'] = int(re.search(r'[\w]>[Ss]peed[^0-9]+(\d+)', text).group(1))
-        ftr[team_id]['AGILITY'] = int(re.search(r'[\w]>[Aa]gility[^0-9]+(\d+)', text).group(1))
-        ftr[team_id]['CHIN'] = int(re.search(r'[\w]>[Cc]hin[^0-9]+(\d+)', text).group(1))
-        ftr[team_id]['CONDITIONING'] = int(re.search(r'[\w]>[Cc]onditioning[^0-9]+(\d+)', text).group(1))
-        ftr[team_id]['RATING'] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
-        ftr[team_id]['STATUS'] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
-        ftr[team_id]['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
-        ftr[team_id]['HEIGHT'] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
-        ftr[team_id]['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
-        ftr[team_id]['WEIGHT'] = compute_weight(ftr[team_id]['HEIGHT'], ftr[team_id]['STRENGTH'], ftr[team_id]['AGILITY'], ftr[team_id]['CONDITIONING'], ftr[team_id]['BUILD'])
-        ftr[team_id]['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ sum(i < ftr[team_id]['WEIGHT'][1] for i in max_weights) ] # find correct weight div
-        ftr[team_id]['RANK'] = int(m.group(1)) if (m := re.search(r'[\w]>[Rr]ank[^0-9]+(\d+)', text)) else 0
-        ftr[team_id]['RECORD'] = [ int(i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) [0-9]+\/[0-9]+\)', text).groups() ]
-        ftr[team_id]['TYPE'] = min(range(len(archetypes)), key=lambda i: (abs(archetypes[i]['SPEED'] / archetypes[i]['STRENGTH'] - ftr[team_id]['SPEED'] / ftr[team_id]['STRENGTH']) + abs(archetypes[i]['AGILITY'] / archetypes[i]['STRENGTH'] - ftr[team_id]['AGILITY'] / ftr[team_id]['STRENGTH'])))
-        ftr[team_id]['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
-        ftr[team_id]['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
+        ftr['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
+        ftr['STRENGTH'] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
+        ftr['KP'] = int(re.search(r'[\w]>[Kk]nockout[^0-9]+(\d+)', text).group(1))
+        ftr['SPEED'] = int(re.search(r'[\w]>[Ss]peed[^0-9]+(\d+)', text).group(1))
+        ftr['AGILITY'] = int(re.search(r'[\w]>[Aa]gility[^0-9]+(\d+)', text).group(1))
+        ftr['CHIN'] = int(re.search(r'[\w]>[Cc]hin[^0-9]+(\d+)', text).group(1))
+        ftr['CONDITIONING'] = int(re.search(r'[\w]>[Cc]onditioning[^0-9]+(\d+)', text).group(1))
+        ftr['RATING'] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
+        ftr['STATUS'] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
+        ftr['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
+        ftr['HEIGHT'] = (int(m.group(1)) - 5) * 12 + int("0%s" % m.group(2)) if (m := re.search(r'[\w]>[Hh]eight[^>]+>([4-7]) feet ?([0-9]{0,2})', text)) else 0
+        ftr['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
+        ftr['WEIGHT'] = compute_weight(ftr['HEIGHT'], ftr['STRENGTH'], ftr['AGILITY'], ftr['CONDITIONING'], ftr['BUILD'])
+        ftr['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ sum(i < ftr['WEIGHT'][1] for i in max_weights) ] # find correct weight div
+        ftr['RANK'] = int(m.group(1)) if (m := re.search(r'[\w]>[Rr]ank[^0-9]+(\d+)', text)) else 0
+        ftr['RECORD'] = [ int(i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) [0-9]+\/[0-9]+\)', text).groups() ]
+        ftr['TYPE'] = min(range(len(archetypes)), key=lambda i: (abs(archetypes[i]['SPEED'] / archetypes[i]['STRENGTH'] - ftr['SPEED'] / ftr['STRENGTH']) + abs(archetypes[i]['AGILITY'] / archetypes[i]['STRENGTH'] - ftr['AGILITY'] / ftr['STRENGTH'])))
+        ftr['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
+        ftr['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
         if (fgt := re.search(r' ([4-7]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)):
-            if not ftr[team_id].get('OPPONENT') or int(fgt.group(3)) != ftr[team_id]['OPPONENT'][1]:
-                ftr[team_id]['OPPONENT'], fgt_tacs = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ], [ [], [], [], [] ]
-                for sess in sorted([ [ m.group(1), int(m.group(2)), 'round 1 (' in w, 'Managed by' in w ] for w in write_msg("eko_career_nodesc", f"team_id={ftr[team_id]['OPPONENT'][1]}").split("query_scout") if (m := re.search(r'team_id=([0-9]+)&session=([0-9]+)', w)) ], key=lambda x: (x[3], x[2], -x[1]))[ :max(3, ftr[team_id]['OPPONENT'][3] + 1) ]:
+            if not ftr.get('OPPONENT') or int(fgt.group(3)) != ftr['OPPONENT'][1]:
+                ftr['OPPONENT'], fgt_tacs = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ], [ [], [], [], [] ]
+                for sess in sorted([ [ m.group(1), int(m.group(2)), 'round 1 (' in w, 'Managed by' in w ] for w in write_msg("eko_career_nodesc", f"team_id={ftr['OPPONENT'][1]}").split("query_scout") if (m := re.search(r'team_id=([0-9]+)&session=([0-9]+)', w)) ], key=lambda x: (x[3], x[2], -x[1]))[ :max(3, ftr['OPPONENT'][3] + 1) ]:
                     fght_text = write_msg("query_scout", f"team_id={sess[0]}&session={sess[1]}")
                     if (ftr_intro := re.findall(r"<[Pp]>In this corner, standing ([4-7]) feet *[and ]*([0-9]{0,2}).*in at \d+ pound.* win.* loss.* is(?: <font color=green><B>| )(.+)!!", fght_text)) and len(ftr_intro) > 1:
-                        ftr_order = 0 if ftr[team_id]['OPPONENT'][2].strip() != ftr_intro[1][2].strip() and (ftr[team_id]['OPPONENT'][2].strip() == ftr_intro[0][2].strip() or ftr[team_id]['HEIGHT'] == (int(ftr_intro[0][0]) - 5) * 12 + int(f"0{ftr_intro[0][1]}")) else 1
+                        ftr_order = 0 if ftr['OPPONENT'][2].strip() != ftr_intro[1][2].strip() and (ftr['OPPONENT'][2].strip() == ftr_intro[0][2].strip() or ftr['HEIGHT'] == (int(ftr_intro[0][0]) - 5) * 12 + int(f"0{ftr_intro[0][1]}")) else 1
                         p = re.findall(r" landed \d+ [^\d]+(\d+)[^\d]+(\d+)[^\d]+(\d+)[^\d]+\d+ right", fght_text)[ftr_order :: 2]
                         for i, r in enumerate(re.findall(r"<[Bb][Rr]><[Hh][Rr]> +ROUND[^\n]+\n([^\n]+)\n([^\n]+)\n", fght_text)):
                             s = next((i for i, k in enumerate([ "(inside)", "(clinching)", "(feinting)", "(counter-punching)", "(using the ring)", "(ropes)", "(outside)", "(all out)", "." ]) if k in r[ftr_order]), None)
@@ -163,70 +162,70 @@ if __name__ == "__main__":
                             elif (a == 3 and s in (2, 4, 6, 8)) or (t[0] > 29 and t[3] >= 3.2): n = 3 # slap
                             elif a == 2 and (not t[0] or t[1] > 4): n = 4 # defend
                             fgt_tacs[ min(i, len(fgt_tacs) - 1) if not sess[3] else len(fgt_tacs) - 1 ].append([ s, a, n ])
-                ftr[team_id]['OPPONENT'][4] = [ ([-1, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
-        else: ftr[team_id]['OPPONENT'] = None
+                ftr['OPPONENT'][4] = [ ([-1, 0, 0, 0, 0, 0, 0]) if not t else (lambda xs, s: [max(xs, key=lambda x: (xs.count(x), xs[::-1].index(x))), len(set(xs))] + [round(s.count(i)/(len(s)+0.0001), 2) for i in range(5)])([row[0] for row in t], [row[2] for row in t]) for t in fgt_tacs ]
+        else: ftr['OPPONENT'] = None
 
-        print(ftr[team_id]) # all data collected
+        print(ftr) # all data collected
 
-        if divis_str.index(ftr[team_id]['DIVISION'][0]) != ftr[team_id]['DIVISION'][2] and not 1 <= ftr[team_id]['RANK'] <= 2: # in wrong div
-            write_msg("eko_change_division", f"your_team={ftr[team_id]['NAME']}&division={divis_str[ftr[team_id]['DIVISION'][2]]}weight")
+        if divis_str.index(ftr['DIVISION'][0]) != ftr['DIVISION'][2] and not 1 <= ftr['RANK'] <= 2: # in wrong div
+            write_msg("eko_change_division", f"your_team={ftr['NAME']}&division={divis_str[ftr['DIVISION'][2]]}weight")
 
-        tr = [ None, None, (ftr[team_id]['CHIN'] < 11 + ftr[team_id]['STATUS'] // 5 or not 6 <= ftr[team_id]['CONDITIONING'] <= 11 or ftr[team_id]['STATUS'] - ftr[team_id]['RATING'] > 2) ]
+        tr = [ None, None, (ftr['CHIN'] < 11 + ftr['STATUS'] // 5 or not 6 <= ftr['CONDITIONING'] <= 11 or ftr['STATUS'] - ftr['RATING'] > 2) ]
         for i in range(2):
-            if not i and max_weights[ ftr[team_id]['DIVISION'][2] ] - 10 < ftr[team_id]['WEIGHT'][0] < max_weights[ ftr[team_id]['DIVISION'][2] ] and ftr[team_id]['AGILITY'] > 10 and ftr[team_id]['CONDITIONING'] > 5: tr[i], tr[2] = 1, True # underweight
-            elif not i and not tr[2] and (ftr[team_id]['RATING'] == 18 or ftr[team_id]['RATING'] == 28 or ftr[team_id]['RATING'] < ftr[team_id]['STATUS'] or ftr[team_id]['KP'] < ftr[team_id]['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
-            elif ftr[team_id]['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
-            elif ftr[team_id]['CHIN'] + int(tr[0] == 4) < 11 + ftr[team_id]['STATUS'] // 5 or ftr[team_id]['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr[team_id]['TYPE']]['CHIN'] - 10.0 - ftr[team_id]['HEIGHT'] // 5.5) * ftr[team_id]['STATUS'] / 28.0: tr[i] = 4
+            if ftr['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
+            elif not i and max_weights[ ftr['DIVISION'][2] ] - 10 < ftr['WEIGHT'][0] < max_weights[ ftr['DIVISION'][2] ] and ftr['AGILITY'] > 10: tr[i], tr[2] = 1, True # underweight
+            elif not i and not tr[2] and (ftr['RATING'] == 18 or ftr['RATING'] == 28 or ftr['RATING'] < ftr['STATUS'] or ftr['KP'] < ftr['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
+            elif ftr['CHIN'] + int(tr[0] == 4) < 11 + ftr['STATUS'] // 5 or ftr['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr['TYPE']]['CHIN'] - 10.0 - ftr['HEIGHT'] // 5.5) * ftr['STATUS'] / 28.0: tr[i] = 4
             else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
-                2: archetypes[ftr[team_id]['TYPE']]['SPEED'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['SPEED'] + int(tr[0] == 2)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1)), 
-                3: archetypes[ftr[team_id]['TYPE']]['AGILITY'] / archetypes[ftr[team_id]['TYPE']]['STRENGTH'] - (ftr[team_id]['AGILITY'] + int(tr[0] == 3)) / (ftr[team_id]['STRENGTH'] + int(tr[0] == 1))}[x])
-        if ftr[team_id]['TRAINING'][0] != tr[0] or (ftr[team_id]['TRAINING'][1] and ftr[team_id]['TRAINING'][1] != tr[1]) or ftr[team_id]['TRAINING'][2] != tr[2]:
-            write_msg("eko_training", f"your_team={ftr[team_id]['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
-            ftr[team_id]['TRAINING'] = [ tr[0], ftr[team_id]['TRAINING'][1] and tr[1], tr[2] ]
+                2: archetypes[ftr['TYPE']]['SPEED'] / archetypes[ftr['TYPE']]['STRENGTH'] - (ftr['SPEED'] + int(tr[0] == 2)) / (ftr['STRENGTH'] + int(tr[0] == 1)), 
+                3: archetypes[ftr['TYPE']]['AGILITY'] / archetypes[ftr['TYPE']]['STRENGTH'] - (ftr['AGILITY'] + int(tr[0] == 3)) / (ftr['STRENGTH'] + int(tr[0] == 1))}[x])
+        if ftr['TRAINING'][0] != tr[0] or (ftr['TRAINING'][1] and ftr['TRAINING'][1] != tr[1]) or ftr['TRAINING'][2] != tr[2]:
+            write_msg("eko_training", f"your_team={ftr['NAME']}&train={train_str[tr[0]]}&train2={train_str[tr[1]]}&intensive={int(tr[2])}")
+            ftr['TRAINING'] = [ tr[0], ftr['TRAINING'][1] and tr[1], tr[2] ]
 
-        if ftr[team_id]['OPPONENT']: # [ Most used style, Amount of unique styles, flash %, weardown %, balanced %, slap %, defend % ]
-            rng, hd, opp = random.Random(int(team_id) + sum(ftr[team_id]['RECORD']) * ftr[team_id]['WEIGHT'][0]), ftr[team_id]['OPPONENT'][0] - ftr[team_id]['HEIGHT'], ftr[team_id]['OPPONENT'][4]
+        if ftr['OPPONENT']: # [ Most used style, Amount of unique styles, flash %, weardown %, balanced %, slap %, defend % ]
+            rng, hd, opp = random.Random(int(team_id) + sum(ftr['RECORD']) * ftr['WEIGHT'][0]), ftr['OPPONENT'][0] - ftr['HEIGHT'], ftr['OPPONENT'][4]
 
-            if ftr[team_id]['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
-            elif ftr[team_id]['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
-            elif ftr[team_id]['WEIGHT'][1] < 200: # non hw
-                if hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr[team_id]['RECORD'][0] > 9 else 3)) # He is much taller
+            if ftr['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
+            elif ftr['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
+            elif ftr['WEIGHT'][1] < 200: # non hw
+                if hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr['RECORD'][0] > 9 else 3)) # He is much taller
                 elif hd <= 2: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # Im slightly taller
                 elif hd <= 0: fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
-                else: fp = rng.choice([ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '4H97alloutR', '6H122alloutR' ][ :6 if ftr[team_id]['CHIN'] < 15 else 7 ]) + rng.choice([ '1', '2', '3' ])
+                else: fp = rng.choice([ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '4H97alloutR', '6H122alloutR' ][ :6 if ftr['CHIN'] < 15 else 7 ]) + rng.choice([ '1', '2', '3' ])
             else: fp = rng.choice([ '5H105alloutR', '4H97alloutR', '6H122alloutR', '5H114insideR', '5H105insideR', '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
 
             for r, f in ( (2, 3), (1, 2), (0, 1) ):
-                if r == 0 and ftr[team_id]['WEIGHT'][1] > 199 and hd > 5 and (opp[r][0] == 0 or (opp[r][0] == 1 and opp[r][3] > 0.9) or opp[r][0] == 7) and rng.random() < 0.8: fp = f'{"4H97" if hd > 8 else "5H105"}counterR{f}' # taller heavyweight
-                elif opp[r][0] == 7 and opp[r][1] <= 2: fp = f'4H97ringR{f}' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else f'4H97clinchR{f}' # allout def
-                elif opp[r][2] > 0.7 or (opp[r][0] == 7 and opp[r][1] <= 1): fp = rng.choice([ f'4H97ringR{f}', f'5H105ringR{f}', f'5H114ringR{f}' ] if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else [ f'4H97clinchR{f}', f'5H105clinchR{f}' ]) # anti flash
+                if r == 0 and ftr['WEIGHT'][1] > 199 and hd > 5 and (opp[r][0] == 0 or (opp[r][0] == 1 and opp[r][3] > 0.9) or opp[r][0] == 7) and rng.random() < 0.8: fp = f'{"4H97" if hd > 8 else "5H105"}counterR{f}' # taller heavyweight
+                elif opp[r][0] == 7 and opp[r][1] <= 2: fp = f'4H97ringR{f}' if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else f'4H97clinchR{f}' # allout def
+                elif opp[r][2] > 0.7 or (opp[r][0] == 7 and opp[r][1] <= 1): fp = rng.choice([ f'4H97ringR{f}', f'5H105ringR{f}', f'5H114ringR{f}' ] if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else [ f'4H97clinchR{f}', f'5H105clinchR{f}' ]) # anti flash
                 elif opp[r][3] > 0.8: # always body
-                    if opp[r][0] == 0: fp = f'5H114ringR{f}' if hd <= 0 or ftr[team_id]['AGILITY'] >= ftr[team_id]['SPEED'] else f'5H114clinchR{f}'  # usually inside
+                    if opp[r][0] == 0: fp = f'5H114ringR{f}' if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else f'5H114clinchR{f}'  # usually inside
                     elif opp[r][0] == 4: fp = rng.choice([ f'5H114alloutR{f}', f'5H105alloutR{f}', f'5H114insideR2' ] if hd > 3 else [ f'4H97alloutR{f}', f'5H114insideR{f}', f'5H114insideR2', f'5H105insideR{f}' ]) # usually ring
-                    elif hd > 9 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ f'6H122alloutR{f}', f'5H105alloutR{f}' ])
-                    elif hd > 5 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ])
-                    elif hd > 2 and ftr[team_id]['WEIGHT'][1] < 200: fp = rng.choice([ f'5H114insideR{f}', f'5H105insideR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ][ :3 if ftr[team_id]['CHIN'] > 15 else 4 ])
-                    else: fp = rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr[team_id]['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
+                    elif hd > 9 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'6H122alloutR{f}', f'5H105alloutR{f}' ])
+                    elif hd > 5 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ])
+                    elif hd > 2 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'5H114insideR{f}', f'5H105insideR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ][ :3 if ftr['CHIN'] > 15 else 4 ])
+                    else: fp = rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
                 elif opp[r][4] > 0.9: # always balanced tactics
                         if hd > 9: fp = rng.choice([ f'6H122alloutR{f}', f'5H114alloutR{f}' ])
                         elif hd > 5: fp = rng.choice([ f'6H122alloutR{f}', f'5H114alloutR{f}' ] if opp[r][0] in (4, 6) else [ f'4H97alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}' ])
                         elif hd > 2: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}' ] if opp[r][0] in (4, 6) else [ f'4H97alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}', f'5H114ringR{f}' ])
-                        else: rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr[team_id]['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
+                        else: rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
                 elif opp[r][5] > 0.9: # always slap
                     fp = f'6H122alloutR{f}' if hd > 5 else f'5H114alloutR{f}'
 
-            if ftr[team_id]['FIGHTPLAN'] != fp:
-                write_msg("eko_select_orders", f"your_team={ftr[team_id]['NAME']}&strategy_choice={fp}")
-                ftr[team_id]['FIGHTPLAN'] = fp
+            if ftr['FIGHTPLAN'] != fp:
+                write_msg("eko_select_orders", f"your_team={ftr['NAME']}&strategy_choice={fp}")
+                ftr['FIGHTPLAN'] = fp
 
-        if ftr[team_id]['IPS'] / (ftr[team_id]['STATUS'] + 1) > 35:
-            if ftr[team_id]['DIVISION'][1] == "contenders" or ftr[team_id]['STATUS'] > 18:
+        if ftr['IPS'] / (ftr['STATUS'] + 1) > 35:
+            if ftr['DIVISION'][1] == "contenders" or ftr['STATUS'] > 18:
                 write_msg("eko_retire_byid", f"team_id={team_id}&verify_retire=1")
             else:
-                write_msg("eko_transfer", f"your_team={ftr[team_id]['NAME']}&to_manager=77894")
+                write_msg("eko_transfer", f"your_team={ftr['NAME']}&to_manager=77894")
 
 
-    ftr_new = { k: ftr[k] for k in team_ids if k in ftr }
+    ftr_new = { k: ftrs[k] for k in team_ids if k in ftrs }
 
     height_tot = { h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 20) }
     for height, count in { h: sum(b["COUNT"] for b in archetypes if b["COUNT"] > 0 and h <= b["HEIGHT"] or h == 19) for h in range(-2, 20) }.items():
