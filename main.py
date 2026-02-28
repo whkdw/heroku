@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
     team_ids = sorted(set(re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief"))), key=int)
     for team_id in team_ids:
-        ftr, text = ftrs.setdefault(team_id, {}), write_msg("eko_control_fighter", "team_id=" + team_id)
+        ftr, text = ftrs.setdefault(team_id, {}), write_msg("eko_control_fighter", f"team_id={team_id}")
 
         ftr['NAME'] = re.search(r'[\w]>(.*) fights in the <[\w]', text).group(1)
         ftr['STRENGTH'] = int(re.search(r'[\w]>[Ss]trength[^0-9]+(\d+)', text).group(1))
@@ -210,7 +210,7 @@ if __name__ == "__main__":
                         if hd > 9: fp = rng.choice([ f'6H122alloutR{f}', f'5H114alloutR{f}' ])
                         elif hd > 5: fp = rng.choice([ f'6H122alloutR{f}', f'5H114alloutR{f}' ] if opp[r][0] in (4, 6) else [ f'4H97alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}' ])
                         elif hd > 2: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}' ] if opp[r][0] in (4, 6) else [ f'4H97alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}', f'5H114ringR{f}' ])
-                        else: rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
+                        else: fp = rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
                 elif opp[r][5] > 0.9: # always slap
                     fp = f'6H122alloutR{f}' if hd > 5 else f'5H114alloutR{f}'
 
