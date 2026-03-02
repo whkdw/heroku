@@ -131,6 +131,7 @@ if __name__ == "__main__":
         ftr['AGILITY'] = int(re.search(r'[\w]>[Aa]gility[^0-9]+(\d+)', text).group(1))
         ftr['CHIN'] = int(re.search(r'[\w]>[Cc]hin[^0-9]+(\d+)', text).group(1))
         ftr['CONDITIONING'] = int(re.search(r'[\w]>[Cc]onditioning[^0-9]+(\d+)', text).group(1))
+        ftr['TYPE'] = min(range(len(archetypes)), key=lambda i: (abs(archetypes[i]['SPEED'] / archetypes[i]['STRENGTH'] - ftr['SPEED'] / ftr['STRENGTH']) + abs(archetypes[i]['AGILITY'] / archetypes[i]['STRENGTH'] - ftr['AGILITY'] / ftr['STRENGTH'])))
         ftr['RATING'] = int(re.search(r'>[Rr]ating[^0-9]+([0-9]+)', text).group(1))
         ftr['STATUS'] = int(re.search(r'>[Ss]tatus[^0-9]+([0-9]+)', text).group(1))
         ftr['IPS'] = int(re.search(r'>[Ii]njury [Pp]oints<[^0-9]+>(\d+)', text).group(1)) + int(re.search(r'[\w]>[Aa][Pp] [Ll]oss[^0-9]+>(-?\d+)', text).group(1)) * 500
@@ -138,9 +139,8 @@ if __name__ == "__main__":
         ftr['BUILD'] = build_str.index(re.search(r'[\w]>[Bb]uild[^>]+>([a-zA-Z ]+)', text).group(1).lower()) - 3
         ftr['WEIGHT'] = compute_weight(ftr['HEIGHT'], ftr['STRENGTH'], ftr['AGILITY'], ftr['CONDITIONING'], ftr['BUILD'])
         ftr['DIVISION'] = [ i.lower() for i in re.search(r'eko_standings[\w&=+]+division=([\w-]+)[\w&=+]+region=([^&]+)', text).groups() ] + [ sum(i < ftr['WEIGHT'][1] for i in max_weights) ] # find correct weight div
-        ftr['RANK'] = int(m.group(1)) if (m := re.search(r'[\w]>[Rr]ank[^0-9]+(\d+)', text)) else 0
         ftr['RECORD'] = [ int(i) for i in re.search(r'\(([0-9]+)-([0-9]+)-([0-9]+) [0-9]+\/[0-9]+\)', text).groups() ]
-        ftr['TYPE'] = min(range(len(archetypes)), key=lambda i: (abs(archetypes[i]['SPEED'] / archetypes[i]['STRENGTH'] - ftr['SPEED'] / ftr['STRENGTH']) + abs(archetypes[i]['AGILITY'] / archetypes[i]['STRENGTH'] - ftr['AGILITY'] / ftr['STRENGTH'])))
+        ftr['RANK'] = int(m.group(1)) if (m := re.search(r'[\w]>[Rr]ank[^0-9]+(\d+)', text)) else 0
         ftr['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
         ftr['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
@@ -225,9 +225,9 @@ if __name__ == "__main__":
                 write_msg("eko_transfer", f"your_team={ftr['NAME']}&to_manager=77894")
 
 
-    ftr_new = { k: ftrs[k] for k in team_ids if k in ftrs }
+    ftrs_new = { k: ftrs[k] for k in team_ids if k in ftrs }
 
-    height_tot = { h: sum(1 for f in ftr_new.values() if f['HEIGHT'] == h) for h in range(-2, 20) }
+    height_tot = { h: sum(1 for f in ftrs_new.values() if f['HEIGHT'] == h) for h in range(-2, 20) }
     for height, count in { h: sum(b["COUNT"] for b in archetypes if b["COUNT"] > 0 and h <= b["HEIGHT"] or h == 19) for h in range(-2, 20) }.items():
         while height_tot.get(height, 0) < count:
             chin, condition, build, new_build = random.randint(13, 14), 6, random.randint(-2 if height > -2 else 3, 3), random.choice([ b for b in archetypes for _ in range(b["COUNT"]) if b["COUNT"] > 0 and height <= b["HEIGHT"] or height == 19 ])
@@ -241,5 +241,5 @@ if __name__ == "__main__":
 
 
     with open("data.json.tmp", "w", encoding="utf-8") as f:
-        json.dump(ftr_new, f, ensure_ascii=False, indent=4)
+        json.dump(ftrs_new, f, ensure_ascii=False, indent=4)
     os.replace("data.json.tmp", "data.json")
