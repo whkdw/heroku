@@ -106,10 +106,8 @@ def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: i
 # ------------------------------
 
 if __name__ == "__main__":
-
-    try:
-        with open('data.json') as f: ftrs = json.load(f)
-    except: ftrs = {}
+    try: ftrs = json.load(open('data.json'))
+    except Exception: ftrs = {}
 
 
     #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 4H97ringR1 5H105insideR1
@@ -168,7 +166,7 @@ if __name__ == "__main__":
         print(ftr) # all data collected
 
         if divis_str.index(ftr['DIVISION'][0]) != ftr['DIVISION'][2] and not 1 <= ftr['RANK'] <= 2: # in wrong div
-            write_msg("eko_change_division", f"your_team={ftr['NAME']}&division={divis_str[ftr['DIVISION'][2]]}weight")
+            write_msg("eko_change_division", f"your_team={ftr['NAME']}&division={divis_str[ ftr['DIVISION'][2] ].title()}weight")
 
         tr = [ None, None, (ftr['CHIN'] < 11 + ftr['STATUS'] // 5 or not 6 <= ftr['CONDITIONING'] <= 11 or ftr['STATUS'] - ftr['RATING'] > 2) ]
         for i in range(2):
