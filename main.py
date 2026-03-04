@@ -1,15 +1,12 @@
 import os
 import sys
 import time
-import math
-
-import requests
 import random
+import requests
 import re
 import json
-import unicodedata
 
-from typing import List, Dict, Tuple
+from unicodedata import normalize
 
 
 # ------------------------------
@@ -32,7 +29,7 @@ archetypes = [
     { "STRENGTH": 0.46, "SPEED": 0.32, "AGILITY": 0.22, "CHIN": 19, "HEIGHT":  9, "COUNT": 3 }, # albino
     { "STRENGTH": 0.55, "SPEED": 0.30, "AGILITY": 0.15, "CHIN": 22, "HEIGHT":  7, "COUNT": 1 }, # zam
     { "STRENGTH": 0.46, "SPEED": 0.25, "AGILITY": 0.29, "CHIN": 18, "HEIGHT": 11, "COUNT": 4 }, # agl
-    { "STRENGTH": 0.42, "SPEED": 0.32, "AGILITY": 0.26, "CHIN": 18, "HEIGHT": 10, "COUNT": 2 }, # ghettoconcept
+    { "STRENGTH": 0.42, "SPEED": 0.32, "AGILITY": 0.26, "CHIN": 17, "HEIGHT": 10, "COUNT": 2 }, # ghettoconcept
 #    { "STRENGTH": 0.38, "SPEED": 0.30, "AGILITY": 0.32, "CHIN": 17, "HEIGHT": 13, "COUNT": 0 }, # bal
 ]
 
@@ -88,17 +85,16 @@ def find_name():
     try:
         response = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/Category:Living_people", headers={"User-Agent": "Mozilla/5.0 (compatible; FantasyNameBot/1.0)"}, timeout=10)
         response.raise_for_status()
-        name = re.search(r"<title>\s*([\w]+)", unicodedata.normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
+        name = re.search(r"<title>\s*([\w]+)", normalize("NFKD", response.text).encode("ascii", "ignore").decode("ascii", "ignore"), flags=re.IGNORECASE).group(1).lower()
         return f"{random.choice([ 'Byl', 'Ell', 'Fel', 'Kel', 'Kul' ])}'{name}" if name not in [ 'adam', 'alex', 'andrew', 'ben', 'bill', 'brent', 'brian', 'chris', 'colin', 'craig', 'dave', 'jason', 'joe', 'john', 'karen', 'marc', 'mark', 'mike', 'patti', 'paul', 'peter', 'ryan', 'sarah', 'sean', 'sharon', 'shawn', 'tim', 'tom', 'zhang' ] else ""
-    except:
-        return ""
+    except Exception: return ""
 
 
-def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: int) -> Tuple[int, int]:
-    wgtval = round((hgtval + 60.0) ** 3.0 * (0.0005 + bldval * 0.00001) *
-        (1.0 + (math.sqrt(strval - 10.0) if (strval > 10) else -math.sqrt(10.0 - strval)) * 0.05) *
-        (1.0 - (math.sqrt(aglval - 10.0) if (aglval > 10) else -math.sqrt(10.0 - aglval)) * 0.05) - 0.49999)
-    return wgtval, round(wgtval * (0.995 - cndval * 0.0025))
+def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: int):
+    wgtval = round( (hgtval + 60.0) ** 3.0 * (0.0005 + bldval * 0.00001) *
+        (1.0 + ((strval - 10.0) ** 0.5 if strval > 10 else -(10.0 - strval) ** 0.5) * 0.05) *
+        (1.0 - ((aglval - 10.0) ** 0.5 if aglval > 10 else -(10.0 - aglval) ** 0.5) * 0.05) - 0.49999)
+    return (wgtval, round(wgtval * (0.995 - cndval * 0.0025)))
 
 
 # ------------------------------
@@ -106,11 +102,9 @@ def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: i
 # ------------------------------
 
 if __name__ == "__main__":
-    try: ftrs = json.load(open('data.json'))
+    try: ftrs = json.load(open("data.json"))
     except Exception: ftrs = {}
 
-
-    #print(write_msg("eko_select_orders", f"your_team=Byl`phillip&strategy_choice=5H114insideR1")) # 6H122alloutR1 4H97ringR1 5H105insideR1
 
     for word in write_msg("eko_retired_fighters").split("Activate</A>"):
             if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
@@ -203,12 +197,12 @@ if __name__ == "__main__":
                     elif hd > 9 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'6H122alloutR{f}', f'5H105alloutR{f}' ])
                     elif hd > 5 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ])
                     elif hd > 2 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'5H114insideR{f}', f'5H105insideR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ][ :3 if ftr['CHIN'] > 15 else 4 ])
-                    else: fp = rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
+                    else: fp = rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 14 else f'5H105insideR{f}', f'5H105ringR{f}' ])
                 elif opp[r][4] > 0.9: # always balanced tactics
                         if hd > 9: fp = rng.choice([ f'6H122alloutR{f}', f'5H114alloutR{f}' ])
                         elif hd > 5: fp = rng.choice([ f'6H122alloutR{f}', f'5H114alloutR{f}' ] if opp[r][0] in (4, 6) else [ f'4H97alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}' ])
                         elif hd > 2: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}' ] if opp[r][0] in (4, 6) else [ f'4H97alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}', f'5H114ringR{f}' ])
-                        else: fp = rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 13 else f'5H105insideR{f}', f'5H105ringR{f}' ])
+                        else: fp = rng.choice([ f'5H105insideR{f}', f'5H114insideR{f}', f'4H97alloutR{f}' if ftr['CHIN'] > 14 else f'5H105insideR{f}', f'5H105ringR{f}' ])
                 elif opp[r][5] > 0.9: # always slap
                     fp = f'6H122alloutR{f}' if hd > 5 else f'5H114alloutR{f}'
 
