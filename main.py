@@ -91,7 +91,7 @@ def find_name():
 
 
 def compute_weight(hgtval: int, strval: int, aglval: int, cndval: int, bldval: int):
-    wgtval = round( (hgtval + 60.0) ** 3.0 * (0.0005 + bldval * 0.00001) *
+    wgtval = round((hgtval + 60.0) ** 3.0 * (0.0005 + bldval * 0.00001) *
         (1.0 + ((strval - 10.0) ** 0.5 if strval > 10 else -(10.0 - strval) ** 0.5) * 0.05) *
         (1.0 - ((aglval - 10.0) ** 0.5 if aglval > 10 else -(10.0 - aglval) ** 0.5) * 0.05) - 0.49999)
     return (wgtval, round(wgtval * (0.995 - cndval * 0.0025)))
@@ -181,19 +181,19 @@ if __name__ == "__main__":
             if ftr['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
             elif ftr['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
             elif ftr['WEIGHT'][1] < 200: # non hw
-                if hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr['RECORD'][0] > 9 else 3)) # He is much taller
-                elif hd <= 2: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # Im slightly taller
-                elif hd <= 0: fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
+                if hd <= 0: fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
+                elif hd <= 2: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # He slightly taller
+                elif hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr['RECORD'][0] > 9 else 3)) # He is much taller
                 else: fp = rng.choice([ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '4H97alloutR', '6H122alloutR' ][ :6 if ftr['CHIN'] < 15 else 7 ]) + rng.choice([ '1', '2', '3' ])
             else: fp = rng.choice([ '5H105alloutR', '4H97alloutR', '6H122alloutR', '5H114insideR', '5H105insideR', '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
 
             for r, f in ( (2, 3), (1, 2), (0, 1) ):
-                if r == 0 and ftr['WEIGHT'][1] > 199 and hd > 5 and (opp[r][0] == 0 or (opp[r][0] == 1 and opp[r][3] > 0.9) or opp[r][0] == 7) and rng.random() < 0.8: fp = f'{"4H97" if hd > 8 else "5H105"}counterR{f}' # taller heavyweight
+                if r == 0 and ftr['WEIGHT'][1] > 199 and hd < -5 and ftr['SPEED'] >= ftr['AGILITY'] and (opp[r][0] == 0 or (opp[r][0] == 1 and opp[r][3] > 0.9) or opp[r][0] == 7) and rng.random() < 0.7: fp = f'{"4H97" if hd < -8 else "5H105"}counterR{f}' # taller hw
                 elif opp[r][0] == 7 and opp[r][1] <= 2: fp = f'4H97ringR{f}' if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else f'4H97clinchR{f}' # allout def
                 elif opp[r][2] > 0.7 or (opp[r][0] == 7 and opp[r][1] <= 1): fp = rng.choice([ f'4H97ringR{f}', f'5H105ringR{f}', f'5H114ringR{f}' ] if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else [ f'4H97clinchR{f}', f'5H105clinchR{f}' ]) # anti flash
                 elif opp[r][3] > 0.8: # always body
                     if opp[r][0] == 0: fp = f'5H114ringR{f}' if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else f'5H114clinchR{f}'  # usually inside
-                    elif opp[r][0] == 4: fp = rng.choice([ f'5H114alloutR{f}', f'5H105alloutR{f}', f'5H114insideR2' ] if hd > 3 else [ f'4H97alloutR{f}', f'5H114insideR{f}', f'5H114insideR2', f'5H105insideR{f}' ]) # usually ring
+                    elif opp[r][0] == 4: fp = rng.choice([ f'5H114alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}' ] if hd > 3 else [ f'4H97alloutR{f}', f'5H114insideR{f}', f'5H114insideR{f}', f'5H105insideR{f}' ]) # usually ring
                     elif hd > 9 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'6H122alloutR{f}', f'5H105alloutR{f}' ])
                     elif hd > 5 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ])
                     elif hd > 2 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'5H114insideR{f}', f'5H105insideR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ][ :3 if ftr['CHIN'] > 15 else 4 ])
