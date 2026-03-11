@@ -165,7 +165,7 @@ if __name__ == "__main__":
         tr = [ None, None, (ftr['CHIN'] < 11 + ftr['STATUS'] // 5 or not 6 <= ftr['CONDITIONING'] <= 11 or ftr['STATUS'] - ftr['RATING'] > 2) ]
         for i in range(2):
             if ftr['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
-            elif not i and (((w := max_weights[ftr['DIVISION'][2]]) - 10 < ftr['WEIGHT'][0] < w and ftr['AGILITY'] > 10) or (ftr['STATUS'] == 28 and ftr['KP'] < ftr['STRENGTH'] // 3)): tr = [ 1, None, True ] # underweight or room for kp
+            elif not i and (((w := max_weights[ ftr['DIVISION'][2] ]) - 10 < ftr['WEIGHT'][0] < w and ftr['AGILITY'] > 10) or (ftr['STATUS'] == 28 and ftr['KP'] < ftr['STRENGTH'] // 3)): tr = [ 1, None, True ] # underweight or room for kp
             elif not i and not tr[2] and (ftr['RATING'] == 18 or ftr['RATING'] == 28 or ftr['RATING'] < ftr['STATUS'] or ftr['KP'] < ftr['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr['CHIN'] + int(tr[0] == 4) < 11 + ftr['STATUS'] // 5 or ftr['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr['TYPE']]['CHIN'] - 10.0 - ftr['HEIGHT'] // 5.5) * ftr['STATUS'] / 28.0: tr[i] = 4
             else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
@@ -181,7 +181,7 @@ if __name__ == "__main__":
             if ftr['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
             elif ftr['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
             elif ftr['WEIGHT'][1] < 200: # non hw
-                if hd < 1 fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
+                if hd < 1: fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
                 elif hd < 3: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # He slightly taller
                 elif hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr['RECORD'][0] > 9 else 3)) # He is much taller
                 else: fp = rng.choice([ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '4H97alloutR', '6H122alloutR' ][ :6 if ftr['CHIN'] < 15 else 7 ]) + rng.choice([ '1', '2', '3' ])
