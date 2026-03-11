@@ -165,7 +165,7 @@ if __name__ == "__main__":
         tr = [ None, None, (ftr['CHIN'] < 11 + ftr['STATUS'] // 5 or not 6 <= ftr['CONDITIONING'] <= 11 or ftr['STATUS'] - ftr['RATING'] > 2) ]
         for i in range(2):
             if ftr['CONDITIONING'] + int(tr[0] == 5) < 6: tr[i] = 5
-            elif not i and max_weights[ ftr['DIVISION'][2] ] - 10 < ftr['WEIGHT'][0] < max_weights[ ftr['DIVISION'][2] ] and ftr['AGILITY'] > 10: tr[i], tr[2] = 1, True # underweight
+            elif not i and (((w := max_weights[ftr['DIVISION'][2]]) - 10 < ftr['WEIGHT'][0] < w and ftr['AGILITY'] > 10) or (ftr['STATUS'] == 28 and ftr['KP'] < ftr['STRENGTH'] // 3)): tr = [ 1, None, True ] # underweight or room for kp
             elif not i and not tr[2] and (ftr['RATING'] == 18 or ftr['RATING'] == 28 or ftr['RATING'] < ftr['STATUS'] or ftr['KP'] < ftr['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr['CHIN'] + int(tr[0] == 4) < 11 + ftr['STATUS'] // 5 or ftr['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr['TYPE']]['CHIN'] - 10.0 - ftr['HEIGHT'] // 5.5) * ftr['STATUS'] / 28.0: tr[i] = 4
             else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
@@ -181,18 +181,18 @@ if __name__ == "__main__":
             if ftr['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
             elif ftr['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
             elif ftr['WEIGHT'][1] < 200: # non hw
-                if hd <= 0: fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
-                elif hd <= 2: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # He slightly taller
+                if hd < 1 fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
+                elif hd < 3: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # He slightly taller
                 elif hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr['RECORD'][0] > 9 else 3)) # He is much taller
                 else: fp = rng.choice([ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '4H97alloutR', '6H122alloutR' ][ :6 if ftr['CHIN'] < 15 else 7 ]) + rng.choice([ '1', '2', '3' ])
             else: fp = rng.choice([ '5H105alloutR', '4H97alloutR', '6H122alloutR', '5H114insideR', '5H105insideR', '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
 
             for r, f in ( (2, 3), (1, 2), (0, 1) ):
                 if r == 0 and ftr['WEIGHT'][1] > 199 and hd < -5 and ftr['SPEED'] >= ftr['AGILITY'] and (opp[r][0] == 0 or (opp[r][0] == 1 and opp[r][3] > 0.9) or opp[r][0] == 7) and rng.random() < 0.7: fp = f'{"4H97" if hd < -8 else "5H105"}counterR{f}' # taller hw
-                elif opp[r][0] == 7 and opp[r][1] <= 2: fp = f'4H97ringR{f}' if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else f'4H97clinchR{f}' # allout def
-                elif opp[r][2] > 0.7 or (opp[r][0] == 7 and opp[r][1] <= 1): fp = rng.choice([ f'4H97ringR{f}', f'5H105ringR{f}', f'5H114ringR{f}' ] if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else [ f'4H97clinchR{f}', f'5H105clinchR{f}' ]) # anti flash
+                elif opp[r][0] == 7 and opp[r][1] <= 2: fp = f'4H97ringR{f}' if hd < 1 or ftr['AGILITY'] >= ftr['SPEED'] else f'4H97clinchR{f}' # allout def
+                elif opp[r][2] > 0.7 or (opp[r][0] == 7 and opp[r][1] <= 1): fp = rng.choice([ f'4H97ringR{f}', f'5H105ringR{f}', f'5H114ringR{f}' ] if hd < 1 or ftr['AGILITY'] >= ftr['SPEED'] else [ f'4H97clinchR{f}', f'5H105clinchR{f}' ]) # anti flash
                 elif opp[r][3] > 0.8: # always body
-                    if opp[r][0] == 0: fp = f'5H114ringR{f}' if hd <= 0 or ftr['AGILITY'] >= ftr['SPEED'] else f'5H114clinchR{f}'  # usually inside
+                    if opp[r][0] == 0: fp = f'5H114ringR{f}' if hd < 1 or ftr['AGILITY'] >= ftr['SPEED'] else f'5H114clinchR{f}'  # usually inside
                     elif opp[r][0] == 4: fp = rng.choice([ f'5H114alloutR{f}', f'5H105alloutR{f}', f'5H114insideR{f}' ] if hd > 3 else [ f'4H97alloutR{f}', f'5H114insideR{f}', f'5H114insideR{f}', f'5H105insideR{f}' ]) # usually ring
                     elif hd > 9 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'6H122alloutR{f}', f'5H105alloutR{f}' ])
                     elif hd > 5 and ftr['WEIGHT'][1] < 200: fp = rng.choice([ f'5H105alloutR{f}', f'5H114alloutR{f}', f'4H97alloutR{f}', f'5H105alloutR{f}' ])
