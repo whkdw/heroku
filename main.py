@@ -179,11 +179,11 @@ if __name__ == "__main__":
             rng, hd, opp = random.Random(int(team_id) + sum(ftr['RECORD']) * ftr['WEIGHT'][0]), ftr['OPPONENT'][0] - ftr['HEIGHT'], ftr['OPPONENT'][4]
 
             if ftr['STATUS'] > 18 and rng.random() < 0.05: fp = '6H113alloutR1' # -1nohistory 0inside 1clinch 2feint 3counter 4ring 5ropes 6outside 7allout 8nostyle
-            elif ftr['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H105alloutR' ]) + rng.choice([ '1', '2' ])
+            elif ftr['RATING'] > 25: fp = rng.choice([ '417clinchR', rng.choice([ '5H114insideR', '5H105insideR' ]), rng.choice([ '5H105alloutR', '5H114alloutR', '4H97alloutR' ]), '6H122alloutR' if hd >= 0 else '5H114alloutR' ]) + rng.choice([ '1', '2' ])
             elif ftr['WEIGHT'][1] < 200: # non hw
-                if hd < 1: fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or Im taller
-                elif hd < 3: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # He slightly taller
-                elif hd > 9 and rng.random() < 0.66: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr['RECORD'][0] > 9 else 3)) # He is much taller
+                if hd < 1: fp = rng.choice([ '4H97ringR1', '5H114ringR1' ]) if rng.random() < 0.7 else '5H105insideR1' # equal or taller
+                elif hd < 3: fp = rng.choice([ '4H97clinchR1', '5H105clinchR1' ]) if rng.random() < 0.5 else '5H114insideR1' # slightly shorter
+                elif hd > 9 and rng.random() < 0.7: fp = '6H122alloutR' + str(rng.randint(1, 2 if ftr['RECORD'][0] > 9 else 3)) # much shorter
                 else: fp = rng.choice([ '417clinchR', '5H105alloutR', '5H105insideR', '5H114alloutR', '5H114insideR', '4H97alloutR', '6H122alloutR' ][ :6 if ftr['CHIN'] < 15 else 7 ]) + rng.choice([ '1', '2', '3' ])
             else: fp = rng.choice([ '5H105alloutR', '4H97alloutR', '6H122alloutR', '5H114insideR', '5H105insideR', '5H105insideR', '5H105ringR' ]) + rng.choice([ '1', '1', '2' ])
 
@@ -235,3 +235,5 @@ if __name__ == "__main__":
     with open("data.json.tmp", "w", encoding="utf-8") as f:
         json.dump(ftrs_new, f, ensure_ascii=False, indent=4)
     os.replace("data.json.tmp", "data.json")
+    
+    # 4agg to 5sgg, add random mid round flashes, retire some straws
