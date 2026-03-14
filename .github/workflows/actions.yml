@@ -13,22 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo content
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: setup python
-        uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
           python-version: '3.9'
 
-      - name: install python packages
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: execute py script
+      - name: Execute script
         env:
           GYM_PASSWORD: ${{ secrets.GYM_PASSWORD }}
           GYM_USERNAME: ${{ secrets.GYM_USERNAME }}
@@ -36,14 +36,14 @@ jobs:
           set -o pipefail
           python -u main.py 2>&1 | tee run.log
 
-      - name: upload log artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload log artifact
+        uses: actions/upload-artifact@v5
         with:
           name: main-log
           path: run.log
           retention-days: 90
 
-      - name: commit updated json
+      - name: Commit updated json
         if: success()
         run: |
           git config user.name "github-actions[bot]"
