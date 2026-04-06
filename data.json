@@ -27,7 +27,7 @@
             13,
             0
         ],
-        "RANK": 0,
+        "RANK": 12,
         "TRAINING": [
             1,
             4,
@@ -64,7 +64,7 @@
             20,
             0
         ],
-        "RANK": 0,
+        "RANK": 113,
         "TRAINING": [
             1,
             null,
@@ -101,7 +101,7 @@
             24,
             0
         ],
-        "RANK": 0,
+        "RANK": 71,
         "TRAINING": [
             1,
             null,
@@ -538,7 +538,7 @@
             36,
             0
         ],
-        "RANK": 0,
+        "RANK": 291,
         "TRAINING": [
             2,
             null,
@@ -581,8 +581,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "4H97ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "4H97clinchR2",
+        "OPPONENT": [
+            7,
+            1613008,
+            ".Nico Hulkenberg.",
+            1,
+            [
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    -1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    -1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        ]
     },
     "1647707": {
         "NAME": "Zol`cora",
@@ -618,8 +661,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105alloutR2",
+        "OPPONENT": [
+            15,
+            1557549,
+            "... Al-Masmiyya al-Kabira",
+            4,
+            [
+                [
+                    2,
+                    2,
+                    0.0,
+                    0.0,
+                    0.4,
+                    0.6,
+                    0.0
+                ],
+                [
+                    2,
+                    2,
+                    0.0,
+                    0.0,
+                    0.4,
+                    0.6,
+                    0.0
+                ],
+                [
+                    2,
+                    2,
+                    0.0,
+                    0.0,
+                    0.6,
+                    0.4,
+                    0.0
+                ],
+                [
+                    2,
+                    5,
+                    0.03,
+                    0.03,
+                    0.34,
+                    0.59,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1647712": {
         "NAME": "Gul`dmitry",
@@ -655,8 +741,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR2",
-        "OPPONENT": null
+        "FIGHTPLAN": "4H97ringR1",
+        "OPPONENT": [
+            5,
+            1693594,
+            "Donald \"Tiny Fists of Fury\" Trump 134",
+            4,
+            [
+                [
+                    7,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    7,
+                    2,
+                    0.8,
+                    0.2,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.33,
+                    0.33,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.45,
+                    0.55,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1648904": {
         "NAME": "Zol`roberto",
@@ -747,7 +876,7 @@
         "CHIN": 18,
         "CONDITIONING": 8,
         "TYPE": 2,
-        "RATING": 27,
+        "RATING": 28,
         "STATUS": 28,
         "IPS": 397,
         "HEIGHT": 2,
@@ -762,61 +891,18 @@
             5
         ],
         "RECORD": [
-            30,
+            31,
             13,
             0
         ],
-        "RANK": 25,
+        "RANK": 14,
         "TRAINING": [
             1,
             null,
             true
         ],
         "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": [
-            5,
-            1557125,
-            "... Mondolfi`s four-eyed opossum",
-            5,
-            [
-                [
-                    3,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.17,
-                    0.83,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    2,
-                    0.0,
-                    0.12,
-                    0.78,
-                    0.06,
-                    0.02
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1649985": {
         "NAME": "Xel`jorge",
@@ -1147,7 +1233,7 @@
         "CHIN": 15,
         "CONDITIONING": 9,
         "TYPE": 2,
-        "RATING": 20,
+        "RATING": 21,
         "STATUS": 21,
         "IPS": 86,
         "HEIGHT": -1,
@@ -1162,79 +1248,36 @@
             0
         ],
         "RECORD": [
-            14,
+            15,
             4,
             0
         ],
-        "RANK": 233,
+        "RANK": 222,
         "TRAINING": [
-            1,
+            4,
             null,
             false
         ],
         "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": [
-            0,
-            1688579,
-            "\"DOOMBOT 009\"",
-            4,
-            [
-                [
-                    5,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    5,
-                    1,
-                    0.0,
-                    0.6,
-                    0.4,
-                    0.0,
-                    0.0
-                ],
-                [
-                    5,
-                    1,
-                    0.0,
-                    0.0,
-                    0.4,
-                    0.6,
-                    0.0
-                ],
-                [
-                    5,
-                    3,
-                    0.0,
-                    0.2,
-                    0.15,
-                    0.4,
-                    0.07
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1650005": {
         "NAME": "Zol`armando",
-        "STRENGTH": 30,
-        "KP": 9,
+        "STRENGTH": 31,
+        "KP": 10,
         "SPEED": 17,
         "AGILITY": 19,
         "CHIN": 18,
         "CONDITIONING": 9,
         "TYPE": 2,
-        "RATING": 25,
-        "STATUS": 25,
+        "RATING": 26,
+        "STATUS": 26,
         "IPS": 518,
         "HEIGHT": 1,
         "BUILD": 2,
         "WEIGHT": [
-            122,
-            119
+            123,
+            120
         ],
         "DIVISION": [
             "super-bantam",
@@ -1242,61 +1285,18 @@
             5
         ],
         "RECORD": [
-            45,
+            46,
             25,
             0
         ],
-        "RANK": 55,
+        "RANK": 36,
         "TRAINING": [
-            1,
             3,
+            1,
             false
         ],
         "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": [
-            3,
-            861140,
-            "Timing is everything",
-            5,
-            [
-                [
-                    4,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    2,
-                    0.33,
-                    0.67,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    3,
-                    0.33,
-                    0.33,
-                    0.33,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    4,
-                    0.02,
-                    0.19,
-                    0.43,
-                    0.26,
-                    0.04
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1650006": {
         "NAME": "Val`hamed",
@@ -1572,8 +1572,51 @@
             2,
             true
         ],
-        "FIGHTPLAN": "5H105alloutR2",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H113alloutR1",
+        "OPPONENT": [
+            18,
+            1693959,
+            "EXP SM 2",
+            6,
+            [
+                [
+                    6,
+                    3,
+                    0.0,
+                    0.0,
+                    0.14,
+                    0.43,
+                    0.29
+                ],
+                [
+                    6,
+                    3,
+                    0.0,
+                    0.0,
+                    0.14,
+                    0.43,
+                    0.29
+                ],
+                [
+                    6,
+                    3,
+                    0.0,
+                    0.0,
+                    0.14,
+                    0.43,
+                    0.29
+                ],
+                [
+                    3,
+                    4,
+                    0.0,
+                    0.0,
+                    0.28,
+                    0.38,
+                    0.26
+                ]
+            ]
+        ]
     },
     "1650017": {
         "NAME": "Kil`hugo",
@@ -1603,7 +1646,7 @@
             30,
             0
         ],
-        "RANK": 0,
+        "RANK": 89,
         "TRAINING": [
             4,
             1,
@@ -1941,9 +1984,9 @@
         "CHIN": 19,
         "CONDITIONING": 7,
         "TYPE": 2,
-        "RATING": 28,
+        "RATING": 27,
         "STATUS": 28,
-        "IPS": 505,
+        "IPS": 530,
         "HEIGHT": 0,
         "BUILD": 1,
         "WEIGHT": [
@@ -1957,60 +2000,17 @@
         ],
         "RECORD": [
             47,
-            26,
+            27,
             1
         ],
-        "RANK": 12,
+        "RANK": 31,
         "TRAINING": [
             1,
-            3,
+            null,
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": [
-            6,
-            561432,
-            "Gary Smith",
-            2,
-            [
-                [
-                    5,
-                    2,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.33,
-                    0.67
-                ],
-                [
-                    5,
-                    2,
-                    0.0,
-                    0.0,
-                    0.67,
-                    0.0,
-                    0.0
-                ],
-                [
-                    5,
-                    2,
-                    0.0,
-                    0.0,
-                    0.67,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    2,
-                    0.0,
-                    0.0,
-                    0.56,
-                    0.22,
-                    0.22
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1650027": {
         "NAME": "Gul`marko",
@@ -2021,9 +2021,9 @@
         "CHIN": 17,
         "CONDITIONING": 8,
         "TYPE": 2,
-        "RATING": 25,
+        "RATING": 24,
         "STATUS": 25,
-        "IPS": 410,
+        "IPS": 435,
         "HEIGHT": 1,
         "BUILD": 3,
         "WEIGHT": [
@@ -2037,60 +2037,17 @@
         ],
         "RECORD": [
             45,
-            29,
+            30,
             0
         ],
-        "RANK": 73,
+        "RANK": 92,
         "TRAINING": [
-            4,
+            1,
             null,
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": [
-            7,
-            1692448,
-            "Finnley \"Lights Out\" SNOW",
-            4,
-            [
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.4,
-                    0.6,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    2,
-                    0.0,
-                    0.4,
-                    0.6,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    2,
-                    0.0,
-                    0.4,
-                    0.6,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    5,
-                    0.12,
-                    0.3,
-                    0.37,
-                    0.09,
-                    0.09
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1650028": {
         "NAME": "Gul`agustin",
@@ -2101,7 +2058,7 @@
         "CHIN": 18,
         "CONDITIONING": 6,
         "TYPE": 2,
-        "RATING": 23,
+        "RATING": 24,
         "STATUS": 24,
         "IPS": 680,
         "HEIGHT": 2,
@@ -2116,61 +2073,18 @@
             3
         ],
         "RECORD": [
-            45,
+            46,
             30,
             2
         ],
-        "RANK": 92,
+        "RANK": 81,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": [
-            10,
-            1583191,
-            "Bobby D Bantam RTC New School Challenger",
-            4,
-            [
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    3,
-                    0.0,
-                    0.0,
-                    0.02,
-                    0.64,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1650034": {
         "NAME": "Kil`peter",
@@ -2286,8 +2200,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            20,
+            1518570,
+            "Tall Bastard 0069",
+            4,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.03,
+                    0.76,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1650043": {
         "NAME": "Xel`lino",
@@ -2477,7 +2434,7 @@
             25,
             1
         ],
-        "RANK": 0,
+        "RANK": 29,
         "TRAINING": [
             1,
             null,
@@ -2920,8 +2877,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "4H97ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114alloutR1",
+        "OPPONENT": [
+            22,
+            1409457,
+            "Mike Dulson jr",
+            1,
+            [
+                [
+                    2,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    2,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    2,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    4,
+                    2,
+                    0.0,
+                    0.0,
+                    0.04,
+                    0.96,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1650248": {
         "NAME": "Zol`lanai",
@@ -2957,26 +2957,69 @@
             null,
             false
         ],
-        "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105counterR1",
+        "OPPONENT": [
+            12,
+            1462202,
+            "Mani \"The Destroyer\" Pakyaw",
+            1,
+            [
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1651090": {
         "NAME": "Xel`gokhan",
         "STRENGTH": 30,
-        "KP": 9,
+        "KP": 10,
         "SPEED": 24,
-        "AGILITY": 18,
+        "AGILITY": 19,
         "CHIN": 17,
         "CONDITIONING": 8,
         "TYPE": 3,
-        "RATING": 27,
-        "STATUS": 27,
+        "RATING": 28,
+        "STATUS": 28,
         "IPS": 389,
         "HEIGHT": 1,
         "BUILD": 2,
         "WEIGHT": [
-            123,
-            120
+            122,
+            119
         ],
         "DIVISION": [
             "super-bantam",
@@ -2984,61 +3027,18 @@
             5
         ],
         "RECORD": [
-            31,
+            32,
             13,
             0
         ],
-        "RANK": 35,
+        "RANK": 8,
         "TRAINING": [
             1,
-            null,
+            3,
             false
         ],
         "FIGHTPLAN": "5H105alloutR1",
-        "OPPONENT": [
-            6,
-            883713,
-            "loxing bedgind",
-            4,
-            [
-                [
-                    4,
-                    1,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    1,
-                    0.0,
-                    0.6,
-                    0.4,
-                    0.0,
-                    0.0
-                ],
-                [
-                    2,
-                    3,
-                    0.03,
-                    0.24,
-                    0.29,
-                    0.24,
-                    0.21
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1651091": {
         "NAME": "Val`vedashree",
@@ -3148,7 +3148,7 @@
             6,
             0
         ],
-        "RANK": 0,
+        "RANK": 304,
         "TRAINING": [
             1,
             null,
@@ -3185,7 +3185,7 @@
             15,
             0
         ],
-        "RANK": 0,
+        "RANK": 74,
         "TRAINING": [
             1,
             null,
@@ -3228,8 +3228,51 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            25,
+            1312960,
+            "Big Bad Fulton",
+            4,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.6,
+                    0.4
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.72,
+                    0.25
+                ]
+            ]
+        ]
     },
     "1654524": {
         "NAME": "Kil`jung",
@@ -3265,8 +3308,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "4H97counterR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            16,
+            1214580,
+            "Ryan Sinn",
+            0,
+            [
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.67,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.67,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.67,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    3,
+                    0.29,
+                    0.33,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1654561": {
         "NAME": "Kil`heidi",
@@ -3296,7 +3382,7 @@
             16,
             0
         ],
-        "RANK": 0,
+        "RANK": 68,
         "TRAINING": [
             1,
             null,
@@ -3339,8 +3425,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            25,
+            1272372,
+            "the fighter guide",
+            2,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.68,
+                    0.09
+                ]
+            ]
+        ]
     },
     "1654729": {
         "NAME": "Zol`john",
@@ -3376,8 +3505,51 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105insideR2",
+        "OPPONENT": [
+            4,
+            1624086,
+            "Bella Kush",
+            1,
+            [
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.67
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.28,
+                    0.33,
+                    0.22,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1655409": {
         "NAME": "Xel`sunu",
@@ -3493,8 +3665,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "4H97clinchR1",
+        "OPPONENT": [
+            14,
+            893766,
+            "Danny Barlow",
+            3,
+            [
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    7,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    -1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    -1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            ]
+        ]
     },
     "1656050": {
         "NAME": "Xel`daheli",
@@ -3610,8 +3825,51 @@
             2,
             true
         ],
-        "FIGHTPLAN": "5H105alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105alloutR2",
+        "OPPONENT": [
+            17,
+            332169,
+            "Lets Do This",
+            5,
+            [
+                [
+                    1,
+                    2,
+                    0.0,
+                    0.67,
+                    0.17,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.0,
+                    0.5,
+                    0.17,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.0,
+                    0.6,
+                    0.4,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    3,
+                    0.0,
+                    0.33,
+                    0.5,
+                    0.0,
+                    0.06
+                ]
+            ]
+        ]
     },
     "1656606": {
         "NAME": "Val`rajhesh",
@@ -3648,7 +3906,50 @@
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            20,
+            684876,
+            "Waldemar Hoff",
+            5,
+            [
+                [
+                    3,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    3,
+                    0.02,
+                    0.48,
+                    0.31,
+                    0.08,
+                    0.12
+                ]
+            ]
+        ]
     },
     "1656914": {
         "NAME": "Gul`alfred",
@@ -3684,8 +3985,51 @@
             2,
             false
         ],
-        "FIGHTPLAN": "5H105ringR2",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114insideR1",
+        "OPPONENT": [
+            18,
+            1695148,
+            "Flood Alert 10",
+            6,
+            [
+                [
+                    1,
+                    3,
+                    0.0,
+                    0.57,
+                    0.14,
+                    0.14,
+                    0.0
+                ],
+                [
+                    1,
+                    3,
+                    0.0,
+                    0.71,
+                    0.0,
+                    0.14,
+                    0.0
+                ],
+                [
+                    1,
+                    3,
+                    0.0,
+                    0.57,
+                    0.14,
+                    0.14,
+                    0.14
+                ],
+                [
+                    1,
+                    7,
+                    0.0,
+                    0.25,
+                    0.16,
+                    0.11,
+                    0.3
+                ]
+            ]
+        ]
     },
     "1657843": {
         "NAME": "Xel`anders",
@@ -3721,8 +4065,51 @@
             3,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            25,
+            1490100,
+            "KO9 Heavyweight 8",
+            6,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.02,
+                    0.98,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1657885": {
         "NAME": "Kil`xing",
@@ -3752,7 +4139,7 @@
             13,
             0
         ],
-        "RANK": 0,
+        "RANK": 20,
         "TRAINING": [
             1,
             3,
@@ -3875,86 +4262,12 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": null
-    },
-    "1658374": {
-        "NAME": "Gul`masaya",
-        "STRENGTH": 31,
-        "KP": 10,
-        "SPEED": 17,
-        "AGILITY": 20,
-        "CHIN": 18,
-        "CONDITIONING": 8,
-        "TYPE": 2,
-        "RATING": 24,
-        "STATUS": 24,
-        "IPS": 324,
-        "HEIGHT": -1,
-        "BUILD": 3,
-        "WEIGHT": [
-            112,
-            109
-        ],
-        "DIVISION": [
-            "junior-fly",
-            "contenders",
-            1
-        ],
-        "RECORD": [
-            29,
-            14,
-            0
-        ],
-        "RANK": 0,
-        "TRAINING": [
-            1,
-            null,
-            false
-        ],
-        "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
-    },
-    "1658473": {
-        "NAME": "Gul`hala",
-        "STRENGTH": 31,
-        "KP": 10,
-        "SPEED": 23,
-        "AGILITY": 18,
-        "CHIN": 17,
-        "CONDITIONING": 6,
-        "TYPE": 3,
-        "RATING": 27,
-        "STATUS": 27,
-        "IPS": 304,
-        "HEIGHT": 2,
-        "BUILD": 0,
-        "WEIGHT": [
-            125,
-            122
-        ],
-        "DIVISION": [
-            "super-bantam",
-            "contenders",
-            5
-        ],
-        "RECORD": [
-            30,
-            10,
-            0
-        ],
-        "RANK": 18,
-        "TRAINING": [
-            3,
-            2,
-            false
-        ],
         "FIGHTPLAN": "6H122alloutR1",
         "OPPONENT": [
-            11,
-            1580548,
-            "LikQid Gloves Up",
-            5,
+            20,
+            1659388,
+            "Desperate and Depressed 1.0",
+            2,
             [
                 [
                     6,
@@ -3985,15 +4298,89 @@
                 ],
                 [
                     6,
-                    3,
+                    2,
                     0.0,
                     0.0,
-                    0.02,
-                    0.68,
-                    0.02
+                    0.04,
+                    0.62,
+                    0.33
                 ]
             ]
         ]
+    },
+    "1658374": {
+        "NAME": "Gul`masaya",
+        "STRENGTH": 31,
+        "KP": 10,
+        "SPEED": 17,
+        "AGILITY": 20,
+        "CHIN": 18,
+        "CONDITIONING": 8,
+        "TYPE": 2,
+        "RATING": 24,
+        "STATUS": 24,
+        "IPS": 324,
+        "HEIGHT": -1,
+        "BUILD": 3,
+        "WEIGHT": [
+            112,
+            109
+        ],
+        "DIVISION": [
+            "junior-fly",
+            "contenders",
+            1
+        ],
+        "RECORD": [
+            29,
+            14,
+            0
+        ],
+        "RANK": 78,
+        "TRAINING": [
+            1,
+            null,
+            false
+        ],
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": null
+    },
+    "1658473": {
+        "NAME": "Gul`hala",
+        "STRENGTH": 31,
+        "KP": 10,
+        "SPEED": 23,
+        "AGILITY": 19,
+        "CHIN": 17,
+        "CONDITIONING": 7,
+        "TYPE": 3,
+        "RATING": 28,
+        "STATUS": 28,
+        "IPS": 304,
+        "HEIGHT": 2,
+        "BUILD": 0,
+        "WEIGHT": [
+            124,
+            121
+        ],
+        "DIVISION": [
+            "super-bantam",
+            "contenders",
+            5
+        ],
+        "RECORD": [
+            31,
+            10,
+            0
+        ],
+        "RANK": 2,
+        "TRAINING": [
+            1,
+            2,
+            false
+        ],
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": null
     },
     "1658474": {
         "NAME": "Kil`tetsuya",
@@ -4183,7 +4570,7 @@
             10,
             0
         ],
-        "RANK": 75,
+        "RANK": 76,
         "TRAINING": [
             1,
             1,
@@ -4217,60 +4604,17 @@
         ],
         "RECORD": [
             26,
-            9,
+            10,
             0
         ],
-        "RANK": 41,
+        "RANK": 57,
         "TRAINING": [
             4,
-            2,
+            null,
             false
         ],
         "FIGHTPLAN": "4H97alloutR3",
-        "OPPONENT": [
-            9,
-            345588,
-            "Susan \"Splash\" Smith",
-            0,
-            [
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.67,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.67,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    2,
-                    0.0,
-                    0.15,
-                    0.81,
-                    0.04,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1660735": {
         "NAME": "Xel`jaime",
@@ -4386,8 +4730,51 @@
             3,
             false
         ],
-        "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "4H97clinchR1",
+        "OPPONENT": [
+            9,
+            1108116,
+            "Dhung Poo Wei",
+            5,
+            [
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    7,
+                    2,
+                    0.83,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.33,
+                    0.33,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.4,
+                    0.6,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1660856": {
         "NAME": "Kil`kourosh",
@@ -4417,7 +4804,7 @@
             13,
             0
         ],
-        "RANK": 0,
+        "RANK": 3,
         "TRAINING": [
             1,
             3,
@@ -4540,8 +4927,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "4H97ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114insideR3",
+        "OPPONENT": [
+            17,
+            1579357,
+            "Watch me Dad",
+            2,
+            [
+                [
+                    5,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                [
+                    5,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                [
+                    5,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                [
+                    5,
+                    2,
+                    0.04,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.39
+                ]
+            ]
+        ]
     },
     "1661376": {
         "NAME": "Xel`naved",
@@ -4577,8 +5007,51 @@
             3,
             false
         ],
-        "FIGHTPLAN": "4H97ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            24,
+            59165,
+            "Bean Pole Billy",
+            0,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.56,
+                    0.07
+                ]
+            ]
+        ]
     },
     "1661378": {
         "NAME": "Val`samir",
@@ -4615,7 +5088,50 @@
             true
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            11,
+            996723,
+            "Jonny \" t-town\" Stone",
+            -1,
+            [
+                [
+                    4,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    2,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    2,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    4,
+                    0.06,
+                    0.65,
+                    0.06,
+                    0.12,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1661379": {
         "NAME": "Gul`colin",
@@ -4731,8 +5247,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105insideR2",
+        "OPPONENT": [
+            5,
+            1656807,
+            "Kurt Capewell",
+            1,
+            [
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.67,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.15,
+                    0.38,
+                    0.0,
+                    0.08,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1661651": {
         "NAME": "Kil`sharon",
@@ -4768,8 +5327,51 @@
             2,
             false
         ],
-        "FIGHTPLAN": "4H97ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105insideR2",
+        "OPPONENT": [
+            19,
+            1695463,
+            "Brother Terry.",
+            7,
+            [
+                [
+                    2,
+                    4,
+                    0.0,
+                    0.75,
+                    0.12,
+                    0.12,
+                    0.0
+                ],
+                [
+                    3,
+                    5,
+                    0.0,
+                    0.75,
+                    0.25,
+                    0.0,
+                    0.0
+                ],
+                [
+                    2,
+                    5,
+                    0.0,
+                    0.71,
+                    0.29,
+                    0.0,
+                    0.0
+                ],
+                [
+                    2,
+                    5,
+                    0.0,
+                    0.48,
+                    0.16,
+                    0.16,
+                    0.21
+                ]
+            ]
+        ]
     },
     "1661703": {
         "NAME": "Xel`chao",
@@ -4806,7 +5408,50 @@
             false
         ],
         "FIGHTPLAN": "5H114alloutR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            24,
+            72240,
+            "Nicko McBrain",
+            6,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.03,
+                    0.71,
+                    0.25
+                ]
+            ]
+        ]
     },
     "1662391": {
         "NAME": "Zol`kris",
@@ -4842,8 +5487,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "417clinchR2",
+        "OPPONENT": [
+            9,
+            1624139,
+            "Carne ABSOLUTE UNIT",
+            3,
+            [
+                [
+                    1,
+                    2,
+                    0.25,
+                    0.25,
+                    0.0,
+                    0.0,
+                    0.5
+                ],
+                [
+                    1,
+                    2,
+                    0.25,
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.25
+                ],
+                [
+                    1,
+                    2,
+                    0.25,
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    3,
+                    0.27,
+                    0.33,
+                    0.13,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1662684": {
         "NAME": "Val`hatsumi",
@@ -4873,7 +5561,7 @@
             10,
             0
         ],
-        "RANK": 0,
+        "RANK": 13,
         "TRAINING": [
             1,
             2,
@@ -5076,8 +5764,51 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H105alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105insideR1",
+        "OPPONENT": [
+            20,
+            1671446,
+            "Boba Alafet",
+            0,
+            [
+                [
+                    3,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.67,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    3,
+                    0.0,
+                    0.59,
+                    0.22,
+                    0.04,
+                    0.07
+                ]
+            ]
+        ]
     },
     "1666094": {
         "NAME": "Xel`arnold",
@@ -5193,8 +5924,51 @@
             1,
             true
         ],
-        "FIGHTPLAN": "5H114ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105alloutR3",
+        "OPPONENT": [
+            16,
+            1694990,
+            "First We Take Manhattan",
+            6,
+            [
+                [
+                    4,
+                    4,
+                    0.0,
+                    0.0,
+                    0.43,
+                    0.14,
+                    0.29
+                ],
+                [
+                    4,
+                    4,
+                    0.0,
+                    0.0,
+                    0.29,
+                    0.43,
+                    0.14
+                ],
+                [
+                    4,
+                    4,
+                    0.0,
+                    0.0,
+                    0.43,
+                    0.29,
+                    0.0
+                ],
+                [
+                    4,
+                    6,
+                    0.0,
+                    0.0,
+                    0.22,
+                    0.16,
+                    0.33
+                ]
+            ]
+        ]
     },
     "1666313": {
         "NAME": "Val`patrick",
@@ -5230,8 +6004,51 @@
             3,
             false
         ],
-        "FIGHTPLAN": "4H97ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114ringR1",
+        "OPPONENT": [
+            8,
+            1693587,
+            "Donald \"Tiny Fists of Fury\" Trump 127",
+            5,
+            [
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    7,
+                    2,
+                    0.83,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.4,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.13,
+                    0.07,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1666438": {
         "NAME": "Kil`jorlian",
@@ -5267,20 +6084,63 @@
             4,
             true
         ],
-        "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105alloutR1",
+        "OPPONENT": [
+            13,
+            1395954,
+            "President Barack Obama",
+            -1,
+            [
+                [
+                    4,
+                    1,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    1,
+                    0.0,
+                    0.33,
+                    0.33,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    1,
+                    0.0,
+                    0.5,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    2,
+                    0.0,
+                    0.3,
+                    0.4,
+                    0.3,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1666475": {
         "NAME": "Xel`martin",
         "STRENGTH": 27,
-        "KP": 8,
+        "KP": 9,
         "SPEED": 18,
         "AGILITY": 13,
         "CHIN": 14,
-        "CONDITIONING": 7,
+        "CONDITIONING": 8,
         "TYPE": 0,
-        "RATING": 13,
-        "STATUS": 13,
+        "RATING": 14,
+        "STATUS": 14,
         "IPS": 166,
         "HEIGHT": -1,
         "BUILD": 0,
@@ -5294,61 +6154,18 @@
             2
         ],
         "RECORD": [
-            13,
+            14,
             5,
             0
         ],
-        "RANK": 32,
+        "RANK": 22,
         "TRAINING": [
-            1,
-            null,
+            4,
+            2,
             false
         ],
         "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": [
-            -2,
-            1354166,
-            "kp shmitty beat NE",
-            1,
-            [
-                [
-                    0,
-                    1,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    1,
-                    0.67,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.33
-                ],
-                [
-                    0,
-                    1,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    2,
-                    3,
-                    0.36,
-                    0.0,
-                    0.21,
-                    0.29,
-                    0.07
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666506": {
         "NAME": "Xel`johnson",
@@ -5385,7 +6202,50 @@
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            22,
+            1555730,
+            "Caminoan Scientist 712 \"Talker\"",
+            3,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    3,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.94,
+                    0.06
+                ]
+            ]
+        ]
     },
     "1666809": {
         "NAME": "Kil`nawasch",
@@ -5396,9 +6256,9 @@
         "CHIN": 14,
         "CONDITIONING": 6,
         "TYPE": 2,
-        "RATING": 17,
+        "RATING": 16,
         "STATUS": 18,
-        "IPS": 25,
+        "IPS": 52,
         "HEIGHT": -2,
         "BUILD": 3,
         "WEIGHT": [
@@ -5412,60 +6272,17 @@
         ],
         "RECORD": [
             13,
-            3,
+            4,
             0
         ],
-        "RANK": 15,
+        "RANK": 21,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "OPPONENT": [
-            0,
-            1556092,
-            "Ewok Warrior 3821 \"Series\"",
-            2,
-            [
-                [
-                    4,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    1,
-                    0.0,
-                    0.67,
-                    0.33,
-                    0.0,
-                    0.0
-                ],
-                [
-                    4,
-                    2,
-                    0.04,
-                    0.41,
-                    0.26,
-                    0.3,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666860": {
         "NAME": "Fel`george",
@@ -5495,7 +6312,7 @@
             2,
             0
         ],
-        "RANK": 0,
+        "RANK": 1,
         "TRAINING": [
             1,
             3,
@@ -5506,15 +6323,15 @@
     },
     "1666862": {
         "NAME": "Ell`bressan",
-        "STRENGTH": 27,
+        "STRENGTH": 28,
         "KP": 9,
         "SPEED": 20,
         "AGILITY": 14,
-        "CHIN": 15,
+        "CHIN": 16,
         "CONDITIONING": 7,
         "TYPE": 0,
-        "RATING": 17,
-        "STATUS": 17,
+        "RATING": 18,
+        "STATUS": 18,
         "IPS": 81,
         "HEIGHT": 0,
         "BUILD": 3,
@@ -5528,61 +6345,18 @@
             5
         ],
         "RECORD": [
-            14,
+            15,
             6,
             0
         ],
-        "RANK": 17,
+        "RANK": 5,
         "TRAINING": [
-            4,
-            null,
+            1,
+            2,
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "OPPONENT": [
-            2,
-            1480582,
-            "Brag0002",
-            3,
-            [
-                [
-                    1,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    4,
-                    0.08,
-                    0.58,
-                    0.23,
-                    0.0,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666865": {
         "NAME": "Ell`josip",
@@ -6012,7 +6786,7 @@
             6,
             0
         ],
-        "RANK": 0,
+        "RANK": 326,
         "TRAINING": [
             1,
             null,
@@ -6049,7 +6823,7 @@
             5,
             0
         ],
-        "RANK": 0,
+        "RANK": 86,
         "TRAINING": [
             1,
             null,
@@ -6067,7 +6841,7 @@
         "CHIN": 16,
         "CONDITIONING": 10,
         "TYPE": 3,
-        "RATING": 22,
+        "RATING": 23,
         "STATUS": 23,
         "IPS": 50,
         "HEIGHT": 1,
@@ -6082,61 +6856,18 @@
             4
         ],
         "RECORD": [
-            17,
+            18,
             5,
             0
         ],
-        "RANK": 112,
+        "RANK": 102,
         "TRAINING": [
-            1,
+            2,
             null,
             false
         ],
         "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": [
-            -2,
-            1479924,
-            "Please Fall Asleep in the Ring",
-            3,
-            [
-                [
-                    0,
-                    1,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    7,
-                    2,
-                    0.5,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    2,
-                    0.1,
-                    0.0,
-                    0.3,
-                    0.0,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666889": {
         "NAME": "Ell`david",
@@ -6387,7 +7118,7 @@
         "CHIN": 16,
         "CONDITIONING": 7,
         "TYPE": 2,
-        "RATING": 17,
+        "RATING": 18,
         "STATUS": 18,
         "IPS": 155,
         "HEIGHT": -2,
@@ -6402,61 +7133,18 @@
             0
         ],
         "RECORD": [
-            17,
+            18,
             5,
             0
         ],
-        "RANK": 314,
+        "RANK": 303,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "5H114ringR1",
-        "OPPONENT": [
-            -2,
-            949821,
-            "Harald Eia",
-            6,
-            [
-                [
-                    0,
-                    3,
-                    0.0,
-                    0.86,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    3,
-                    0.0,
-                    0.86,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    3,
-                    0.0,
-                    0.86,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    3,
-                    0.09,
-                    0.44,
-                    0.41,
-                    0.0,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666897": {
         "NAME": "Kul`tsehay",
@@ -6486,7 +7174,7 @@
             8,
             1
         ],
-        "RANK": 0,
+        "RANK": 46,
         "TRAINING": [
             1,
             2,
@@ -6497,15 +7185,15 @@
     },
     "1666898": {
         "NAME": "Byl`ramona",
-        "STRENGTH": 23,
+        "STRENGTH": 24,
         "KP": 7,
-        "SPEED": 19,
+        "SPEED": 20,
         "AGILITY": 17,
-        "CHIN": 13,
+        "CHIN": 14,
         "CONDITIONING": 7,
         "TYPE": 3,
-        "RATING": 13,
-        "STATUS": 13,
+        "RATING": 15,
+        "STATUS": 15,
         "IPS": 153,
         "HEIGHT": 0,
         "BUILD": 3,
@@ -6519,61 +7207,18 @@
             3
         ],
         "RECORD": [
-            15,
+            16,
             7,
             0
         ],
-        "RANK": 29,
+        "RANK": 15,
         "TRAINING": [
-            4,
+            1,
             1,
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": [
-            10,
-            1218577,
-            "Jimmi \"Jabberwocky\" Jankulovski",
-            4,
-            [
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.02,
-                    0.97,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666899": {
         "NAME": "Kel`lisandro",
@@ -6584,7 +7229,7 @@
         "CHIN": 16,
         "CONDITIONING": 11,
         "TYPE": 3,
-        "RATING": 23,
+        "RATING": 24,
         "STATUS": 24,
         "IPS": 97,
         "HEIGHT": 1,
@@ -6599,141 +7244,55 @@
             3
         ],
         "RECORD": [
-            18,
+            19,
             4,
             0
         ],
-        "RANK": 90,
+        "RANK": 80,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": [
-            -1,
-            1406204,
-            "KO9 will never go away",
-            2,
-            [
-                [
-                    1,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    0.33,
-                    0.67,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    0.33,
-                    0.67,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    2,
-                    0.37,
-                    0.17,
-                    0.37,
-                    0.0,
-                    0.04
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666900": {
         "NAME": "Kul`julien",
-        "STRENGTH": 23,
+        "STRENGTH": 24,
         "KP": 7,
-        "SPEED": 18,
+        "SPEED": 20,
         "AGILITY": 16,
         "CHIN": 14,
         "CONDITIONING": 8,
         "TYPE": 3,
-        "RATING": 14,
-        "STATUS": 14,
+        "RATING": 16,
+        "STATUS": 16,
         "IPS": 168,
         "HEIGHT": 2,
         "BUILD": 1,
         "WEIGHT": [
-            125,
-            122
+            126,
+            123
         ],
         "DIVISION": [
             "super-bantam",
             "eurasia",
-            5
+            6
         ],
         "RECORD": [
-            14,
+            15,
             7,
             0
         ],
-        "RANK": 37,
+        "RANK": 15,
         "TRAINING": [
             1,
-            2,
+            1,
             false
         ],
         "FIGHTPLAN": "4H97ringR1",
-        "OPPONENT": [
-            2,
-            1696486,
-            "BC US 1.1",
-            9,
-            [
-                [
-                    7,
-                    1,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    7,
-                    1,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    7,
-                    1,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    7,
-                    1,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666903": {
         "NAME": "Kul`brian",
@@ -7206,8 +7765,51 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H114alloutR2",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114alloutR1",
+        "OPPONENT": [
+            20,
+            1557934,
+            "Caminoan Technician 166 \"Marty\"",
+            3,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.56,
+                    0.33,
+                    0.07
+                ]
+            ]
+        ]
     },
     "1666918": {
         "NAME": "Kul`mangu",
@@ -7243,8 +7845,51 @@
             4,
             true
         ],
-        "FIGHTPLAN": "5H114alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            16,
+            1619159,
+            "\"HM\" Ellicott City Granodiorite",
+            -1,
+            [
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    3,
+                    0.04,
+                    0.0,
+                    0.0,
+                    0.96,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1666929": {
         "NAME": "Fel`van",
@@ -7274,7 +7919,7 @@
             6,
             0
         ],
-        "RANK": 0,
+        "RANK": 273,
         "TRAINING": [
             1,
             4,
@@ -7285,20 +7930,20 @@
     },
     "1666931": {
         "NAME": "Kul`ippazio",
-        "STRENGTH": 24,
-        "KP": 7,
+        "STRENGTH": 25,
+        "KP": 8,
         "SPEED": 14,
         "AGILITY": 17,
         "CHIN": 14,
-        "CONDITIONING": 6,
+        "CONDITIONING": 7,
         "TYPE": 2,
-        "RATING": 10,
-        "STATUS": 10,
+        "RATING": 12,
+        "STATUS": 12,
         "IPS": 77,
         "HEIGHT": 0,
         "BUILD": 2,
         "WEIGHT": [
-            115,
+            116,
             113
         ],
         "DIVISION": [
@@ -7307,61 +7952,18 @@
             3
         ],
         "RECORD": [
-            11,
+            12,
             7,
             0
         ],
-        "RANK": 43,
+        "RANK": 32,
         "TRAINING": [
             1,
-            1,
+            2,
             false
         ],
         "FIGHTPLAN": "5H105ringR1",
-        "OPPONENT": [
-            0,
-            1695057,
-            "Malik \"Rib Breaker\" ROLLINS",
-            2,
-            [
-                [
-                    1,
-                    2,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    2,
-                    0.0,
-                    0.67,
-                    0.33,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    2,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    5,
-                    0.5,
-                    0.08,
-                    0.31,
-                    0.04,
-                    0.04
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666932": {
         "NAME": "Ell`mitch",
@@ -7374,7 +7976,7 @@
         "TYPE": 2,
         "RATING": 22,
         "STATUS": 22,
-        "IPS": 100,
+        "IPS": 141,
         "HEIGHT": 1,
         "BUILD": 1,
         "WEIGHT": [
@@ -7388,60 +7990,17 @@
         ],
         "RECORD": [
             17,
-            4,
+            5,
             0
         ],
-        "RANK": 105,
+        "RANK": 117,
         "TRAINING": [
             4,
-            1,
+            null,
             false
         ],
         "FIGHTPLAN": "5H114insideR2",
-        "OPPONENT": [
-            7,
-            635953,
-            "Rattler`s Bodyguard",
-            -2,
-            [
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.67
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.81
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666934": {
         "NAME": "Fel`john",
@@ -7557,8 +8116,51 @@
             null,
             true
         ],
-        "FIGHTPLAN": "5H105alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105ringR1",
+        "OPPONENT": [
+            6,
+            1693600,
+            "Donald \"Tiny Fists of Fury\" Trump 140",
+            1,
+            [
+                [
+                    0,
+                    1,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    7,
+                    2,
+                    0.67,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    7,
+                    2,
+                    0.5,
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.39,
+                    0.28,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1666939": {
         "NAME": "Ell`tatjana",
@@ -7642,15 +8244,15 @@
     },
     "1666945": {
         "NAME": "Kul`hamed",
-        "STRENGTH": 29,
+        "STRENGTH": 30,
         "KP": 9,
         "SPEED": 22,
         "AGILITY": 14,
         "CHIN": 18,
         "CONDITIONING": 11,
         "TYPE": 0,
-        "RATING": 24,
-        "STATUS": 24,
+        "RATING": 25,
+        "STATUS": 25,
         "IPS": 95,
         "HEIGHT": 0,
         "BUILD": 0,
@@ -7664,61 +8266,18 @@
             3
         ],
         "RECORD": [
-            18,
+            19,
             4,
             0
         ],
-        "RANK": 79,
+        "RANK": 53,
         "TRAINING": [
             1,
-            null,
+            4,
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": [
-            8,
-            1622411,
-            "Greg Conescu",
-            0,
-            [
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.2,
-                    0.8,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1666947": {
         "NAME": "Kul`kevaughn",
@@ -7994,8 +8553,51 @@
             3,
             false
         ],
-        "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114insideR1",
+        "OPPONENT": [
+            14,
+            1440580,
+            "Phillip D. Ivey",
+            4,
+            [
+                [
+                    4,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    1,
+                    0.0,
+                    0.2,
+                    0.8,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    1,
+                    0.0,
+                    0.4,
+                    0.6,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    1,
+                    0.0,
+                    0.28,
+                    0.47,
+                    0.26,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1666955": {
         "NAME": "Fel`marcus",
@@ -8241,13 +8843,13 @@
         "NAME": "Ell`francois",
         "STRENGTH": 29,
         "KP": 9,
-        "SPEED": 15,
+        "SPEED": 16,
         "AGILITY": 19,
-        "CHIN": 15,
-        "CONDITIONING": 8,
+        "CHIN": 16,
+        "CONDITIONING": 9,
         "TYPE": 2,
-        "RATING": 19,
-        "STATUS": 19,
+        "RATING": 21,
+        "STATUS": 21,
         "IPS": 100,
         "HEIGHT": 0,
         "BUILD": 3,
@@ -8261,61 +8863,18 @@
             3
         ],
         "RECORD": [
-            15,
+            16,
             4,
             0
         ],
-        "RANK": 129,
+        "RANK": 105,
         "TRAINING": [
-            4,
+            1,
             2,
             false
         ],
         "FIGHTPLAN": "5H114ringR1",
-        "OPPONENT": [
-            1,
-            977948,
-            "FBI - Commemorative Fighter",
-            6,
-            [
-                [
-                    0,
-                    3,
-                    0.0,
-                    0.86,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    3,
-                    0.0,
-                    0.71,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    3,
-                    0.14,
-                    0.57,
-                    0.14,
-                    0.0,
-                    0.0
-                ],
-                [
-                    0,
-                    2,
-                    0.13,
-                    0.55,
-                    0.32,
-                    0.0,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1667243": {
         "NAME": "Kul`eugenio",
@@ -8591,8 +9150,51 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            25,
+            1630991,
+            "Pandora llll",
+            3,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.92,
+                    0.03
+                ]
+            ]
+        ]
     },
     "1667332": {
         "NAME": "Byl`phillip",
@@ -8603,7 +9205,7 @@
         "CHIN": 16,
         "CONDITIONING": 6,
         "TYPE": 2,
-        "RATING": 20,
+        "RATING": 21,
         "STATUS": 22,
         "IPS": 75,
         "HEIGHT": 0,
@@ -8618,61 +9220,18 @@
             3
         ],
         "RECORD": [
-            15,
+            16,
             4,
             0
         ],
-        "RANK": 123,
+        "RANK": 111,
         "TRAINING": [
             1,
             null,
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": [
-            8,
-            1536969,
-            "Filthy LikQid ",
-            2,
-            [
-                [
-                    2,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    2,
-                    2,
-                    0.0,
-                    0.0,
-                    0.33,
-                    0.67,
-                    0.0
-                ],
-                [
-                    2,
-                    2,
-                    0.0,
-                    0.0,
-                    0.33,
-                    0.67,
-                    0.0
-                ],
-                [
-                    2,
-                    2,
-                    0.0,
-                    0.0,
-                    0.1,
-                    0.6,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1667333": {
         "NAME": "Kul`jose",
@@ -8702,7 +9261,7 @@
             4,
             0
         ],
-        "RANK": 0,
+        "RANK": 1,
         "TRAINING": [
             1,
             4,
@@ -8713,15 +9272,15 @@
     },
     "1667368": {
         "NAME": "Byl`jailene",
-        "STRENGTH": 30,
-        "KP": 9,
-        "SPEED": 20,
+        "STRENGTH": 31,
+        "KP": 10,
+        "SPEED": 21,
         "AGILITY": 15,
         "CHIN": 17,
         "CONDITIONING": 7,
         "TYPE": 0,
-        "RATING": 21,
-        "STATUS": 21,
+        "RATING": 23,
+        "STATUS": 23,
         "IPS": 65,
         "HEIGHT": 0,
         "BUILD": 3,
@@ -8735,61 +9294,18 @@
             5
         ],
         "RECORD": [
-            16,
+            17,
             3,
             0
         ],
-        "RANK": 119,
+        "RANK": 95,
         "TRAINING": [
-            1,
+            4,
             2,
             false
         ],
         "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": [
-            6,
-            1485292,
-            "McFly 0006",
-            4,
-            [
-                [
-                    2,
-                    1,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    8,
-                    2,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    2,
-                    1,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    2,
-                    6,
-                    0.0,
-                    0.08,
-                    0.5,
-                    0.22,
-                    0.14
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1667450": {
         "NAME": "Byl`fredrik",
@@ -8906,7 +9422,50 @@
             false
         ],
         "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            18,
+            1481160,
+            "Pop 0015",
+            -2,
+            [
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1667555": {
         "NAME": "Byl`baron",
@@ -9343,7 +9902,50 @@
             true
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            8,
+            1473201,
+            "IRobot 71",
+            -1,
+            [
+                [
+                    1,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.67,
+                    0.33,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    2,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    2,
+                    0.29,
+                    0.43,
+                    0.0,
+                    0.24,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1667630": {
         "NAME": "Fel`zhang",
@@ -9379,8 +9981,51 @@
             1,
             false
         ],
-        "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114insideR1",
+        "OPPONENT": [
+            11,
+            1152206,
+            "Granite Chris",
+            2,
+            [
+                [
+                    4,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    2,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    2,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    3,
+                    0.0,
+                    0.77,
+                    0.15,
+                    0.04,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1667659": {
         "NAME": "Kul`rail",
@@ -9410,7 +10055,7 @@
             3,
             0
         ],
-        "RANK": 137,
+        "RANK": 275,
         "TRAINING": [
             1,
             4,
@@ -9438,7 +10083,7 @@
             110
         ],
         "DIVISION": [
-            "junior-fly",
+            "fly",
             "eurasia",
             2
         ],
@@ -9447,7 +10092,7 @@
             5,
             0
         ],
-        "RANK": 0,
+        "RANK": 12,
         "TRAINING": [
             4,
             2,
@@ -9810,8 +10455,51 @@
             4,
             false
         ],
-        "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114alloutR1",
+        "OPPONENT": [
+            12,
+            237645,
+            "Irina Irinova",
+            0,
+            [
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    8,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1695601": {
         "NAME": "Fel`percy",
@@ -9847,8 +10535,51 @@
             1,
             true
         ],
-        "FIGHTPLAN": "6H122alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "4H97alloutR1",
+        "OPPONENT": [
+            9,
+            790434,
+            "-Hold On-",
+            -2,
+            [
+                [
+                    4,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    2,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    2,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    4,
+                    3,
+                    0.0,
+                    0.37,
+                    0.11,
+                    0.19,
+                    0.33
+                ]
+            ]
+        ]
     },
     "1695602": {
         "NAME": "Ell`alex",
@@ -9884,8 +10615,51 @@
             3,
             true
         ],
-        "FIGHTPLAN": "5H105insideR2",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H105alloutR2",
+        "OPPONENT": [
+            25,
+            567292,
+            "PiZzA tHe HuT1o1",
+            2,
+            [
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0,
+                    2,
+                    0.33,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    2,
+                    0.06,
+                    0.0,
+                    0.59,
+                    0.0,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1695603": {
         "NAME": "Fel`elizabeth",
@@ -9922,7 +10696,50 @@
             false
         ],
         "FIGHTPLAN": "5H105insideR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            18,
+            1693801,
+            "Wilder \"Bluetooth\" HARRISON",
+            4,
+            [
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.2,
+                    0.8,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.4,
+                    0.6,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.2,
+                    0.8,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    3,
+                    0.0,
+                    0.18,
+                    0.49,
+                    0.11,
+                    0.2
+                ]
+            ]
+        ]
     },
     "1695604": {
         "NAME": "Kel`summer",
@@ -9933,7 +10750,7 @@
         "CHIN": 15,
         "CONDITIONING": 7,
         "TYPE": 2,
-        "RATING": 18,
+        "RATING": 17,
         "STATUS": 18,
         "IPS": 5,
         "HEIGHT": 2,
@@ -9949,60 +10766,17 @@
         ],
         "RECORD": [
             11,
-            1,
+            2,
             0
         ],
-        "RANK": 1,
+        "RANK": 7,
         "TRAINING": [
             1,
-            4,
+            null,
             false
         ],
         "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": [
-            7,
-            1108451,
-            "The \"Representative\" from California",
-            -1,
-            [
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    3,
-                    1,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.67,
-                    0.33,
-                    0.0
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1695605": {
         "NAME": "Kel`artur",
@@ -10118,8 +10892,51 @@
             1,
             true
         ],
-        "FIGHTPLAN": "4H97alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "4H97alloutR2",
+        "OPPONENT": [
+            11,
+            1421820,
+            "Rayong",
+            -1,
+            [
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.0,
+                    0.46,
+                    0.5,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1695638": {
         "NAME": "Fel`saqib",
@@ -10309,7 +11126,7 @@
             5,
             0
         ],
-        "RANK": 50,
+        "RANK": 53,
         "TRAINING": [
             4,
             null,
@@ -10353,7 +11170,50 @@
             true
         ],
         "FIGHTPLAN": "5H114alloutR1",
-        "OPPONENT": null
+        "OPPONENT": [
+            13,
+            1097145,
+            "Nightcliff`s Olympic Redemption",
+            2,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    3,
+                    0.11,
+                    0.0,
+                    0.0,
+                    0.67,
+                    0.22
+                ]
+            ]
+        ]
     },
     "1695895": {
         "NAME": "Ell`gabriel",
@@ -10444,9 +11304,9 @@
         "CHIN": 13,
         "CONDITIONING": 6,
         "TYPE": 2,
-        "RATING": 5,
+        "RATING": 4,
         "STATUS": 8,
-        "IPS": 121,
+        "IPS": 144,
         "HEIGHT": 1,
         "BUILD": 1,
         "WEIGHT": [
@@ -10460,60 +11320,17 @@
         ],
         "RECORD": [
             7,
-            5,
+            6,
             0
         ],
-        "RANK": 102,
+        "RANK": 103,
         "TRAINING": [
             1,
             null,
             true
         ],
         "FIGHTPLAN": "5H105ringR3",
-        "OPPONENT": [
-            -2,
-            592235,
-            "The Angry Midget Drawf",
-            0,
-            [
-                [
-                    1,
-                    1,
-                    0.0,
-                    0.33,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    0.67,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    2,
-                    0.21,
-                    0.32,
-                    0.26,
-                    0.05,
-                    0.11
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1696043": {
         "NAME": "Byl`dana",
@@ -10549,26 +11366,69 @@
             1,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            19,
+            410806,
+            "FSL31",
+            3,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.03,
+                    0.97,
+                    0.0
+                ]
+            ]
+        ]
     },
     "1696137": {
         "NAME": "Kel`kiril",
-        "STRENGTH": 25,
+        "STRENGTH": 26,
         "KP": 8,
         "SPEED": 19,
-        "AGILITY": 15,
+        "AGILITY": 17,
         "CHIN": 14,
         "CONDITIONING": 8,
         "TYPE": 3,
-        "RATING": 14,
-        "STATUS": 14,
+        "RATING": 16,
+        "STATUS": 16,
         "IPS": 25,
         "HEIGHT": -1,
         "BUILD": -2,
         "WEIGHT": [
-            104,
-            101
+            102,
+            99
         ],
         "DIVISION": [
             "straw",
@@ -10576,61 +11436,18 @@
             0
         ],
         "RECORD": [
-            9,
+            10,
             2,
             0
         ],
-        "RANK": 45,
+        "RANK": 19,
         "TRAINING": [
             1,
-            3,
+            4,
             true
         ],
         "FIGHTPLAN": "5H114insideR1",
-        "OPPONENT": [
-            0,
-            464001,
-            "94...K.G.B.",
-            0,
-            [
-                [
-                    1,
-                    1,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    0.33,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    1,
-                    0.0,
-                    0.33,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                [
-                    1,
-                    4,
-                    0.19,
-                    0.0,
-                    0.19,
-                    0.1,
-                    0.19
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1696354": {
         "NAME": "Kel`melchior",
@@ -10660,7 +11477,7 @@
             0,
             0
         ],
-        "RANK": 0,
+        "RANK": 8,
         "TRAINING": [
             4,
             3,
@@ -10783,8 +11600,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H105insideR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "5H114insideR1",
+        "OPPONENT": [
+            5,
+            1696453,
+            "Ronnie \"Fracture\" SAMPSON",
+            0,
+            [
+                [
+                    1,
+                    1,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.67,
+                    0.33,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.0,
+                    0.67,
+                    0.33,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1,
+                    1,
+                    0.05,
+                    0.45,
+                    0.18,
+                    0.0,
+                    0.23
+                ]
+            ]
+        ]
     },
     "1696894": {
         "NAME": "Kel`metzger",
@@ -10820,8 +11680,51 @@
             null,
             false
         ],
-        "FIGHTPLAN": "5H114alloutR1",
-        "OPPONENT": null
+        "FIGHTPLAN": "6H122alloutR1",
+        "OPPONENT": [
+            25,
+            1696971,
+            "David \"Quite Nasty\" GOODWIN",
+            1,
+            [
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                [
+                    3,
+                    2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.33,
+                    0.67
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.67,
+                    0.33
+                ],
+                [
+                    6,
+                    3,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.56,
+                    0.3
+                ]
+            ]
+        ]
     },
     "1697371": {
         "NAME": "Ell`nanatty",
@@ -10851,7 +11754,7 @@
             1,
             0
         ],
-        "RANK": 0,
+        "RANK": 109,
         "TRAINING": [
             1,
             null,
@@ -10862,15 +11765,15 @@
     },
     "1697372": {
         "NAME": "Fel`river",
-        "STRENGTH": 20,
+        "STRENGTH": 21,
         "KP": 6,
-        "SPEED": 15,
+        "SPEED": 16,
         "AGILITY": 13,
         "CHIN": 13,
         "CONDITIONING": 6,
         "TYPE": 3,
-        "RATING": 3,
-        "STATUS": 3,
+        "RATING": 5,
+        "STATUS": 5,
         "IPS": 0,
         "HEIGHT": -1,
         "BUILD": 3,
@@ -10884,61 +11787,18 @@
             3
         ],
         "RECORD": [
-            2,
+            3,
             0,
             0
         ],
-        "RANK": 83,
+        "RANK": 68,
         "TRAINING": [
-            2,
             1,
+            2,
             false
         ],
         "FIGHTPLAN": "6H122alloutR3",
-        "OPPONENT": [
-            8,
-            1697114,
-            "Dawson \"Spinal Injury\" MCLEAN",
-            1,
-            [
-                [
-                    6,
-                    2,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.67,
-                    0.0
-                ],
-                [
-                    6,
-                    2,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.67,
-                    0.33
-                ],
-                [
-                    6,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                [
-                    6,
-                    4,
-                    0.04,
-                    0.0,
-                    0.12,
-                    0.71,
-                    0.12
-                ]
-            ]
-        ]
+        "OPPONENT": null
     },
     "1697427": {
         "NAME": "Ell`jose",
