@@ -136,7 +136,7 @@ if __name__ == "__main__":
         ftr['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
         ftr['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
-        if team_id in ( 1666809, 1666884, 1666929, 1696137 ): ftr['TYPE'] = 0
+        if int(team_id) in ( 1666809, 1666884, 1666929, 1696137 ): ftr['TYPE'] = 0
         
         if (fgt := re.search(r' ([4-7]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)):
             if not ftr.get('OPPONENT') or int(fgt.group(3)) != ftr['OPPONENT'][1]:
