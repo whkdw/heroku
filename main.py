@@ -170,7 +170,7 @@ if __name__ == "__main__":
             elif not i and (((w := max_weights[ ftr['DIVISION'][2] ]) - 10 < ftr['WEIGHT'][0] < w and ftr['AGILITY'] > 10) or (ftr['STATUS'] == 28 and ftr['KP'] < ftr['STRENGTH'] // 3)): tr = [ 1, None, True ] # underweight or room for kp
             elif not i and not tr[2] and (ftr['RATING'] == 18 or ftr['RATING'] == 28 or ftr['RATING'] < ftr['STATUS'] or ftr['KP'] < ftr['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr['CHIN'] + int(tr[0] == 4) < 11 + ftr['STATUS'] // 5 or ftr['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr['TYPE']]['CHIN'] - 10.0 - ftr['HEIGHT'] // 5.5) * ftr['STATUS'] / 28.0: tr[i] = 4
-            elif not i or ftr['RATING'] == ftr['STATUS'] != 28: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
+            else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
                 2: archetypes[ftr['TYPE']]['SPEED'] / archetypes[ftr['TYPE']]['STRENGTH'] - (ftr['SPEED'] + int(tr[0] == 2)) / (ftr['STRENGTH'] + int(tr[0] == 1)), 
                 3: archetypes[ftr['TYPE']]['AGILITY'] / archetypes[ftr['TYPE']]['STRENGTH'] - (ftr['AGILITY'] + int(tr[0] == 3)) / (ftr['STRENGTH'] + int(tr[0] == 1)) + int(175 < ftr['WEIGHT'][1] < 182)}[x]) # train agl (also severe underweight cruiser)
         if ftr['TRAINING'][0] != tr[0] or (ftr['TRAINING'][1] and ftr['TRAINING'][1] != tr[1]) or ftr['TRAINING'][2] != tr[2]:
