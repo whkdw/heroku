@@ -22,6 +22,7 @@ max_weights = [ 106, 109, 112, 115, 118, 122, 126, 130, 135, 141, 147, 153, 160,
 divis_str = [ "straw", "junior-fly", "fly", "super-fly", "bantam", "super-bantam", "feather", "super-feather", "light", "super-light", "welter", "super-welter", "middle", "super-middle", "light-heavy", "cruiser", "heavy" ]
 build_str = [ "very light", "light", "a little light", "normal", "a little heavy", "heavy", "very heavy" ]
 stats_str = [ "strength", "knockout punch", "speed", "agility", "chin", "conditioning" ]
+train_str = [ "free+practice", "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
 train_str = [ "weights+(STR)", "heavy+bag+(KP)", "speed+bag+(SPD)", "jump+rope+(AGL)", "sparring+(CHN)", "road+work+(CND)" ]
 style_str = [ "inside", "clinch", "feint", "counter", "ring", "ropes", "outside", "allout" ]
 
@@ -136,8 +137,6 @@ if __name__ == "__main__":
         ftr['TRAINING'] = [ stats_str.index(i.strip()) if i.strip() in stats_str else None for i in re.search(r' training <[Bb]>([a-z\s]+)[^<]*<[^<]*[\<Bb\>]*([a-z\s]+)', text).groups() ] + [ ' (intensive) <' in text ]
         ftr['FIGHTPLAN'] = m.group(1) if (m := re.search(r'> your <[Bb]>(.+)<\/[Bb]> plan.', text)) else None
 
-        if int(team_id) in ( 1666809, 1666884, 1666929, 1696137 ): ftr['TYPE'] = 0
-        
         if (fgt := re.search(r' ([4-7]) feet *([0-9]{0,2})[^>]*team_id=([0-9]+)&describe=[0-9]\">(.*)<[I\/][AM][G>]', text)):
             if not ftr.get('OPPONENT') or int(fgt.group(3)) != ftr['OPPONENT'][1]:
                 ftr['OPPONENT'], fgt_tacs = [ (int(fgt.group(1)) - 5) * 12 + int("0%s" % fgt.group(2)), int(fgt.group(3)), fgt.group(4)] + [ round(((wl := tuple(map(int, re.search(r'(\d+)-(\d+)-\d+ \d+/\d+\)  from the', text).groups())))[0] - wl[1]) / (sum(wl) + 1) / max(1, 8 - sum(wl)) * 10), [] ], [ [], [], [], [] ]
@@ -170,7 +169,7 @@ if __name__ == "__main__":
             elif not i and (((w := max_weights[ ftr['DIVISION'][2] ]) - 10 < ftr['WEIGHT'][0] < w and ftr['AGILITY'] > 10) or (ftr['STATUS'] == 28 and ftr['KP'] < ftr['STRENGTH'] // 3)): tr = [ 1, None, True ] # underweight or room for kp
             elif not i and not tr[2] and (ftr['RATING'] == 18 or ftr['RATING'] == 28 or ftr['RATING'] < ftr['STATUS'] or ftr['KP'] < ftr['STRENGTH'] // 3): tr[i] = 1 # float KP if no chance to gain a ap
             elif ftr['CHIN'] + int(tr[0] == 4) < 11 + ftr['STATUS'] // 5 or ftr['CHIN'] + int(tr[0] == 4) - 10.0 < (archetypes[ftr['TYPE']]['CHIN'] - 10.0 - ftr['HEIGHT'] // 5.5) * ftr['STATUS'] / 28.0: tr[i] = 4
-            else: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
+            elif not i or ftr['RATING'] == ftr['STATUS'] != 28: tr[i] = max((1, 2, 3), key=lambda x: {1: 0, # KP insead of str
                 2: archetypes[ftr['TYPE']]['SPEED'] / archetypes[ftr['TYPE']]['STRENGTH'] - (ftr['SPEED'] + int(tr[0] == 2)) / (ftr['STRENGTH'] + int(tr[0] == 1)), 
                 3: archetypes[ftr['TYPE']]['AGILITY'] / archetypes[ftr['TYPE']]['STRENGTH'] - (ftr['AGILITY'] + int(tr[0] == 3)) / (ftr['STRENGTH'] + int(tr[0] == 1)) + int(175 < ftr['WEIGHT'][1] < 182)}[x]) # train agl (also severe underweight cruiser)
         if ftr['TRAINING'][0] != tr[0] or (ftr['TRAINING'][1] and ftr['TRAINING'][1] != tr[1]) or ftr['TRAINING'][2] != tr[2]:
@@ -212,11 +211,12 @@ if __name__ == "__main__":
                 write_msg("eko_select_orders", f"your_team={ftr['NAME']}&strategy_choice={fp}")
                 ftr['FIGHTPLAN'] = fp
 
-        if ftr['IPS'] / (ftr['STATUS'] + 1) > 35:
+        if ftr['IPS'] / (ftr['STATUS'] + 1) > 60 or (ftr['RATING'] == 28 and ftr['RANK'] > 2 and not ftr['OPPONENT']): #if ftr['IPS'] / (ftr['STATUS'] + 1) > 35:
             if ftr['DIVISION'][1] == "contenders" or ftr['STATUS'] > 18:
                 write_msg("eko_retire_byid", f"team_id={team_id}&verify_retire=1")
             else:
                 write_msg("eko_transfer", f"your_team={ftr['NAME']}&to_manager=77894")
+            ftrs.pop(team_id, None)
 
 
     ftrs_new = { k: ftrs[k] for k in team_ids if k in ftrs }
@@ -237,5 +237,3 @@ if __name__ == "__main__":
     with open("data.json.tmp", "w", encoding="utf-8") as f:
         json.dump(ftrs_new, f, ensure_ascii=False, indent=4)
     os.replace("data.json.tmp", "data.json")
-    
-    # 4agg to 5sgg, add random mid round flashes, retire some straws
