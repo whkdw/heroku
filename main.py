@@ -107,10 +107,10 @@ if __name__ == "__main__":
 
 
     for word in write_msg("eko_retired_fighters").split("Activate</A>"):
-            if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
-                for team_id in re.findall(r"team_id=([0-9]+)", word):
-                    write_msg("eko_activate", f"team_id={team_id}")
-                    break
+        if "regional_champion" not in word and "challenger.gif" not in word and "champion.gif" not in word:
+            for team_id in re.findall(r"team_id=([0-9]+)", word):
+                write_msg("eko_activate", f"team_id={team_id}")
+                break
 
     team_ids = sorted(set(re.findall(r"team_id=([0-9]+)", write_msg("eko_all_fighters_brief"))), key=int)
     for team_id in team_ids:
@@ -210,7 +210,7 @@ if __name__ == "__main__":
                 write_msg("eko_select_orders", f"your_team={ftr['NAME']}&strategy_choice={fp}")
                 ftr['FIGHTPLAN'] = fp
 
-        if ftr['IPS'] / (ftr['STATUS'] + 1) > 60 or (ftr['RATING'] == 28 and ftr['RANK'] > 2 and not ftr['OPPONENT']): #if ftr['IPS'] / (ftr['STATUS'] + 1) > 35:
+        if ftr['IPS'] / (ftr['STATUS'] + 1) > 60 or (ftr['RATING'] == 28 and ftr['RANK'] > 2 and ftr['WEIGHT'][1] < 200 and not ftr['OPPONENT']): #if ftr['IPS'] / (ftr['STATUS'] + 1) > 35:
             if ftr['DIVISION'][1] == "contenders" or ftr['STATUS'] > 18:
                 write_msg("eko_retire_byid", f"team_id={team_id}&verify_retire=1")
             else:
